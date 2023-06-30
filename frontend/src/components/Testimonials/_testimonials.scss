@@ -1,0 +1,68 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.testimonials-container {
+	@include display_flex(column, space-between, center);
+	width: 81.5%;
+	height: 70vh;
+	margin-top: 8rem;
+
+	.testimonials-header {
+		@include display_flex(row, space-between, center);
+		width: 100%;
+		height: 10%;
+
+		h1 {
+			color: #1f6f8b;
+			font-size: 2rem;
+			font-weight: bold;
+		}
+	}
+
+	.testimonials-carousel {
+		width: 100%;
+		height: 73%;
+		padding-top: 10px;
+
+		.testimonials-carousel-item {
+			@include display_flex(column, space-between, flex-start);
+			height: 90%;
+
+			.testimonials-carousel-image {
+				width: 90px;
+				height: 90px;
+				margin-top: 5px;
+				margin-left: 10px;
+				border-radius: 100%;
+				box-shadow: 1px 1px 5px #555;
+				transition: height 0.4s ease-in-out;
+			}
+
+			.testimonials-carousel-info {
+				@include display_flex(column, space-between, flex-start);
+				width: 95%;
+				height: 60%;
+				padding: 0 5px 5px 10px;
+
+				.author-name {
+					color: #1f6f8b;
+					font-size: 20px;
+					font-weight: 600;
+				}
+
+				.author-testimony {
+					width: 90%;
+					color: #222;
+					font-size: 14.4px;
+					text-align: justify;
+				}
+
+				.author-position {
+					color: #888;
+					font-size: 15px;
+					font-weight: 700;
+				}
+			}
+		}
+	}
+}

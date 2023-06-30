@@ -106,6 +106,7 @@ contract EthRow {
     }
 
     function cancel(uint256 _nftID) public {
+        require(msg.sender == seller[_nftID] || msg.sender == buyer[_nftID], "Only buyer or seller can cancel the deal");
         require(listed[_nftID], "Property is not listed");
         require(finalized[_nftID][seller[_nftID]], "Property is already sold");
 

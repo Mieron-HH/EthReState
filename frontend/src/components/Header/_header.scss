@@ -1,0 +1,36 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.header-container {
+	@include display_flex(row, space-between, center);
+	width: 75%;
+	height: 12vh;
+	margin-top: 1.7%;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 2px;
+	background-color: white;
+	box-shadow: 0.5px 1px 10px #777;
+
+	.logo {
+		width: 90px;
+		height: 80%;
+	}
+
+	.menu-container {
+		@include display_flex(row, space-evenly, center);
+		width: 35%;
+		height: 80%;
+
+		.menu-item {
+			cursor: pointer;
+			color: #333;
+			font-size: 14px;
+			font-weight: 500;
+
+			&:hover {
+				color: rgb(31, 166, 210);
+			}
+		}
+	}
+}

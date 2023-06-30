@@ -1,0 +1,49 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.cards-container {
+	@include display_flex(row, space-around, center);
+	width: 85%;
+	height: 22vh;
+	padding: 10px;
+	margin-top: 19%;
+
+	.card-item {
+		@include display_flex(column, space-evenly, center);
+		width: 22%;
+		height: 100%;
+		background-color: white;
+		border-radius: 5px;
+		box-shadow: 1px 2px 10px #999;
+		cursor: pointer;
+
+		img {
+			width: 50%;
+			height: 50%;
+			object-fit: contain;
+		}
+
+		.label {
+			@include reset();
+			color: #222;
+			font-size: 15px;
+			font-weight: bold;
+			text-align: center;
+		}
+
+		&:hover {
+			box-shadow: 2px 2px 10px #1658f3b0;
+
+			img {
+				width: 70%;
+				height: 70%;
+				transition: width 1s ease-in-out;
+				transition: height 1s ease-in-out;
+			}
+
+			.label {
+				font-size: 12px;
+			}
+		}
+	}
+}

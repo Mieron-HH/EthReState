@@ -1,0 +1,71 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.search-container {
+	@include display_flex(column, center, center);
+	width: 50%;
+	height: 25vh;
+	margin-top: 5%;
+	border-radius: 5px;
+
+	h2.search-header {
+		@include reset();
+		color: white;
+		font-size: 38px;
+	}
+
+	.input-group {
+		@include display_flex(row, space-between, center);
+		width: 84%;
+		height: 35%;
+		margin-top: 10px;
+
+		.text-input {
+			@include reset();
+			width: 75%;
+			height: 90%;
+			padding-left: 10px;
+			padding-right: 10px;
+			font-size: 15px;
+			border-radius: 5px;
+			border: none;
+
+			&:hover {
+				border-radius: 10px;
+
+				&::placeholder {
+					font-size: 14px;
+				}
+			}
+		}
+
+		.search-button {
+			@include reset();
+			width: 19%;
+			height: 90%;
+			color: white;
+			font-size: 15px;
+			font-weight: bold;
+			background: linear-gradient(270deg, #f82a7e 0%, #752a90 100%);
+			border-radius: 5px;
+			border: none;
+			cursor: pointer;
+
+			&:hover {
+				background: linear-gradient(to right, #214e6c, #4095ce);
+				margin-bottom: 3px;
+				transition: margin 0.1s ease-in;
+			}
+		}
+	}
+
+	.catchy-sentence {
+		@include reset();
+		margin-top: 15px;
+		color: white;
+		font-size: 16px;
+		font-weight: bold;
+		text-align: center;
+		text-transform: uppercase;
+	}
+}

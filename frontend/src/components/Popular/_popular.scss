@@ -1,0 +1,107 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.popular-container {
+	@include display_flex(column, space-between, center);
+	width: 81.5%;
+	height: 100vh;
+	margin-top: 8rem;
+
+	.popular-header {
+		@include display_flex(row, space-between, center);
+		width: 100%;
+		height: 10%;
+
+		h1 {
+			color: #1f6f8b;
+			font-size: 2rem;
+			font-weight: bold;
+		}
+
+		button {
+			@include reset();
+			width: 12rem;
+			height: 80%;
+			background: linear-gradient(270deg, #f82a7e 0%, #752a90 100%);
+			border-radius: 25px;
+			border: none;
+			color: white;
+			font-size: 1rem;
+			font-weight: 400;
+			line-height: 1.5;
+
+			&:hover {
+				background: linear-gradient(to right, #214e6c, #4095ce);
+				box-shadow: 1px 1px 10px #555;
+			}
+		}
+	}
+
+	.popular-carousel {
+		width: 100%;
+		height: 80%;
+
+		.popular-carousel-item {
+			@include display_flex(column, flex-start, center);
+			height: 93%;
+			border-radius: 5px;
+			box-shadow: 0px 1px 5px #555;
+			position: relative;
+
+			.heart-container {
+				@include display_flex(row, center, center);
+				width: 35px;
+				height: 35px;
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				z-index: 1;
+				border-radius: 100%;
+				cursor: pointer;
+
+				.icon {
+					@include reset();
+					font-size: 30px;
+					color: blue;
+				}
+
+				&:hover {
+					.icon {
+						font-size: 40px;
+						color: red;
+					}
+				}
+			}
+
+			.popular-carousel-image {
+				width: 100%;
+				height: 70%;
+				box-shadow: 1px 1px 5px #555;
+				transition: height 0.4s ease-in-out;
+			}
+
+			.popular-carousel-info {
+				width: 97%;
+				height: 40%;
+				background-color: white;
+				border-radius: 2px;
+				position: absolute;
+				bottom: 0;
+				transition: height 0.4s ease-in-out;
+			}
+
+			&:hover {
+				box-shadow: 1px 3px 10px rgb(57, 124, 232);
+
+				.popular-carousel-image {
+					height: 80%;
+					object-fit: cover;
+				}
+
+				.popular-carousel-info {
+					height: 30%;
+				}
+			}
+		}
+	}
+}
