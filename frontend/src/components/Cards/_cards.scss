@@ -21,6 +21,8 @@
 			width: 50%;
 			height: 50%;
 			object-fit: contain;
+			transition: width 0.35s ease-in-out;
+			transition: height 0.35s ease-in-out;
 		}
 
 		.label {
@@ -37,8 +39,6 @@
 			img {
 				width: 70%;
 				height: 70%;
-				transition: width 1s ease-in-out;
-				transition: height 1s ease-in-out;
 			}
 
 			.label {
