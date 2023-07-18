@@ -88,7 +88,7 @@ const propertySlice = createSlice({
 	},
 });
 
-export const { setNewProperty } = state.reducers;
+export const { setNewProperty } = propertySlice.actions;
 
 export const selectNewProperty = (state) => state.properties.newProperty;
 

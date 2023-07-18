@@ -1,13 +1,13 @@
 {
-  "name": "hardhat-project",
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.4.0",
-    "@openzeppelin/contracts": "^4.9.2",
-    "ethers": "^6.6.1",
-    "react-icons": "^4.10.1"
-  },
-  "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
-    "hardhat": "^2.16.0"
-  }
+	"name": "hardhat-project",
+	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^6.4.0",
+		"@openzeppelin/contracts": "^4.9.2",
+		"ethers": "^6.6.1",
+		"react-icons": "^4.10.1"
+	},
+	"devDependencies": {
+		"@nomicfoundation/hardhat-toolbox": "^3.0.0",
+		"hardhat": "^2.16.0"
+	}
 }
