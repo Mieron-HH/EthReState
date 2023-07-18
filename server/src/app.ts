@@ -12,10 +12,16 @@ import { SigninRouter } from "./routes/user/sign-in";
 import { CurrentUserRouter } from "./routes/user/current-user";
 
 // importing MINT routes
-import { CreateTokenUriRouter } from "./routes/nft/create-token-uri";
-import { MintRouter } from "./routes/nft/mint-nft";
-import { ListRouter } from "./routes/nft/list-property";
-import { BuyRouter } from "./routes/nft/buy-property";
+import { PublishRouter } from "./routes/property/publish-property";
+import { MintRouter } from "./routes/property/mint-property";
+import { ListRouter } from "./routes/property/list-property";
+import { UnlistRouter } from "./routes/property/unlist-property";
+import { LockRouter } from "./routes/property/lock-property";
+import { UnlockRouter } from "./routes/property/unlock-property";
+import { BuyRouter } from "./routes/property/buy-property";
+import { GetPropertiesRouter } from "./routes/property/get-properties";
+import { GetSellerPropertiesRouter } from "./routes/property/get-seller-properties";
+import { GetBuyerPropertiesRouter } from "./routes/property/get-buyer-properties";
 
 const app = express();
 
@@ -29,10 +35,16 @@ app.use(SigninRouter);
 app.use(CurrentUserRouter);
 
 // hooking MINT routes
-app.use(CreateTokenUriRouter);
+app.use(PublishRouter);
 app.use(MintRouter);
 app.use(ListRouter);
+app.use(UnlistRouter);
+app.use(LockRouter);
+app.use(UnlockRouter);
 app.use(BuyRouter);
+app.use(GetPropertiesRouter);
+app.use(GetSellerPropertiesRouter);
+app.use(GetBuyerPropertiesRouter);
 
 // Default route
 app.all("*", async (req, res, next) => {
