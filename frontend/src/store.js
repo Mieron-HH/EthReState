@@ -9,6 +9,10 @@ const store = configureStore({
 		property: PropertySlice,
 		config: ConfigSlice,
 	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: false,
+		}),
 });
 
 export default store;

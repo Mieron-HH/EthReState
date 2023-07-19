@@ -3,9 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
 	account: null,
 	provider: null,
-	network: null,
-	rethState: null,
-	ethRow: null,
+	chainId: null,
+	signer: null,
 };
 
 const configSlice = createSlice({
@@ -18,26 +17,23 @@ const configSlice = createSlice({
 		setProvider: (state, action) => {
 			state.provider = action.payload;
 		},
-		setNetwork: (state, action) => {
-			state.network = action.payload;
+		setChainId: (state, action) => {
+			state.chainId = action.payload;
 		},
-		setRethState: (state, action) => {
-			state.rethState = action.payload;
-		},
-		setEthRow: (state, action) => {
-			state.ethRow = action.payload;
+		setSigner: (state, action) => {
+			state.signer = action.payload;
 		},
 		reset: (state) => {
 			state.account = null;
 			state.provider = null;
-			state.network = null;
+			state.chainId = null;
 			state.rethState = null;
 			state.ethRow = null;
 		},
 	},
 });
 
-export const { setAccount, setProvider, setNetwork, setRethState, setEthRow } =
+export const { setAccount, setProvider, setChainId, setSigner, reset } =
 	configSlice.actions;
 
 export default configSlice.reducer;
