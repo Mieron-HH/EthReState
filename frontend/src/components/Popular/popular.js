@@ -11,7 +11,7 @@ const Popular = () => {
 			<div className="popular-header">
 				<h1>POPULAR PROPERTIES</h1>
 
-				<button type="button">View all properities</button>
+				<button type="button">View all properties</button>
 			</div>
 
 			<Swiper

@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import "./_drawer.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { BiUser, BiLogIn } from "react-icons/bi";
+import { BiUser, BiMenu, BiX } from "react-icons/bi";
 
 // importing actions
 import { setAccount, setSigner } from "../../slices/config-slice";
@@ -14,39 +14,8 @@ const Drawer = () => {
 	const { user } = useSelector((state) => state.common);
 
 	const [isDisplayed, setIsDisplayed] = useState(false);
-	const userIconRef = useRef(null);
-	const drawerRef = useRef(null);
 
-	useEffect(() => {
-		const handleClickOutside = (event) => {
-			if (
-				isDisplayed &&
-				userIconRef.current &&
-				userIconRef.current.contains(event.target)
-			)
-				return;
-
-			if (
-				isDisplayed &&
-				drawerRef.current &&
-				!drawerRef.current.contains(event.target)
-			)
-				setIsDisplayed(false);
-		};
-
-		document.addEventListener("mousedown", handleClickOutside);
-
-		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
-	}, []);
-
-	const toggleDisplay = () => {
-		setIsDisplayed(!isDisplayed);
-	};
-
-	const connectAccount = async (e) => {
-		e.preventDefault();
+	const connectAccount = async () => {
 		try {
 			const accounts = await window.ethereum.request({
 				method: "eth_requestAccounts",
@@ -60,9 +29,14 @@ const Drawer = () => {
 		}
 	};
 
+	const toggleDisplay = () => {
+		setIsDisplayed(!isDisplayed);
+	};
+
 	const displayLoginForm = (e) => {
 		e.preventDefault();
 
+		setIsDisplayed(false);
 		dispatch(setLoginFormDisplayed(true));
 	};
 
@@ -74,29 +48,27 @@ const Drawer = () => {
 
 	return (
 		<>
-			{user ? (
-				<div
-					className="user-icon-container"
-					ref={userIconRef}
-					onClick={toggleDisplay}
-				>
-					<div
-						className="indicator"
-						style={{ backgroundColor: signer ? "lightgreen" : "red" }}
-					></div>
+			<div className="user-icon-container" onClick={toggleDisplay}>
+				{isDisplayed ? (
+					<BiX className="icon" />
+				) : user !== null ? (
+					<>
+						<div
+							className="indicator"
+							style={{ backgroundColor: signer ? "lightgreen" : "red" }}
+						></div>
 
-					<BiUser className="icon" />
-				</div>
-			) : (
-				<div className="user-icon-container" onClick={displayLoginForm}>
-					<BiLogIn className="icon" />
-				</div>
-			)}
+						<BiUser className="icon" />
+					</>
+				) : (
+					<BiMenu className="icon" />
+				)}
+			</div>
 
 			{isDisplayed && (
-				<div className="drawer-container" ref={drawerRef}>
+				<div className="drawer-container">
 					<div className="user-info-container">
-						{user ? (
+						{user !== null ? (
 							<p className="user-email">{displayName(user.email)}</p>
 						) : (
 							<button className="login-button" onClick={displayLoginForm}>

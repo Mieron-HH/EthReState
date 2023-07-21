@@ -35,7 +35,7 @@ const Login = () => {
 
 		if (data) {
 			const data = await getCurrentUser();
-
+			console.log({ data });
 			dispatch(setUser(data));
 			dispatch(setLoginFormDisplayed(false));
 		} else if (error !== "") {
