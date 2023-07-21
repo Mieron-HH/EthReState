@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,11 +35,27 @@ export const ContextValues = createContext({
 });
 
 const App = () => {
+	const dispatch = useDispatch();
+	const { provider, chainId } = useSelector((state) => state.config);
+
 	const [rethState, setRethState] = useState(null);
 	const [ethRow, setEthRow] = useState(null);
 
-	const dispatch = useDispatch();
-	const { account, provider, chainId } = useSelector((state) => state.config);
+	useEffect(() => {
+		connectWithBlockchain();
+	}, []);
+
+	useEffect(() => {
+		if (!provider || !chainId) return;
+
+		setRethState(
+			loadContract(networkChain[chainId].rethState.address, RethState, provider)
+		);
+
+		setEthRow(
+			loadContract(networkChain[chainId].ethRow.address, EthRow, provider)
+		);
+	}, [provider, chainId]);
 
 	const connectWithBlockchain = async () => {
 		try {
@@ -57,35 +73,12 @@ const App = () => {
 
 				dispatch(setAccount(accounts[0]));
 				const signer = await provider.getSigner();
-				setSigner(signer);
+				dispatch(setSigner(signer));
 			});
 		} catch (error) {
 			console.error(error);
 		}
 	};
-
-	const loadSigner = async () => {
-		const signer = await provider.getSigner();
-		setSigner(signer);
-	};
-
-	useEffect(() => {
-		connectWithBlockchain();
-	}, []);
-
-	useEffect(() => {
-		if (!provider || !chainId) return;
-
-		loadSigner();
-
-		setRethState(
-			loadContract(networkChain[chainId].rethState.address, RethState, provider)
-		);
-
-		setEthRow(
-			loadContract(networkChain[chainId].ethRow.address, EthRow, provider)
-		);
-	}, [provider, chainId]);
 
 	return (
 		<ContextValues.Provider value={{ rethState, ethRow }}>
