@@ -1,8 +1,5 @@
 import express, { Request, Response } from "express";
 
-// importing models
-import { User } from "../../models/user";
-
 // importing types, middlewares, and errors
 import { currentUser } from "@kmalae.ltd/library";
 

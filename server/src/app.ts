@@ -2,6 +2,7 @@ import express from "express";
 import { json } from "body-parser";
 import "express-async-errors";
 import cookieSession from "cookie-session";
+const cors = require("cors");
 
 // importing errors, types and middlewares
 import { errorHandler, NotFoundError } from "@kmalae.ltd/library";
@@ -27,7 +28,20 @@ const app = express();
 
 app.set("trust proxy", true);
 app.use(json());
-app.use(cookieSession({ signed: false, secure: false }));
+// app.use(cookieSession({ signed: false, secure: false }));
+app.use(
+	cookieSession({
+		signed: false,
+		secure: true,
+		sameSite: "none",
+	})
+);
+app.use(
+	cors({
+		origin: "http://localhost:3000",
+		credentials: true,
+	})
+);
 
 // hooking USER routes
 app.use(SignupRouter);
@@ -46,7 +60,7 @@ app.use(GetPropertiesRouter);
 app.use(GetSellerPropertiesRouter);
 app.use(GetBuyerPropertiesRouter);
 
-// Default route
+// Invalid routes
 app.all("*", async (req, res, next) => {
 	throw new NotFoundError();
 });

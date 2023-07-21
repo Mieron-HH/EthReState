@@ -8,6 +8,7 @@ import { NFTStorage, File } from "nft.storage";
 var client: NFTStorage;
 
 app.listen(5000, async () => {
+	if (!process.env.SESSION_KEY) throw new Error("SESSION_KEY must be defined");
 	if (!process.env.JWT_KEY) throw new Error("JWT_KEY must be defined");
 	if (!process.env.MONGO_URI) throw new Error("MONGO_URI must be defined");
 	if (!process.env.NFT_KEY) throw new Error("NFT_KEY must be defined");
