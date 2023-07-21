@@ -37,7 +37,7 @@ export const loginUser = async (email, password) => {
 				data = result.data;
 			})
 			.catch((err) => {
-				error = err.response.data.errors[0].message;
+				if (err.response) error = err.response.data.errors[0].message;
 				console.log({ error });
 			});
 

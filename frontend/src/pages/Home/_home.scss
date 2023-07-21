@@ -28,4 +28,16 @@
 		opacity: 0.1;
 		z-index: -1;
 	}
+
+	.components-container {
+		width: 100%;
+		height: 100%;
+		@include display_flex(column, flex-start, center);
+		opacity: 0;
+		transition: opacity 0.35s ease-in-out;
+	}
+
+	.components-container.visible {
+		opacity: 1;
+	}
 }

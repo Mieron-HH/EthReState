@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./_drawer.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { BiUser, BiLogIn } from "react-icons/bi";
@@ -9,13 +9,39 @@ import { setLoginFormDisplayed } from "../../slices/common-slice";
 
 const Drawer = () => {
 	const dispatch = useDispatch();
+
 	const { provider, signer } = useSelector((state) => state.config);
 	const { user } = useSelector((state) => state.common);
+
 	const [isDisplayed, setIsDisplayed] = useState(false);
+	const userIconRef = useRef(null);
+	const drawerRef = useRef(null);
 
-	const toggleDisplay = (e) => {
-		e.preventDefault();
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (
+				isDisplayed &&
+				userIconRef.current &&
+				userIconRef.current.contains(event.target)
+			)
+				return;
 
+			if (
+				isDisplayed &&
+				drawerRef.current &&
+				!drawerRef.current.contains(event.target)
+			)
+				setIsDisplayed(false);
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
+
+	const toggleDisplay = () => {
 		setIsDisplayed(!isDisplayed);
 	};
 
@@ -49,7 +75,11 @@ const Drawer = () => {
 	return (
 		<>
 			{user ? (
-				<div className="user-icon-container" onClick={toggleDisplay}>
+				<div
+					className="user-icon-container"
+					ref={userIconRef}
+					onClick={toggleDisplay}
+				>
 					<div
 						className="indicator"
 						style={{ backgroundColor: signer ? "lightgreen" : "red" }}
@@ -64,7 +94,7 @@ const Drawer = () => {
 			)}
 
 			{isDisplayed && (
-				<div className="drawer-container">
+				<div className="drawer-container" ref={drawerRef}>
 					<div className="user-info-container">
 						{user ? (
 							<p className="user-email">{displayName(user.email)}</p>

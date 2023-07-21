@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./_home.scss";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,7 +12,7 @@ import Testimonials from "../../components/Testimonials/testimonials";
 import Footer from "../../components/Footer/footer";
 
 // importing actions
-import { setUser } from "../../slices/common-slice";
+import { setLoginFormDisplayed, setUser } from "../../slices/common-slice";
 
 // importing services
 import { getCurrentUser } from "../../services/api-calls";
@@ -21,14 +21,38 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const { loginFormDisplayed } = useSelector((state) => state.common);
 
+	const [displayContent, setDisplayContent] = useState(false);
+
 	useEffect(() => {
 		currentUserHandler();
+
+		const handleScroll = () => {
+			const scrollPosition = window.scrollY;
+
+			const shouldShowDiv = scrollPosition > 250;
+
+			setDisplayContent(shouldShowDiv);
+		};
+
+		// Add the event listener to the scroll event
+		window.addEventListener("scroll", handleScroll);
+
+		return () => {
+			dispatch(setLoginFormDisplayed(false));
+			window.removeEventListener("scroll", handleScroll);
+		};
 	}, []);
 
-	const currentUserHandler = async () => {
-		const data = await getCurrentUser();
+	useEffect(() => {}, []);
 
-		if (data !== null) dispatch(setUser(data));
+	const currentUserHandler = async () => {
+		try {
+			const data = await getCurrentUser();
+
+			if (data !== null) dispatch(setUser(data));
+		} catch (error) {
+			console.log({ error });
+		}
 	};
 
 	return (
@@ -45,10 +69,15 @@ const Home = () => {
 			{loginFormDisplayed && <Login />}
 
 			<Search />
-			<Cards />
-			<Popular />
-			<Testimonials />
-			<Footer />
+
+			<div
+				className={`components-container ${displayContent ? "visible" : ""}`}
+			>
+				<Cards />
+				<Popular />
+				<Testimonials />
+				<Footer />
+			</div>
 		</div>
 	);
 };
