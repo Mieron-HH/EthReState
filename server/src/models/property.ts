@@ -25,7 +25,7 @@ interface PropertyAttr {
 	listed: Boolean;
 	locked: Boolean;
 	sold: Boolean;
-	likes: number;
+	likes: string[];
 	views: number;
 	buyer?: string;
 }
@@ -57,7 +57,7 @@ const propertySchema = new mongoose.Schema(
 		listed: { type: Boolean, required: true },
 		locked: { type: Boolean, required: true },
 		sold: { type: Boolean, required: true },
-		likes: { type: Number, required: true },
+		likes: { type: [String], required: true },
 		views: { type: Number, required: true },
 		buyer: { type: mongoose.Types.ObjectId, required: false, ref: "User" },
 	},

@@ -147,7 +147,7 @@ router.post(
 				listed: false,
 				locked: false,
 				sold: false,
-				likes: 0,
+				likes: [],
 				views: 0,
 			});
 
