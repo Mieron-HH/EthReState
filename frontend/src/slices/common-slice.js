@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
 	user: null,
 	loginFormDisplayed: false,
+	loading: false,
 };
 
 const commonSlice = createSlice({
@@ -15,9 +16,13 @@ const commonSlice = createSlice({
 		setLoginFormDisplayed: (state, action) => {
 			state.loginFormDisplayed = action.payload;
 		},
+		setLoading: (state, action) => {
+			state.loading = action.payload;
+		},
 	},
 });
 
-export const { setUser, setLoginFormDisplayed } = commonSlice.actions;
+export const { setUser, setLoginFormDisplayed, setLoading } =
+	commonSlice.actions;
 
 export default commonSlice.reducer;

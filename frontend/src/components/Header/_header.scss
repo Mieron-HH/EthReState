@@ -32,10 +32,16 @@
 				color: #333;
 				font-size: 14px;
 				font-weight: 500;
+				text-decoration: none !important;
 
 				&:hover {
 					color: rgb(31, 166, 210);
 				}
+			}
+
+			.menu-item.selected {
+				color: rgb(28, 98, 121);
+				font-weight: 600;
 			}
 		}
 	}

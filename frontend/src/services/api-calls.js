@@ -33,17 +33,53 @@ export const loginUser = async (email, password) => {
 				},
 				{ withCredentials: true }
 			)
-			.then((result) => {
-				data = result.data;
+			.then((response) => {
+				data = response.data;
 			})
 			.catch((err) => {
 				if (err.response) error = err.response.data.errors[0].message;
-				console.log({ error });
+				console.error({ error });
 			});
 
 		return { data, error };
 	} catch (error) {
-		console.log({ error });
+		console.error({ error });
+		throw error;
+	}
+};
+
+export const logoutUser = async () => {
+	try {
+		await axios.get(BASE_URL + "/user/signout").then((response) => {
+			console.log(response.data);
+		});
+
+		return null;
+	} catch (error) {
+		console.error("Error logging out user:", error);
+		throw error;
+	}
+};
+
+export const publishProperty = async (PostData) => {
+	let data = null;
+	let error = "";
+
+	try {
+		await axios
+			.post(BASE_URL + "/property/publish", PostData, { withCredentials: true })
+			.then((response) => {
+				console.log({ data: response.data });
+				data = response.data;
+			})
+			.catch((err) => {
+				if (err.response) error = err.response.data.errors[0].message;
+				console.log({ err });
+			});
+
+		return { data, error };
+	} catch (error) {
+		console.error({ error });
 		throw error;
 	}
 };
