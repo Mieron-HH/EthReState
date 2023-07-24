@@ -19,12 +19,15 @@ interface PropertyAttr {
 	state: string;
 	price: string;
 	size: string;
+	bedroomNumber: string;
+	bathroomNumber: string;
 	metadata: MetadataAttr;
 	owner: string;
 	minted: Boolean;
 	listed: Boolean;
 	locked: Boolean;
 	sold: Boolean;
+	cancelled: Boolean;
 	likes: string[];
 	views: number;
 	buyer?: string;
@@ -50,6 +53,8 @@ const propertySchema = new mongoose.Schema(
 		city: { type: String, required: true, lowercase: true, trim: true },
 		price: { type: String, required: true },
 		size: { type: String, required: true },
+		bedroomNumber: { type: String, required: true },
+		bathroomNumber: { type: String, required: true },
 		owner: { type: String, required: true, lowercase: true, trim: true },
 		metadata: { type: Object, required: true },
 		state: { type: String, required: true, lowercase: true, trim: true },
@@ -57,6 +62,7 @@ const propertySchema = new mongoose.Schema(
 		listed: { type: Boolean, required: true },
 		locked: { type: Boolean, required: true },
 		sold: { type: Boolean, required: true },
+		cancelled: { type: Boolean, required: true },
 		likes: { type: [String], required: true },
 		views: { type: Number, required: true },
 		buyer: { type: mongoose.Types.ObjectId, required: false, ref: "User" },
