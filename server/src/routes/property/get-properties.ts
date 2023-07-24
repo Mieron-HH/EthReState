@@ -6,7 +6,7 @@ import { User } from "../../models/user";
 import { Property } from "../../models/property";
 
 // importing types, middlewares, and errors
-import { BadRequestError, currentUser, requireAuth } from "@kmalae.ltd/library";
+import { BadRequestError } from "@kmalae.ltd/library";
 
 interface QueryParams {
 	minted: boolean;
@@ -24,13 +24,7 @@ const router = express.Router();
 
 router.post(
 	"/api/property/getProperties",
-	currentUser,
-	requireAuth,
 	async (req: Request, res: Response) => {
-		const { email } = req.currentUser!;
-		const existingUser = await User.findOne({ email });
-		if (!existingUser) throw new BadRequestError("User not found");
-
 		const { street, city, state, bedroomNumber, bathroomNumber } = req.body;
 
 		const queryParams: QueryParams = {
