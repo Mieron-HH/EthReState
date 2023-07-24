@@ -13,11 +13,13 @@ export const validateImages = async (
 	let image_count = 0;
 	let thumbnail_image_found = false;
 
+	// @ts-ignore
 	if (!req.files || Object.keys(req.files).length === 0) {
 		await DeleteImages.deleteImage(req);
 		throw new BadRequestError("Property images required");
 	}
 
+	// @ts-ignore
 	for (let index in req.files) {
 		// @ts-ignore
 		const image = req.files[index]!;
