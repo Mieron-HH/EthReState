@@ -6,7 +6,8 @@ import networkChain from "./network-chain.json";
 
 // importing pages
 import Home from "./pages/Home/Home";
-import Publish from "./pages/Publish/publish";
+import Properties from "./pages/Properties/Properties";
+import Publish from "./pages/Publish/Publish";
 
 // importing states selectors and actions
 import {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <Home />,
+	},
+	{
+		path: "/properties",
+		element: <Properties />,
 	},
 	{
 		path: "/publish",

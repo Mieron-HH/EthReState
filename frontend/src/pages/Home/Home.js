@@ -3,6 +3,7 @@ import "./_home.scss";
 import { useDispatch, useSelector } from "react-redux";
 
 // importing components
+import Loader from "../../components/Loader/loader";
 import Header from "../../components/Header/header";
 import Login from "../../components/Login/login";
 import Search from "../../components/Search/search";
@@ -12,18 +13,23 @@ import Testimonials from "../../components/Testimonials/testimonials";
 import Footer from "../../components/Footer/footer";
 
 // importing actions
-import { setLoginFormDisplayed, setUser } from "../../slices/common-slice";
+import {
+	setLoading,
+	setLoginFormDisplayed,
+	setUser,
+} from "../../slices/common-slice";
 
 // importing services
 import { getCurrentUser } from "../../services/api-calls";
 
 const Home = () => {
 	const dispatch = useDispatch();
-	const { loginFormDisplayed } = useSelector((state) => state.common);
 
+	const { loading, loginFormDisplayed } = useSelector((state) => state.common);
 	const [displayContent, setDisplayContent] = useState(false);
 
 	useEffect(() => {
+		dispatch(setLoading(true));
 		currentUserHandler();
 
 		const handleScroll = () => {
@@ -43,20 +49,24 @@ const Home = () => {
 		};
 	}, []);
 
-	useEffect(() => {}, []);
-
 	const currentUserHandler = async () => {
 		try {
 			const data = await getCurrentUser();
 
 			if (data !== null) dispatch(setUser(data));
+
+			setTimeout(() => {
+				dispatch(setLoading(false));
+			}, 500);
 		} catch (error) {
 			console.log({ error });
+			dispatch(setLoading(false));
 		}
 	};
 
 	return (
 		<div className="Home">
+			{loading && <Loader />}
 			<img
 				className="landing-page-image"
 				src={require("../../images/landing_page_image.jpg")}

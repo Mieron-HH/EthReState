@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./_login.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BiX } from "react-icons/bi";
 
 // importing services
 import { getCurrentUser, loginUser } from "../../services/api-calls";
 
 // importing actions
-import { setLoginFormDisplayed, setUser } from "../../slices/common-slice";
+import {
+	setLoading,
+	setLoginFormDisplayed,
+	setUser,
+} from "../../slices/common-slice";
 
 const Login = () => {
 	const dispatch = useDispatch();
@@ -20,6 +24,7 @@ const Login = () => {
 
 	useEffect(() => {
 		return () => {
+			setLoading(false);
 			setEmail("");
 			setPassword("");
 			setLoginError("");
@@ -30,17 +35,21 @@ const Login = () => {
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
+		dispatch(setLoading(true));
 
 		const { data, error } = await loginUser(email, password);
+		setLoginError(error);
 
 		if (data) {
 			const data = await getCurrentUser();
-			console.log({ data });
+
 			dispatch(setUser(data));
 			dispatch(setLoginFormDisplayed(false));
-		} else if (error !== "") {
-			setLoginError(error);
 		}
+
+		setTimeout(() => {
+			dispatch(setLoading(false));
+		}, 1000);
 	};
 
 	return (

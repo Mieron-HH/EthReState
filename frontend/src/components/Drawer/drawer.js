@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./_drawer.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { BiUser, BiMenu, BiX } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import { BiUser, BiMenu, BiX, BiLogOut, BiHomeAlt2 } from "react-icons/bi";
 
 // importing actions
 import { setAccount, setSigner } from "../../slices/config-slice";
-import { setLoginFormDisplayed } from "../../slices/common-slice";
+import { setLoginFormDisplayed, setUser } from "../../slices/common-slice";
+
+// importing services
+import { logoutUser } from "../../services/api-calls";
 
 const Drawer = () => {
 	const dispatch = useDispatch();
 
 	const { provider, signer } = useSelector((state) => state.config);
 	const { user } = useSelector((state) => state.common);
-
 	const [isDisplayed, setIsDisplayed] = useState(false);
+
+	useEffect(() => {
+		// Add the event listener to the scroll event
+		window.addEventListener("scroll", () => setIsDisplayed(false));
+	}, []);
 
 	const connectAccount = async () => {
 		try {
@@ -46,28 +54,75 @@ const Drawer = () => {
 		return name;
 	};
 
+	const handleLogout = async () => {
+		const data = await logoutUser();
+
+		dispatch(setUser(data));
+	};
+
+	const renderConnector = () => {
+		return (
+			user &&
+			(signer ? (
+				<>
+					<div className="account-address">
+						{signer.address.slice(0, 4) + "...." + signer.address.slice(38)}
+					</div>
+
+					<p>Wallet is connected 😎</p>
+				</>
+			) : (
+				<>
+					<button
+						type="button"
+						className="connector-button"
+						onClick={connectAccount}
+					>
+						Connect Wallet
+					</button>
+
+					<p>Wallet is not connected 😐</p>
+				</>
+			))
+		);
+	};
+
 	return (
 		<>
-			<div className="user-icon-container" onClick={toggleDisplay}>
-				{isDisplayed ? (
-					<BiX className="icon" />
-				) : user !== null ? (
-					<>
-						<div
-							className="indicator"
-							style={{ backgroundColor: signer ? "lightgreen" : "red" }}
-						></div>
+			{!isDisplayed && (
+				<div className="user-icon-container" onClick={toggleDisplay}>
+					{isDisplayed ? (
+						<BiX className="icon" />
+					) : user !== null ? (
+						<>
+							{!signer && (
+								<div
+									className="indicator"
+									style={{ backgroundColor: "red" }}
+								></div>
+							)}
 
-						<BiUser className="icon" />
-					</>
-				) : (
-					<BiMenu className="icon" />
-				)}
-			</div>
+							<BiUser className="icon" />
+						</>
+					) : (
+						<BiMenu className="icon" />
+					)}
+				</div>
+			)}
 
-			{isDisplayed && (
-				<div className="drawer-container">
+			<div
+				className="drawer-container"
+				style={{ width: isDisplayed ? "25vw" : "0vw" }}
+			>
+				{isDisplayed && (
 					<div className="user-info-container">
+						<div
+							className="hide-drawer-button"
+							onClick={() => setIsDisplayed(false)}
+						>
+							<BiX className="icon" />
+						</div>
+
 						{user !== null ? (
 							<p className="user-email">{displayName(user.email)}</p>
 						) : (
@@ -76,38 +131,28 @@ const Drawer = () => {
 							</button>
 						)}
 					</div>
+				)}
 
-					{user ? (
-						signer ? (
-							<>
-								<div className="account-address">
-									{signer.address.slice(0, 4) +
-										"...." +
-										signer.address.slice(38)}
-								</div>
+				{isDisplayed && renderConnector()}
 
-								<p>Wallet is connected 😎</p>
-							</>
-						) : (
-							<>
-								<button
-									type="button"
-									className="connector-button"
-									onClick={connectAccount}
-								>
-									Connect Wallet
-								</button>
+				{isDisplayed && user && (
+					<div className="drawer-menu-container">
+						<Link className="drawer-menu-item" to="/publish">
+							<BiHomeAlt2 className="icon" /> Publish
+						</Link>
 
-								<p>Wallet is not connected 😐</p>
-							</>
-						)
-					) : (
-						<div className="login-instruction">
-							Log-in required to load user data
+						<div className="drawer-menu-item" onClick={handleLogout}>
+							<BiLogOut className="icon" /> Logout
 						</div>
-					)}
-				</div>
-			)}
+					</div>
+				)}
+
+				{isDisplayed && !user && (
+					<div className="login-instruction">
+						Log-in required to load user data
+					</div>
+				)}
+			</div>
 		</>
 	);
 };

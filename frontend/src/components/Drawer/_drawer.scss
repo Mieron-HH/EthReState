@@ -30,31 +30,46 @@
 	}
 
 	&:hover {
-		padding: 5px;
-
 		.icon {
+			width: 70%;
+			height: 70%;
 			color: rgb(31, 166, 210);
 		}
 	}
 }
 
 .drawer-container {
-	width: 17vw;
-	height: 20vh;
+	width: 25vw;
+	height: 100vh;
 	@include display_flex(column, flex-start, center);
-	background-color: white;
+	background-color: rgba(255, 255, 255, 0.9);
 	border-radius: 5px;
 	position: absolute;
-	right: 10px;
-	top: 18vh;
+	top: 0;
+	right: 0;
+	transition: width 0.35s ease-in-out;
 
 	.user-info-container {
 		width: 100%;
-		height: 35%;
+		height: 10%;
 		@include display_flex(column, center, center);
 		background-color: rgb(140, 144, 146);
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
+
+		.hide-drawer-button {
+			width: fit-content;
+			height: fit-content;
+			@include display_flex(row, center, center);
+			position: absolute;
+			right: 5px;
+			cursor: pointer;
+
+			.icon {
+				color: white;
+				font-size: 25px;
+			}
+		}
 
 		.login-button {
 			width: 30%;
@@ -68,6 +83,7 @@
 			font-weight: 600;
 			text-transform: uppercase;
 			text-decoration: underline;
+			position: relative;
 
 			&:hover {
 				color: rgb(31, 166, 210);
@@ -85,7 +101,7 @@
 
 	.connector-button {
 		width: 85%;
-		height: 30%;
+		height: 8%;
 		margin-top: 5%;
 		background-color: rgb(16, 222, 222);
 		color: white;
@@ -108,7 +124,7 @@
 
 	.account-address {
 		width: 85%;
-		height: 30%;
+		height: 8%;
 		margin-top: 5%;
 		@include display_flex(row, center, center);
 		background: linear-gradient(to right, rgb(47, 47, 138), rgb(126, 63, 63));
@@ -121,7 +137,7 @@
 		margin-top: 5px;
 		font-size: 14px;
 		font-weight: 600;
-		color: #777;
+		color: #555;
 	}
 
 	.login-instruction {
@@ -130,7 +146,50 @@
 		margin: auto 0;
 		@include display_flex(row, center, center);
 		text-align: center;
-		color: #777;
+		color: #555;
 		font-weight: 600;
 	}
+
+	.drawer-menu-container {
+		width: 98%;
+		height: 100%;
+		margin-top: 20px;
+
+		.drawer-menu-item {
+			width: 100%;
+			height: 43px;
+			margin-bottom: 5px;
+			padding-left: 5px;
+			@include display_flex(row, flex-start, center);
+			border-radius: 3px;
+			border-bottom: 1px solid lightgray;
+			color: #222;
+			font-size: 15px;
+			font-weight: 600;
+			cursor: pointer;
+			text-decoration: none;
+
+			.icon {
+				@include reset();
+				margin-right: 7px;
+				color: #111;
+				font-size: 20px;
+			}
+
+			&:hover {
+				background-color: gray;
+				color: white;
+				border-top-left-radius: 5px;
+				border-top-right-radius: 5px;
+			}
+
+			&:visited {
+				color: #222;
+			}
+		}
+	}
+}
+
+.drawer-container.hidden {
+	width: 0vw;
 }
