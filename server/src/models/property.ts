@@ -14,6 +14,11 @@ interface MetadataAttr {
 interface PropertyAttr {
 	seller: string;
 	tokenID?: string;
+	street: string;
+	city: string;
+	state: string;
+	price: string;
+	size: string;
 	metadata: MetadataAttr;
 	owner: string;
 	minted: Boolean;
@@ -41,8 +46,13 @@ const propertySchema = new mongoose.Schema(
 			ref: "User",
 		},
 		tokenID: { type: Number, required: false },
-		metadata: { type: Object, required: true },
+		street: { type: String, required: true, lowercase: true, trim: true },
+		city: { type: String, required: true, lowercase: true, trim: true },
+		price: { type: String, required: true },
+		size: { type: String, required: true },
 		owner: { type: String, required: true, lowercase: true, trim: true },
+		metadata: { type: Object, required: true },
+		state: { type: String, required: true, lowercase: true, trim: true },
 		minted: { type: Boolean, required: true },
 		listed: { type: Boolean, required: true },
 		locked: { type: Boolean, required: true },

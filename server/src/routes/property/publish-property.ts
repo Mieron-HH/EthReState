@@ -6,11 +6,11 @@ import multer from "multer";
 import fs from "fs";
 import path from "path";
 import { client } from "../../index";
-import { validateImages } from "../../services/validate-images";
 
 // importing models and services
 import { User } from "../../models/user";
 import { Property } from "../../models/property";
+import { validateImages } from "../../services/validate-images";
 import { DeleteImages } from "../../services/delete-images";
 
 // importing types, middlewares, and errors
@@ -43,7 +43,13 @@ router.post(
 			.withMessage("Size must be provided")
 			.isNumeric()
 			.withMessage("Size must be in digits"),
-		body("location").notEmpty().withMessage("Location must be provided"),
+		body("street").notEmpty().withMessage("Street must be provided"),
+		body("city").notEmpty().withMessage("City must be provided"),
+		body("state")
+			.notEmpty()
+			.withMessage("State must be provided")
+			.custom((input) => input.length === 2)
+			.withMessage("State must be in 2 letters form"),
 		body("bathroomNumber")
 			.notEmpty()
 			.withMessage("Bathroom number must be provided")
@@ -66,10 +72,21 @@ router.post(
 	async (req: Request, res: Response) => {
 		const { email } = req.currentUser!;
 		const existingUser = await User.findOne({ email });
-		if (!existingUser) throw new BadRequestError("User not found");
+		if (!existingUser) {
+			await DeleteImages.deleteImage(req);
+			throw new BadRequestError("User not found");
+		}
 
-		const { owner, price, size, location, bathroomNumber, bedroomNumber } =
-			req.body;
+		const {
+			owner,
+			price,
+			size,
+			street,
+			city,
+			state,
+			bathroomNumber,
+			bedroomNumber,
+		} = req.body;
 
 		const propertyImages = [];
 		let defaultImage;
@@ -106,7 +123,9 @@ router.post(
 					owner,
 					price,
 					size,
-					location,
+					street,
+					city,
+					state,
 					bathroomNumber,
 					bedroomNumber,
 					propertyImages,
@@ -118,6 +137,11 @@ router.post(
 			const property = Property.build({
 				seller: existingUser.id,
 				owner,
+				street,
+				city,
+				state,
+				price,
+				size,
 				metadata,
 				minted: false,
 				listed: false,
