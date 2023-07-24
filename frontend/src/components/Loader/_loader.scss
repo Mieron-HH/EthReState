@@ -1,0 +1,19 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.loader-container {
+	width: 100vw;
+	height: 100vh;
+	@include display_flex(row, center, center);
+	background-color: rgba(255, 255, 255, 0.548);
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+
+	.spinner {
+		width: 20%;
+		height: 20%;
+		object-fit: contain;
+	}
+}
