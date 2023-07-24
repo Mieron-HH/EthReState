@@ -11,6 +11,7 @@ import { errorHandler, NotFoundError } from "@kmalae.ltd/library";
 import { SignupRouter } from "./routes/user/sign-up";
 import { SigninRouter } from "./routes/user/sign-in";
 import { CurrentUserRouter } from "./routes/user/current-user";
+import { signoutRouter } from "./routes/user/sign-out";
 
 // importing MINT routes
 import { PublishRouter } from "./routes/property/publish-property";
@@ -46,6 +47,7 @@ app.use(
 app.use(SignupRouter);
 app.use(SigninRouter);
 app.use(CurrentUserRouter);
+app.use(signoutRouter);
 
 // hooking MINT routes
 app.use(PublishRouter);
