@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-var web3 = require("web3");
+const web3 = require("web3");
+const sharp = require("sharp");
 import multer from "multer";
 import fs from "fs";
 import path from "path";
@@ -95,9 +96,9 @@ router.post(
 		for (let index in req.files) {
 			// @ts-ignore
 			const image = req.files[index];
-			const imageBuffer = fs.readFileSync(
-				path.join("properties/" + image.filename)
-			) as Buffer;
+			const imageBuffer = await sharp(image.path)
+				.resize({ width: 800 })
+				.toBuffer();
 
 			if (image.fieldname === "propertyImage") {
 				const propertyImage: ImageAttr = {
