@@ -1,14 +1,9 @@
 import mongoose from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
-interface PropertyImage {
+export interface ImageAttr {
 	data: Buffer;
 	contentType: string;
-}
-
-interface MetadataAttr {
-	url: string;
-	ipnft: string;
 }
 
 interface PropertyAttr {
@@ -21,7 +16,8 @@ interface PropertyAttr {
 	size: string;
 	bedroomNumber: string;
 	bathroomNumber: string;
-	metadata: MetadataAttr;
+	thumbnail: ImageAttr;
+	images: ImageAttr[];
 	owner: string;
 	minted: Boolean;
 	listed: Boolean;
@@ -56,7 +52,8 @@ const propertySchema = new mongoose.Schema(
 		bedroomNumber: { type: String, required: true },
 		bathroomNumber: { type: String, required: true },
 		owner: { type: String, required: true, lowercase: true, trim: true },
-		metadata: { type: Object, required: true },
+		thumbnail: { type: Object, required: true },
+		images: { type: [Object], required: true },
 		state: { type: String, required: true, lowercase: true, trim: true },
 		minted: { type: Boolean, required: true },
 		listed: { type: Boolean, required: true },

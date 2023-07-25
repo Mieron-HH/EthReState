@@ -1,15 +1,13 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 var web3 = require("web3");
-import { File } from "nft.storage";
 import multer from "multer";
 import fs from "fs";
 import path from "path";
-import { client } from "../../index";
 
 // importing models and services
 import { User } from "../../models/user";
-import { Property } from "../../models/property";
+import { Property, ImageAttr } from "../../models/property";
 import { validateImages } from "../../services/validate-images";
 import { DeleteImages } from "../../services/delete-images";
 
@@ -88,8 +86,11 @@ router.post(
 			bedroomNumber,
 		} = req.body;
 
-		const propertyImages = [];
-		let defaultImage;
+		const propertyImages: ImageAttr[] = [];
+		let thumbnail: ImageAttr = {
+			data: Buffer.from([]),
+			contentType: "",
+		};
 
 		for (let index in req.files) {
 			// @ts-ignore
@@ -99,41 +100,24 @@ router.post(
 			) as Buffer;
 
 			if (image.fieldname === "propertyImage") {
-				const propertyImage = new File([imageBuffer], image.filename, {
-					type: image.mimetype,
-				});
+				const propertyImage: ImageAttr = {
+					data: imageBuffer,
+					contentType: image.mimetype,
+				};
 
 				// @ts-ignore
 				propertyImages.push(propertyImage);
 			} else {
-				defaultImage = new File([imageBuffer], image.filename, {
-					type: image.mimetype,
-				});
+				thumbnail = {
+					data: imageBuffer,
+					contentType: image.mimetype,
+				};
 			}
 		}
 
 		await DeleteImages.deleteImage(req);
 
 		try {
-			const metadata = await client.store({
-				name: "Property Data",
-				description: "IPFS stored Property data",
-				image: defaultImage,
-				properties: {
-					owner,
-					price,
-					size,
-					street,
-					city,
-					state,
-					bathroomNumber,
-					bedroomNumber,
-					propertyImages,
-				},
-			});
-
-			await client.check(metadata.ipnft);
-
 			const property = Property.build({
 				seller: existingUser.id,
 				owner,
@@ -144,7 +128,8 @@ router.post(
 				size,
 				bedroomNumber,
 				bathroomNumber,
-				metadata,
+				thumbnail,
+				images: propertyImages,
 				minted: false,
 				listed: false,
 				locked: false,
