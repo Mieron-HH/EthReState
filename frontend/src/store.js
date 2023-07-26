@@ -7,7 +7,7 @@ import CommonSlice from "./slices/common-slice";
 
 const store = configureStore({
 	reducer: {
-		property: PropertySlice,
+		properties: PropertySlice,
 		config: ConfigSlice,
 		common: CommonSlice,
 	},

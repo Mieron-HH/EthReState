@@ -23,6 +23,7 @@ const configSlice = createSlice({
 		setSigner: (state, action) => {
 			state.signer = action.payload;
 		},
+
 		reset: (state) => {
 			state.account = null;
 			state.provider = null;
@@ -33,7 +34,13 @@ const configSlice = createSlice({
 	},
 });
 
-export const { setAccount, setProvider, setChainId, setSigner, reset } =
-	configSlice.actions;
+export const {
+	setAccount,
+	setProvider,
+	setChainId,
+	setSigner,
+	setCoordinates,
+	reset,
+} = configSlice.actions;
 
 export default configSlice.reducer;

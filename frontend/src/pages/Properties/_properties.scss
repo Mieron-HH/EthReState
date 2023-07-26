@@ -1,0 +1,21 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.Properties {
+	width: 100vw;
+	height: 100vh;
+	@include display_flex(column, flex-start, center);
+	position: relative;
+	overflow-y: scroll;
+
+	.properties-container {
+		width: 90%;
+		height: 90%;
+		margin-top: 20px;
+		padding: 10px;
+		@include display_flex(row, flex-start, flex-start);
+		flex-wrap: wrap;
+		gap: 30px;
+		overflow-y: scroll;
+	}
+}
