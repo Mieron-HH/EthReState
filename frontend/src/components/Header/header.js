@@ -2,9 +2,6 @@ import React from "react";
 import "./_header.scss";
 import { Link, useLocation } from "react-router-dom";
 
-// importing components
-import Drawer from "../../components/Drawer/drawer";
-
 const Header = () => {
 	const location = useLocation();
 
@@ -39,8 +36,6 @@ const Header = () => {
 					</div>
 				</div>
 			</div>
-
-			<Drawer />
 		</div>
 	);
 };

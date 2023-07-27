@@ -4,6 +4,7 @@ const initialState = {
 	user: null,
 	loginFormDisplayed: false,
 	loading: false,
+	drawerExtended: false,
 };
 
 const commonSlice = createSlice({
@@ -19,10 +20,13 @@ const commonSlice = createSlice({
 		setLoading: (state, action) => {
 			state.loading = action.payload;
 		},
+		setDrawerExtended: (state, action) => {
+			state.drawerExtended = action.payload;
+		},
 	},
 });
 
-export const { setUser, setLoginFormDisplayed, setLoading } =
+export const { setUser, setLoginFormDisplayed, setLoading, setDrawerExtended } =
 	commonSlice.actions;
 
 export default commonSlice.reducer;

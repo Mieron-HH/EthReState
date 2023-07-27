@@ -1,195 +1,194 @@
 @import "../../styles/mixin";
 @import "../../styles/variables";
 
-.user-icon-container {
-	width: 50px;
-	height: 50px;
-	@include display_flex(row, center, center);
-	background-color: white;
-	border-radius: 100%;
-	position: absolute;
-	right: 20px;
-	z-index: 1;
-	cursor: pointer;
-	transition: padding 0.3s ease-in-out;
-
-	.icon {
-		@include reset();
-		width: 80%;
-		height: 80%;
-		color: black;
-	}
-
-	.indicator {
-		width: 10px;
-		height: 10px;
-		border-radius: 100%;
-		position: absolute;
-		top: -3px;
-		right: 7px;
-	}
+.drawer-container {
+	width: 100%;
+	height: 100%;
+	@include display_flex(column, flex-start, center);
+	border-left: 2px ridge white;
+	position: relative;
 
 	&:hover {
-		.icon {
-			width: 70%;
-			height: 70%;
-			color: rgb(31, 166, 210);
+		border-left: 2px ridge rgb(48, 48, 237);
+	}
+
+	.drawer-toggler {
+		width: 30px;
+		height: 30px;
+		@include display_flex(row, center, center);
+		background-color: white;
+		border-radius: 100%;
+		color: black;
+		position: absolute;
+		left: -35px;
+		top: calc(50% - 15px);
+
+		.toggler-icon {
+			font-size: 22px;
+		}
+
+		&:hover {
+			background-color: black;
+			color: white;
 		}
 	}
-}
 
-.drawer-container {
-	width: 25vw;
-	height: 100vh;
-	@include display_flex(column, flex-start, center);
-	background-color: rgba(255, 255, 255, 0.9);
-	border-radius: 5px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	transition: width 0.35s ease-in-out;
+	.drawer-toggler.reversed {
+		background-color: black;
+		color: white;
+	}
 
-	.user-info-container {
-		width: 100%;
-		height: 10%;
-		@include display_flex(column, center, center);
-		background-color: rgb(140, 144, 146);
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
+	.drawer-menu-item {
+		width: 40px;
+		height: 40px;
+		margin-bottom: 20px;
+		@include display_flex(row, center, center);
+		color: white;
+		border-radius: 100%;
+		cursor: pointer;
 
-		.hide-drawer-button {
-			width: fit-content;
-			height: fit-content;
-			@include display_flex(row, center, center);
-			position: absolute;
-			right: 5px;
-			cursor: pointer;
-
-			.icon {
-				color: white;
-				font-size: 25px;
-			}
-		}
-
-		.login-button {
-			width: 30%;
-			height: 80%;
-			@include display_flex(row, center, center);
-			background: none;
-			border: none;
-			cursor: pointer;
-			color: white;
-			font-size: 20px;
-			font-weight: 600;
-			text-transform: uppercase;
-			text-decoration: underline;
-			position: relative;
-
-			&:hover {
-				color: rgb(31, 166, 210);
-			}
+		.menu-icon {
+			font-size: 30px;
 		}
 
 		.user-email {
-			@include reset();
-			color: white;
-			font-size: 16px;
-			font-weight: 600;
+			font-size: 18px;
+			font-weight: bold;
 			text-transform: uppercase;
-		}
-	}
-
-	.connector-button {
-		width: 85%;
-		height: 8%;
-		margin-top: 5%;
-		background-color: rgb(16, 222, 222);
-		color: white;
-		font-size: 16px;
-		font-weight: bold;
-		border-radius: 8px;
-		text-transform: uppercase;
-		border: none;
-		cursor: pointer;
-		box-shadow: 1px 1px 5px #aaa;
-
-		&:hover {
-			background: linear-gradient(to right, rgb(47, 47, 138), rgb(126, 63, 63));
+			word-break: break-all;
 		}
 
-		&:disabled {
-			cursor: not-allowed;
-		}
-	}
-
-	.account-address {
-		width: 85%;
-		height: 8%;
-		margin-top: 5%;
-		@include display_flex(row, center, center);
-		background: linear-gradient(to right, rgb(47, 47, 138), rgb(126, 63, 63));
-		color: white;
-		border-radius: 8px;
-	}
-
-	p {
-		@include reset();
-		margin-top: 5px;
-		font-size: 14px;
-		font-weight: 600;
-		color: #555;
-	}
-
-	.login-instruction {
-		width: 80%;
-		height: 50%;
-		margin: auto 0;
-		@include display_flex(row, center, center);
-		text-align: center;
-		color: #555;
-		font-weight: 600;
-	}
-
-	.drawer-menu-container {
-		width: 98%;
-		height: 100%;
-		margin-top: 20px;
-
-		.drawer-menu-item {
-			width: 100%;
-			height: 43px;
-			margin-bottom: 5px;
-			padding-left: 5px;
-			@include display_flex(row, flex-start, center);
-			border-radius: 3px;
-			border-bottom: 1px solid lightgray;
-			color: #222;
-			font-size: 15px;
-			font-weight: 600;
-			cursor: pointer;
-			text-decoration: none;
-
-			.icon {
-				@include reset();
-				margin-right: 7px;
-				color: #111;
-				font-size: 20px;
-			}
+		.login-button {
+			width: 80%;
+			height: 50%;
+			@include display_flex(row, center, center);
+			background-color: rgb(49, 231, 231);
+			border-radius: 8px;
+			box-shadow: 1px 1px 10px #999;
+			color: white;
+			font-size: 20px;
+			font-weight: bold;
 
 			&:hover {
-				background-color: gray;
-				color: white;
-				border-top-left-radius: 5px;
-				border-top-right-radius: 5px;
-			}
-
-			&:visited {
-				color: #222;
+				background: linear-gradient(to right, black, blue);
 			}
 		}
+	}
+
+	.drawer-menu-item.user {
+		width: 55px;
+		height: 55px;
+		background-color: white;
+		color: black;
+
+		.menu-icon {
+			font-size: 35px;
+		}
+	}
+
+	.drawer-menu-item.extended-user {
+		width: 100%;
+		height: 80px;
+		@include display_flex(row, center, center);
+		border-radius: 0;
+
+		.menu-icon {
+			font-size: 35px;
+		}
+	}
+
+	.drawer-menu-item.logged-in {
+		background-color: black;
+		color: white;
+	}
+
+	.drawer-menu-item.logged-out {
+		background-color: white;
+	}
+
+	.drawer-menu-item.hightlight {
+		background-color: white;
+		color: black;
+
+		&:hover {
+			background-color: black;
+			color: white;
+		}
+	}
+
+	.drawer-menu-item.reverse-hightlight {
+		background-color: black;
+		color: white;
+
+		&:hover {
+			background-color: white;
+			color: black;
+		}
+	}
+
+	.drawer-menu-item.extended {
+		width: 98%;
+		height: 45px;
+		margin-bottom: 1px;
+		padding-left: 10px;
+		@include display_flex(row, flex-start, center);
+		border-radius: 5px;
+		border-bottom: 1px solid gray;
+		color: #222;
+		font-weight: bold;
+
+		.menu-icon {
+			font-size: 20px;
+			margin-right: 10px;
+		}
+
+		.menu-icon-label {
+			font-size: 18px;
+		}
+
+		&:hover {
+			background-color: black;
+			color: white;
+		}
+	}
+
+	.drawer-menu-item.connector {
+		width: 100%;
+		height: 42px;
+		border-radius: 0;
+
+		.connector-button {
+			width: 80%;
+			height: 100%;
+			@include display_flex(row, center, center);
+			background-color: rgb(49, 231, 231);
+			border-radius: 8px;
+			box-shadow: 1px 1px 10px #999;
+			color: white;
+			font-size: 18px;
+			font-weight: bold;
+			position: relative;
+
+			&:hover {
+				background: linear-gradient(to right, black, blue);
+			}
+
+			.disconnect-icon {
+				font-size: 18px;
+				position: absolute;
+				top: 2px;
+				right: 2px;
+				cursor: pointer;
+			}
+		}
+	}
+
+	.drawer-menu-item.connector.no-cursor {
+		cursor: default;
 	}
 }
 
-.drawer-container.hidden {
-	width: 0vw;
+.drawer-container.extended {
+	background-color: rgba(255, 255, 255, 0.8);
+	border: none;
 }

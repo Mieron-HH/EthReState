@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 // importing components
 import Loader from "../../components/Loader/loader";
 import Header from "../../components/Header/header";
+import Drawer from "../../components/Drawer/drawer";
 import Login from "../../components/Login/login";
 import Search from "../../components/Search/search";
 import Cards from "../../components/Cards/cards";
@@ -25,7 +26,9 @@ import { getCurrentUser } from "../../services/api-calls";
 const Home = () => {
 	const dispatch = useDispatch();
 
-	const { loading, loginFormDisplayed } = useSelector((state) => state.common);
+	const { loading, loginFormDisplayed, drawerExtended } = useSelector(
+		(state) => state.common
+	);
 	const [displayContent, setDisplayContent] = useState(false);
 
 	useEffect(() => {
@@ -40,7 +43,6 @@ const Home = () => {
 			setDisplayContent(shouldShowDiv);
 		};
 
-		// Add the event listener to the scroll event
 		window.addEventListener("scroll", handleScroll);
 
 		return () => {
@@ -75,6 +77,13 @@ const Home = () => {
 			<div className="shade"></div>
 
 			<Header />
+
+			<div
+				className="home-drawer-container"
+				style={{ width: drawerExtended ? "18vw" : "5vw" }}
+			>
+				<Drawer />
+			</div>
 
 			{loginFormDisplayed && <Login />}
 
