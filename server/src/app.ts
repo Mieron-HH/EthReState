@@ -25,6 +25,7 @@ import { CancelRouter } from "./routes/property/cancel-property";
 import { GetPropertiesRouter } from "./routes/property/get-properties";
 import { GetSellerPropertiesRouter } from "./routes/property/get-seller-properties";
 import { GetBuyerPropertiesRouter } from "./routes/property/get-buyer-properties";
+import { GetPopularPropertiesRouter } from "./routes/property/get-popular-properties";
 
 const app = express();
 
@@ -62,6 +63,7 @@ app.use(CancelRouter);
 app.use(GetPropertiesRouter);
 app.use(GetSellerPropertiesRouter);
 app.use(GetBuyerPropertiesRouter);
+app.use(GetPopularPropertiesRouter);
 
 // Invalid routes
 app.all("*", async (req, res, next) => {
