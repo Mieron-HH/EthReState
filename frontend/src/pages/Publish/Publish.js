@@ -1,15 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./_publish.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Cookies from "js-cookie";
 import { BiBed, BiBath, BiPlus, BiPlusCircle, BiX } from "react-icons/bi";
 
 // importing components
 import Loader from "../../components/Loader/loader";
 
+// importing actions
+import { setSigner } from "../../slices/config-slice";
+
 // importing services
 import { publishProperty } from "../../services/api-calls";
 
 const Publish = () => {
+	const dispatch = useDispatch();
 	const PostData = useRef(new FormData());
 
 	const { signer } = useSelector((state) => state.config);
@@ -28,7 +33,10 @@ const Publish = () => {
 	const [submitEnabled, setSubmitEnabled] = useState(false);
 
 	useEffect(() => {
-		if (signer === null) alert("Connect Your Wallet");
+		if (Cookies.get("signer")) {
+			const signer = JSON.parse(Cookies.get("signer"));
+			dispatch(setSigner(signer));
+		}
 	}, []);
 
 	useEffect(() => {
@@ -235,7 +243,7 @@ const Publish = () => {
 		PostData.current.append("bathroomNumber", bathroomNumber);
 		PostData.current.append("price", price);
 
-		const { data, error } = await publishProperty(PostData.current);
+		const { error } = await publishProperty(PostData.current);
 		setError(error);
 
 		setTimeout(() => {

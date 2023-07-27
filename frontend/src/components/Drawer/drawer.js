@@ -61,7 +61,10 @@ const Drawer = () => {
 					{signer.address.slice(0, 4)}...{signer.address.slice(38, 42)}
 					<GiCancel
 						className="disconnect-icon"
-						onClick={() => dispatch(setSigner(null))}
+						onClick={() => {
+							dispatch(setSigner(null));
+							Cookies.remove("signer");
+						}}
 					/>
 				</div>
 			) : (
@@ -70,7 +73,7 @@ const Drawer = () => {
 				</div>
 			)
 		) : signer ? (
-			<GiChaingun className="menu-icon" />
+			<GiChaingun className="menu-icon" onClick={toggleDrawer} />
 		) : (
 			<TbPlugConnected className="menu-icon" onClick={getSigner} />
 		);
