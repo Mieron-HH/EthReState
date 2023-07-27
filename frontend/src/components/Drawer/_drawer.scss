@@ -62,7 +62,7 @@
 			width: 80%;
 			height: 50%;
 			@include display_flex(row, center, center);
-			background-color: rgb(49, 231, 231);
+			background: linear-gradient(to right, black, blue);
 			border-radius: 8px;
 			box-shadow: 1px 1px 10px #999;
 			color: white;
@@ -70,7 +70,7 @@
 			font-weight: bold;
 
 			&:hover {
-				background: linear-gradient(to right, black, blue);
+				background: linear-gradient(to right, black, rgb(202, 50, 50));
 			}
 		}
 	}
@@ -161,7 +161,7 @@
 			width: 80%;
 			height: 100%;
 			@include display_flex(row, center, center);
-			background-color: rgb(49, 231, 231);
+			background: linear-gradient(to right, black, blue);
 			border-radius: 8px;
 			box-shadow: 1px 1px 10px #999;
 			color: white;
@@ -170,7 +170,7 @@
 			position: relative;
 
 			&:hover {
-				background: linear-gradient(to right, black, blue);
+				background: linear-gradient(to right, black, rgb(202, 50, 50));
 			}
 
 			.disconnect-icon {

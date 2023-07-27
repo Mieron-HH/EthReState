@@ -48,7 +48,7 @@ const Drawer = () => {
 				</div>
 			)
 		) : user ? (
-			<BiUser className="menu-icon" />
+			<BiUser className="menu-icon" onClick={toggleDrawer} />
 		) : (
 			<IoMdLogIn className="menu-icon" onClick={dispatchLoginForm} />
 		);
@@ -94,7 +94,9 @@ const Drawer = () => {
 
 		setTimeout(() => {
 			dispatch(setUser(null));
+			dispatch(setSigner(null));
 			dispatch(setLoading(false));
+			Cookies.remove("signer");
 		}, 2000);
 	};
 
