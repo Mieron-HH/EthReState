@@ -19,6 +19,7 @@ import {
 	setLoginFormDisplayed,
 	setUser,
 } from "../../slices/common-slice";
+import { fetchPopular } from "../../slices/property-slice";
 
 // importing services
 import { getCurrentUser } from "../../services/api-calls";
@@ -29,11 +30,13 @@ const Home = () => {
 	const { loading, loginFormDisplayed, drawerExtended } = useSelector(
 		(state) => state.common
 	);
+	const { popular } = useSelector((state) => state.properties);
 	const [displayContent, setDisplayContent] = useState(false);
 
 	useEffect(() => {
 		dispatch(setLoading(true));
 		currentUserHandler();
+		dispatch(fetchPopular());
 
 		const handleScroll = () => {
 			const scrollPosition = window.scrollY;
@@ -93,7 +96,7 @@ const Home = () => {
 				className={`components-container ${displayContent ? "visible" : ""}`}
 			>
 				<Cards />
-				<Popular />
+				{popular.length > 0 && <Popular />}
 				<Testimonials />
 				<Footer />
 			</div>

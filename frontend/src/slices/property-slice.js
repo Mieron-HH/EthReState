@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 const initialState = {
 	properties: [],
+	popular: [],
 	status: "idle", // idle, loading, succeeded, failed
 	error: null,
 };
@@ -23,7 +24,16 @@ const fetchPropertiesAPI = async (city, state) => {
 		.post(BASE_URL + "/property/getProperties", payload, {
 			withCredentials: true,
 		})
-		.then(async (response) => response.data)
+		.then((response) => response.data)
+		.catch((error) => {
+			throw error;
+		});
+};
+
+const fetchPopularAPI = async () => {
+	return await axios
+		.get(BASE_URL + "/property/popular", { withCredentials: true })
+		.then((response) => response.data)
 		.catch((error) => {
 			throw error;
 		});
@@ -51,6 +61,18 @@ export const fetchProperties = createAsyncThunk(
 	}
 );
 
+export const fetchPopular = createAsyncThunk(
+	"popular/fetchPopular",
+	async () => {
+		try {
+			return await fetchPopularAPI();
+		} catch (error) {
+			console.log({ error });
+			throw new Error("Error fetching popular properties");
+		}
+	}
+);
+
 const propertySlice = createSlice({
 	name: "properties",
 	initialState,
@@ -65,6 +87,17 @@ const propertySlice = createSlice({
 				state.properties = action.payload;
 			})
 			.addCase(fetchProperties.rejected, (state, action) => {
+				state.status = "failed";
+				state.error = action.error.message;
+			})
+			.addCase(fetchPopular.pending, (state) => {
+				state.status = "loading";
+			})
+			.addCase(fetchPopular.fulfilled, (state, action) => {
+				state.status = "succeeded";
+				state.popular = action.payload;
+			})
+			.addCase(fetchPopular.rejected, (state, action) => {
 				state.status = "failed";
 				state.error = action.error.message;
 			});

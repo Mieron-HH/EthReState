@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./_popular.scss";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/css/bundle";
-import { BiHeart } from "react-icons/bi";
+
+// importing components
+import Card from "../Card/card";
 
 const Popular = () => {
+	const navigate = useNavigate();
+
+	const { popular } = useSelector((state) => state.properties);
+
 	return (
 		<div className="popular-container">
 			<div className="popular-header">
 				<h1>POPULAR PROPERTIES</h1>
 
-				<button type="button">View all properties</button>
+				<button type="button" onClick={() => navigate("/properties")}>
+					View all properties
+				</button>
 			</div>
 
 			<Swiper
@@ -26,84 +36,14 @@ const Popular = () => {
 				onSlideChange={() => {}}
 				onSwiper={(swiper) => {}}
 			>
-				<SwiperSlide className="popular-carousel-item">
-					<img
-						className="popular-carousel-image"
-						src={require("../../images/houses/house_1.jpg")}
-						alt=""
-					/>
-
-					<div className="heart-container">
-						<BiHeart className="icon" />
-					</div>
-
-					<div className="popular-carousel-info"></div>
-				</SwiperSlide>
-				<SwiperSlide className="popular-carousel-item">
-					<img
-						className="popular-carousel-image"
-						src={require("../../images/houses/house_2.jpg")}
-						alt=""
-					/>
-
-					<div className="heart-container">
-						<BiHeart className="icon" />
-					</div>
-
-					<div className="popular-carousel-info"></div>
-				</SwiperSlide>
-				<SwiperSlide className="popular-carousel-item">
-					<img
-						className="popular-carousel-image"
-						src={require("../../images/houses/house_3.jpg")}
-						alt=""
-					/>
-
-					<div className="heart-container">
-						<BiHeart className="icon" />
-					</div>
-
-					<div className="popular-carousel-info"></div>
-				</SwiperSlide>
-				<SwiperSlide className="popular-carousel-item">
-					<img
-						className="popular-carousel-image"
-						src={require("../../images/houses/house_4.jpg")}
-						alt=""
-					/>
-
-					<div className="heart-container">
-						<BiHeart className="icon" />
-					</div>
-
-					<div className="popular-carousel-info"></div>
-				</SwiperSlide>
-				<SwiperSlide className="popular-carousel-item">
-					<img
-						className="popular-carousel-image"
-						src={require("../../images/houses/house_5.jpg")}
-						alt=""
-					/>
-
-					<div className="heart-container">
-						<BiHeart className="icon" />
-					</div>
-
-					<div className="popular-carousel-info"></div>
-				</SwiperSlide>
-				<SwiperSlide className="popular-carousel-item">
-					<img
-						className="popular-carousel-image"
-						src={require("../../images/houses/house_6.jpg")}
-						alt=""
-					/>
-
-					<div className="heart-container">
-						<BiHeart className="icon" />
-					</div>
-
-					<div className="popular-carousel-info"></div>
-				</SwiperSlide>
+				{popular.length > 0 &&
+					popular.map((property) => {
+						return (
+							<SwiperSlide key={property.id} className="popular-carousel-item">
+								<Card property={property} width="100%" height="100%" />
+							</SwiperSlide>
+						);
+					})}
 			</Swiper>
 		</div>
 	);
