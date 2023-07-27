@@ -41,7 +41,8 @@ router.post(
 			throw new BadRequestError("User does not own property");
 		if (!existingProperty.minted)
 			throw new BadRequestError("NFT for the property not minted");
-
+		if (existingProperty.listed)
+			throw new BadRequestError("Property already listed");
 		try {
 			existingProperty.set({
 				owner: process.env.ETHRESTATE_ADDRESS,

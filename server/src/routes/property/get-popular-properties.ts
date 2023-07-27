@@ -1,11 +1,11 @@
-import express, { Response } from "express";
+import express, { Request, Response } from "express";
 
 // importing models
 import { Property } from "../../models/property";
 
 const router = express.Router();
 
-router.get("/api/property/popular", async (res: Response) => {
+router.get("/api/property/popular", async (req: Request, res: Response) => {
 	const popularProperties = await Property.find({
 		minted: true,
 		listed: true,
