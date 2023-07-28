@@ -38,7 +38,7 @@ export const getCityAndState = async (lat, lng) => {
 };
 
 export const createAddress = (street = "", city = "", state = "") => {
-	const address = `${street.toUpperCase()}, ${city.toUpperCase()}, ${state.toUpperCase()}`;
+	const address = `${street.toUpperCase()} - ${city.toUpperCase()}, ${state.toUpperCase()}`;
 
 	if (address.length > 40) return address.slice(0, 40) + "...";
 
