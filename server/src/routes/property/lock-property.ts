@@ -42,6 +42,7 @@ router.post(
 		if (
 			!existingProperty.minted ||
 			!existingProperty.listed ||
+			existingProperty.sold ||
 			existingProperty.locked
 		)
 			throw new BadRequestError("Cannot lock property");
@@ -50,6 +51,7 @@ router.post(
 			existingProperty.set({
 				buyer: buyerID,
 				locked: true,
+				lockedAt: new Date(),
 			});
 
 			existingProperty.save();
