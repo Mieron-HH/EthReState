@@ -15,7 +15,8 @@ router.get("/api/property/popular", async (req: Request, res: Response) => {
 			likes: -1,
 			views: -1,
 		})
-		.limit(20);
+		.limit(20)
+		.populate("seller");
 
 	return res.status(200).send(popularProperties);
 });
