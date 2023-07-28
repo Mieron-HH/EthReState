@@ -100,6 +100,7 @@ const Drawer = () => {
 			dispatch(setSigner(null));
 			dispatch(setLoading(false));
 			Cookies.remove("signer");
+			Cookies.remove("user");
 		}, 2000);
 	};
 

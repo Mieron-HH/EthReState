@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Cookies from "js-cookie";
 import networkChain from "./network-chain.json";
 
 // importing pages
@@ -16,6 +17,7 @@ import {
 	setChainId,
 	setSigner,
 } from "./slices/config-slice";
+import { setUser } from "./slices/common-slice";
 
 // importing services
 import loadContract from "./services/load-contract";
@@ -46,8 +48,9 @@ export const ContextValues = createContext({
 
 const App = () => {
 	const dispatch = useDispatch();
-	const { provider, chainId } = useSelector((state) => state.config);
 
+	const { provider, chainId } = useSelector((state) => state.config);
+	const { user } = useSelector((state) => state.common);
 	const [rethState, setRethState] = useState(null);
 	const [ethRow, setEthRow] = useState(null);
 

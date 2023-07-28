@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 
 // importing components
 import Loader from "../../components/Loader/loader";
-import Card from "../../components/Card/card";
+import Property from "../../components/Property/property";
 
 // importing actions
 import { fetchProperties } from "../../slices/property-slice";
@@ -31,8 +31,6 @@ const Properties = () => {
 	useEffect(() => {
 		if (status === "loading" || status === "idle") dispatch(setLoading(true));
 		else dispatch(setLoading(false));
-
-		console.log({ loading });
 	}, [properties, status, error]);
 
 	const handleUserCoordinates = async () => {
@@ -76,10 +74,10 @@ const Properties = () => {
 			<div className="properties-container">
 				{properties.map((property) => {
 					return (
-						<Card
+						<Property
 							key={property.id}
 							width={370}
-							height={440}
+							height={410}
 							property={property}
 						/>
 					);

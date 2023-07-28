@@ -1,0 +1,196 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.card-container {
+	@include display_flex(column, flex-start, center);
+	border-radius: 5px;
+	box-shadow: 1px 1px 10px #999;
+	position: relative;
+
+	.image-container {
+		width: 100%;
+		height: 75%;
+		@include display_flex(row, center, center);
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+		position: relative;
+
+		.image {
+			width: 100%;
+			height: 100%;
+			border-top-left-radius: 4px;
+			border-top-right-radius: 4px;
+			object-fit: fill;
+			transition: width 0.1s ease-in-out;
+			cursor: pointer;
+		}
+
+		.image.hidden {
+			display: none;
+		}
+
+		.arrow {
+			width: 25px;
+			height: 25px;
+			@include display_flex(row, center, center);
+			background-color: white;
+			color: black;
+			border-radius: 100%;
+			box-shadow: 0px 0px 5px white;
+			position: absolute;
+			top: calc(50% - 15px);
+			cursor: pointer;
+
+			.icon {
+				@include reset();
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		.arrow.left {
+			left: 5px;
+		}
+
+		.arrow.right {
+			right: 5px;
+		}
+
+		.counts-container {
+			width: 40%;
+			height: 24px;
+			padding: 0 5px;
+			@include display_flex(row, space-between, center);
+			background-color: white;
+			border-top-left-radius: 7px;
+			border-bottom-right-radius: 7px;
+			opacity: 0.85;
+			position: absolute;
+			right: 5px;
+			top: 5px;
+
+			.counts-item {
+				width: 30px;
+				height: 100%;
+				margin-left: 10px;
+				@include display_flex(row, space-between, center);
+				color: #333;
+
+				.icon {
+					@include reset();
+					font-size: 15px;
+				}
+
+				.count {
+					font-size: 15px;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+
+	.details-container {
+		width: 98%;
+		height: 40%;
+		margin-bottom: 5px;
+		padding: 5px 8px;
+		background-color: white;
+		border-radius: 5px;
+		position: absolute;
+		bottom: 0;
+		z-index: 1;
+
+		.address {
+			width: 100%;
+			height: fit-content;
+			color: #333;
+			@include display_flex(row, flex-start, center);
+			font-size: 14px;
+			font-weight: bolder;
+			text-transform: uppercase;
+
+			.icon {
+				margin-right: 3px;
+				color: blue;
+				font-size: 18px;
+			}
+		}
+
+		.price {
+			width: 100%;
+			margin-top: 12px;
+			height: fit-content;
+			color: blue;
+			font-size: 17px;
+			font-weight: bolder;
+		}
+
+		.bed-bath-size-container {
+			width: 100%;
+			height: fit-content;
+			margin-top: 12px;
+			@include display_flex(row, flex-start, center);
+
+			.item-container {
+				width: fit-content;
+				height: fit-content;
+				margin-right: 20px;
+				@include display_flex(row, flex-start, center);
+				color: #333;
+
+				.icon {
+					margin-right: 8px;
+					color: #222;
+					font-size: 19px;
+				}
+
+				.item {
+					font-size: 15px;
+					font-weight: bold;
+				}
+			}
+		}
+
+		.seller {
+			width: 100%;
+			height: fit-content;
+			margin-top: 12px;
+			@include display_flex(row, flex-start, center);
+			color: #111;
+			font-size: 15px;
+			font-weight: bold;
+
+			.icon {
+				margin-right: 5px;
+			}
+		}
+
+		.other-info {
+			width: 100%;
+			height: fit-content;
+			margin-top: 8px;
+			@include display_flex(row, space-between, center);
+			color: #777;
+			font-size: 12px;
+			font-weight: bold;
+
+			.date-container {
+				width: 80%;
+				height: fit-content;
+				@include display_flex(row, flex-start, center);
+
+				.icon {
+					margin-right: 5px;
+					color: #555;
+					font-size: 15px;
+				}
+			}
+
+			.icon {
+				color: rgb(226, 43, 43);
+				font-size: 27px;
+				cursor: pointer;
+			}
+		}
+	}
+}

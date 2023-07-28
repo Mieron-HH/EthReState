@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./_login.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
 import { BiX } from "react-icons/bi";
 
 // importing services
@@ -42,6 +43,7 @@ const Login = () => {
 
 		if (data) {
 			const data = await getCurrentUser();
+			Cookies.set("user", JSON.stringify(data));
 
 			dispatch(setUser(data));
 			dispatch(setLoginFormDisplayed(false));
@@ -55,7 +57,7 @@ const Login = () => {
 	return (
 		<div className="login-container">
 			<div className="logo-container">
-				<img src={require("../../images/Logo.png")} alt="" />
+				<img src={require("../../images/Logo.png")} alt="Logo" />
 			</div>
 
 			{loginError !== "" && (

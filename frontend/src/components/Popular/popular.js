@@ -7,7 +7,7 @@ import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/css/bundle";
 
 // importing components
-import Card from "../Card/card";
+import Property from "../Property/property";
 
 const Popular = () => {
 	const navigate = useNavigate();
@@ -40,7 +40,7 @@ const Popular = () => {
 					popular.map((property) => {
 						return (
 							<SwiperSlide key={property.id} className="popular-carousel-item">
-								<Card property={property} width="100%" height="100%" />
+								<Property property={property} width="100%" height="100%" />
 							</SwiperSlide>
 						);
 					})}

@@ -68,10 +68,7 @@ export const publishProperty = async (PostData) => {
 	try {
 		await axios
 			.post(BASE_URL + "/property/publish", PostData, { withCredentials: true })
-			.then((response) => {
-				console.log({ data: response.data });
-				data = response.data;
-			})
+			.then((response) => (data = response.data))
 			.catch((err) => {
 				if (err.response) error = err.response.data.errors[0].message;
 				console.log({ err });
@@ -80,6 +77,50 @@ export const publishProperty = async (PostData) => {
 		return { data, error };
 	} catch (error) {
 		console.error({ error });
+		throw error;
+	}
+};
+
+export const updatePropertyLikes = async (propertyID) => {
+	let data = null;
+	let error = "";
+
+	try {
+		await axios
+			.post(
+				BASE_URL + "/property/updateLikes",
+				{ propertyID },
+				{ withCredentials: true }
+			)
+			.then((response) => (data = response.data))
+			.catch((err) => {
+				if (err.response) error = err.response.data.errors[0].message;
+				console.log({ err, error });
+			});
+	} catch (error) {
+		console.log({ error });
+		throw error;
+	}
+};
+
+export const updatePropertyViews = async (propertyID) => {
+	let data = null;
+	let error = "";
+
+	try {
+		await axios
+			.post(
+				BASE_URL + "/property/updateViews",
+				{ propertyID },
+				{ withCredentials: true }
+			)
+			.then((response) => (data = response.data))
+			.catch((err) => {
+				if (err.response) error = err.response.data.errors[0].message;
+				console.log({ err });
+			});
+	} catch (error) {
+		console.log({ error });
 		throw error;
 	}
 };

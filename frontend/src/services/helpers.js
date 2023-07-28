@@ -3,6 +3,11 @@ import Cookies from "js-cookie";
 // importing variables
 import { stateAbbreviations } from "./variables";
 
+export const loadUserCookie = () => {
+	if (Cookies.get("user")) return JSON.parse(Cookies.get("user"));
+	else return null;
+};
+
 export const getCityAndState = async (lat, lng) => {
 	const location = {
 		city: "",
