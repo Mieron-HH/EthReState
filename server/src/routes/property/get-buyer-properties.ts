@@ -18,7 +18,9 @@ router.get(
 		const existingUser = await User.findOne({ email });
 		if (!existingUser) throw new BadRequestError("User not found");
 
-		const properties = await Property.find({ buyer: existingUser._id });
+		const properties = await Property.find({
+			buyer: existingUser._id,
+		}).populate("seller");
 
 		return res.status(200).send(properties);
 	}

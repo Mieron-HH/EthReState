@@ -40,7 +40,7 @@ router.post(
 		if (bedroomNumber) queryParams.bedroomNumber = bedroomNumber;
 		if (bathroomNumber) queryParams.bathroomNumber = bathroomNumber;
 
-		const properties = await Property.find(queryParams);
+		const properties = await Property.find(queryParams).populate("seller");
 
 		return res.status(200).send(properties);
 	}
