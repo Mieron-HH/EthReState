@@ -102,26 +102,26 @@ const Card = ({ property = null, width = "", height = "" }) => {
 				<div className="arrow right" onClick={nextSlide}>
 					<BiChevronRight className="icon" />
 				</div>
-
-				<div className="counts-container">
-					<div className="counts-item">
-						<BsEyeFill className="icon" />
-						<div className="count">{property.views}</div>
-					</div>
-
-					<div className="counts-item">
-						<BiSolidHeart />
-						<div className="count">{propertyLikes}</div>
-					</div>
-
-					<div className="counts-item">
-						<BsCameraFill />
-						<div className="count">{property.images.length + 1}</div>
-					</div>
-				</div>
 			</div>
 
 			<div className="details-container">
+				<div className="counts-container">
+					<div className="counts-item">
+						<div className="count">{property.views}</div>
+						<BsEyeFill className="icon" />
+					</div>
+
+					<div className="counts-item">
+						<div className="count">{propertyLikes}</div>
+						<BiSolidHeart />
+					</div>
+
+					<div className="counts-item">
+						<div className="count">{property.images.length + 1}</div>
+						<BsCameraFill />
+					</div>
+				</div>
+
 				<div className="address">
 					<MdLocationOn className="icon" />{" "}
 					{createAddress(property.street, property.city, property.state)}

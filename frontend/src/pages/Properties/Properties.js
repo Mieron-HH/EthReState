@@ -77,7 +77,7 @@ const Properties = () => {
 						<Property
 							key={property.id}
 							width={370}
-							height={410}
+							height={390}
 							property={property}
 						/>
 					);

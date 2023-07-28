@@ -9,7 +9,7 @@
 
 	.image-container {
 		width: 100%;
-		height: 75%;
+		height: 100%;
 		@include display_flex(row, center, center);
 		border-top-left-radius: 4px;
 		border-top-right-radius: 4px;
@@ -33,10 +33,10 @@
 			width: 25px;
 			height: 25px;
 			@include display_flex(row, center, center);
-			background-color: white;
-			color: black;
+			background-color: rgba(0, 0, 0, 0.6);
+			color: white;
 			border-radius: 100%;
-			box-shadow: 0px 0px 5px white;
+			box-shadow: 0px 0px 3px white;
 			position: absolute;
 			top: calc(50% - 15px);
 			cursor: pointer;
@@ -55,30 +55,40 @@
 		.arrow.right {
 			right: 5px;
 		}
+	}
+
+	.details-container {
+		width: 100%;
+		height: 41%;
+		padding: 5px 8px;
+		background: linear-gradient(
+			rgba(0, 0, 0, 0.15),
+			rgba(0, 0, 0, 0.75),
+			black
+		);
+		border-radius: 5px;
+		position: absolute;
+		bottom: 0;
+		z-index: 1;
 
 		.counts-container {
-			width: 40%;
-			height: 24px;
-			padding: 0 5px;
-			@include display_flex(row, space-between, center);
-			background-color: white;
-			border-top-left-radius: 7px;
-			border-bottom-right-radius: 7px;
-			opacity: 0.85;
+			width: 30px;
+			height: 60%;
+			@include display_flex(column, space-between, center);
 			position: absolute;
 			right: 5px;
 			top: 5px;
 
 			.counts-item {
-				width: 30px;
-				height: 100%;
-				margin-left: 10px;
+				width: 100%;
+				height: 20%;
+				margin: 2px 0;
 				@include display_flex(row, space-between, center);
-				color: #333;
+				color: white;
 
 				.icon {
 					@include reset();
-					font-size: 15px;
+					font-size: 14px;
 				}
 
 				.count {
@@ -87,23 +97,11 @@
 				}
 			}
 		}
-	}
-
-	.details-container {
-		width: 98%;
-		height: 40%;
-		margin-bottom: 5px;
-		padding: 5px 8px;
-		background-color: white;
-		border-radius: 5px;
-		position: absolute;
-		bottom: 0;
-		z-index: 1;
 
 		.address {
 			width: 100%;
 			height: fit-content;
-			color: #333;
+			color: white;
 			@include display_flex(row, flex-start, center);
 			font-size: 14px;
 			font-weight: bolder;
@@ -111,7 +109,6 @@
 
 			.icon {
 				margin-right: 3px;
-				color: blue;
 				font-size: 18px;
 			}
 		}
@@ -120,7 +117,7 @@
 			width: 100%;
 			margin-top: 12px;
 			height: fit-content;
-			color: blue;
+			color: white;
 			font-size: 17px;
 			font-weight: bolder;
 		}
@@ -136,11 +133,11 @@
 				height: fit-content;
 				margin-right: 20px;
 				@include display_flex(row, flex-start, center);
-				color: #333;
+				color: #ccc;
 
 				.icon {
 					margin-right: 8px;
-					color: #222;
+					color: white;
 					font-size: 19px;
 				}
 
@@ -156,7 +153,7 @@
 			height: fit-content;
 			margin-top: 12px;
 			@include display_flex(row, flex-start, center);
-			color: #111;
+			color: #ccc;
 			font-size: 15px;
 			font-weight: bold;
 
@@ -170,7 +167,7 @@
 			height: fit-content;
 			margin-top: 8px;
 			@include display_flex(row, space-between, center);
-			color: #777;
+			color: #aaa;
 			font-size: 12px;
 			font-weight: bold;
 
@@ -181,13 +178,13 @@
 
 				.icon {
 					margin-right: 5px;
-					color: #555;
+					color: #aaa;
 					font-size: 15px;
 				}
 			}
 
 			.icon {
-				color: rgb(226, 43, 43);
+				color: rgb(247, 26, 26);
 				font-size: 27px;
 				cursor: pointer;
 			}
