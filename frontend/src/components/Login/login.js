@@ -68,6 +68,13 @@ const Login = () => {
 				</div>
 			)}
 
+			<div
+				className="close-button"
+				onClick={() => dispatch(setLoginFormDisplayed(false))}
+			>
+				<BiX className="icon" />
+			</div>
+
 			<div className="form-container">
 				<div className="input-container">
 					<div className="input-group">

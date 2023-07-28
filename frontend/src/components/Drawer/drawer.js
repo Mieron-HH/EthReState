@@ -134,15 +134,17 @@ const Drawer = () => {
 			</div>
 
 			<div
-				className={`drawer-menu-item ${drawerExtended && "connector"} ${
-					drawerExtended && signer && "no-cursor"
-				}`}
+				className={`drawer-menu-item ${
+					drawerExtended ? "connector" : "hightlight"
+				} ${drawerExtended && signer && "no-cursor"}`}
 			>
 				{renderConnectorButton()}
 			</div>
 
 			<div
-				className={`drawer-menu-item ${drawerExtended && "extended"}`}
+				className={`drawer-menu-item ${
+					drawerExtended ? "extended" : "hightlight"
+				}`}
 				onClick={navigateToListProperty}
 			>
 				{drawerExtended ? (
@@ -157,7 +159,9 @@ const Drawer = () => {
 
 			{user && (
 				<div
-					className={`drawer-menu-item ${drawerExtended && "extended"}`}
+					className={`drawer-menu-item ${
+						drawerExtended ? "extended" : "hightlight"
+					}`}
 					onClick={() => drawerExtended && handleUserLogout()}
 				>
 					{drawerExtended ? (

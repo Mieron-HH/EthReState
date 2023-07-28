@@ -13,8 +13,8 @@
 	}
 
 	.drawer-toggler {
-		width: 30px;
-		height: 30px;
+		width: 28px;
+		height: 28px;
 		@include display_flex(row, center, center);
 		background-color: white;
 		border-radius: 100%;
@@ -22,6 +22,7 @@
 		position: absolute;
 		left: -35px;
 		top: calc(50% - 15px);
+		cursor: pointer;
 
 		.toggler-icon {
 			font-size: 22px;
@@ -62,7 +63,11 @@
 			width: 80%;
 			height: 50%;
 			@include display_flex(row, center, center);
-			background: linear-gradient(to right, black, blue);
+			background: linear-gradient(
+				to right,
+				rgba(0, 0, 0, 0.8),
+				rgba(0, 0, 255, 0.8)
+			);
 			border-radius: 8px;
 			box-shadow: 1px 1px 10px #999;
 			color: white;
@@ -70,7 +75,11 @@
 			font-weight: bold;
 
 			&:hover {
-				background: linear-gradient(to right, black, rgb(202, 50, 50));
+				background: linear-gradient(
+					to right,
+					rgba(0, 0, 0, 0.8),
+					rgba(202, 50, 50, 0.8)
+				);
 			}
 		}
 	}
@@ -98,7 +107,7 @@
 	}
 
 	.drawer-menu-item.logged-in {
-		background-color: black;
+		background-color: rgba(0, 0, 0, 0.8);
 		color: white;
 	}
 
@@ -107,11 +116,8 @@
 	}
 
 	.drawer-menu-item.hightlight {
-		background-color: white;
-		color: black;
-
 		&:hover {
-			background-color: black;
+			background-color: rgba(0, 0, 0, 0.8);
 			color: white;
 		}
 	}
@@ -128,7 +134,7 @@
 
 	.drawer-menu-item.extended {
 		width: 98%;
-		height: 45px;
+		height: 40px;
 		margin-bottom: 1px;
 		padding-left: 10px;
 		@include display_flex(row, flex-start, center);
@@ -147,7 +153,7 @@
 		}
 
 		&:hover {
-			background-color: black;
+			background-color: rgba(0, 0, 0, 0.8);
 			color: white;
 		}
 	}
@@ -161,7 +167,11 @@
 			width: 80%;
 			height: 100%;
 			@include display_flex(row, center, center);
-			background: linear-gradient(to right, black, blue);
+			background: linear-gradient(
+				to right,
+				rgba(0, 0, 0, 0.8),
+				rgba(0, 0, 255, 0.8)
+			);
 			border-radius: 8px;
 			box-shadow: 1px 1px 10px #999;
 			color: white;
@@ -170,7 +180,11 @@
 			position: relative;
 
 			&:hover {
-				background: linear-gradient(to right, black, rgb(202, 50, 50));
+				background: linear-gradient(
+					to right,
+					rgba(0, 0, 0, 0.8),
+					rgba(202, 50, 50, 0.8)
+				);
 			}
 
 			.disconnect-icon {
@@ -191,4 +205,6 @@
 .drawer-container.extended {
 	background-color: rgba(255, 255, 255, 0.8);
 	border: none;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
 }

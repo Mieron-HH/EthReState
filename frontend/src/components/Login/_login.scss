@@ -12,10 +12,18 @@
 	z-index: 1;
 
 	.logo-container {
-		width: 50%;
+		width: 30%;
 		height: 30%;
 		margin-top: 10px;
 		@include display_flex(row, center, center);
+		padding: 8px;
+		background: linear-gradient(
+			rgba(0, 0, 0, 0.8),
+			rgba(0, 0, 0, 0.5),
+			rgba(0, 0, 0, 0.8)
+		);
+		border-top-left-radius: 15px;
+		border-bottom-right-radius: 15px;
 
 		img {
 			width: 100%;
@@ -25,7 +33,7 @@
 	}
 
 	.error-message-container {
-		width: 170px;
+		width: fit-content;
 		height: fit-content;
 		padding: 3px;
 		padding-left: 20px;
@@ -38,6 +46,7 @@
 		position: absolute;
 		top: 5px;
 		right: 5px;
+		z-index: 2;
 
 		.icon {
 			@include reset();
@@ -49,6 +58,28 @@
 
 			&:hover {
 				box-shadow: 1px 1px 4px blue;
+			}
+		}
+	}
+
+	.close-button {
+		width: 30px;
+		height: 30px;
+		@include display_flex(row, center, center);
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		z-index: 1;
+		cursor: pointer;
+
+		.icon {
+			color: #333;
+			font-size: 25px;
+		}
+
+		&:hover {
+			.icon {
+				font-size: 28px;
 			}
 		}
 	}
