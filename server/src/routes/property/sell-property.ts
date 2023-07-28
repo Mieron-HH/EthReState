@@ -13,7 +13,7 @@ import { BadRequestError, validateRequest } from "@kmalae.ltd/library";
 const router = express.Router();
 
 router.post(
-	"/api/property/buy",
+	"/api/property/sell",
 	[
 		body("propertyID")
 			.notEmpty()
@@ -33,28 +33,34 @@ router.post(
 		const existingUser = await User.findById(buyerID);
 		if (!existingUser) throw new BadRequestError("User not found");
 
-		const existingNFT = await Property.findById(propertyID);
-		if (!existingNFT) throw new BadRequestError("Property not found");
+		const existingProperty = await Property.findById(propertyID);
+		if (!existingProperty) throw new BadRequestError("Property not found");
 
-		if (!existingNFT.minted || !existingNFT.listed || !existingNFT.locked)
-			throw new BadRequestError("Cannot buy property");
-		if (existingNFT.buyer!.toString() !== existingUser._id.toString())
+		if (
+			!existingProperty.minted ||
+			!existingProperty.listed ||
+			existingProperty.sold ||
+			!existingProperty.locked
+		)
+			throw new BadRequestError("Cannot sell property");
+		if (existingProperty.buyer!.toString() !== existingUser._id.toString())
 			throw new BadRequestError("User is not the buyer");
 
 		try {
-			existingNFT.set({
+			existingProperty.set({
 				owner: newOwner,
 				sold: true,
+				soldAt: new Date(),
 			});
 
-			existingNFT.save();
+			existingProperty.save();
 
-			return res.status(201).send(existingNFT);
+			return res.status(201).send(existingProperty);
 		} catch (error) {
 			console.error(error);
-			throw new BadRequestError("Error buying property");
+			throw new BadRequestError("Error selling property");
 		}
 	}
 );
 
-export { router as BuyRouter };
+export { router as SellRouter };
