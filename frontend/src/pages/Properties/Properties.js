@@ -29,8 +29,10 @@ const Properties = () => {
 	}, []);
 
 	useEffect(() => {
-		if (status === "loading") dispatch(setLoading(true));
+		if (status === "loading" || status === "idle") dispatch(setLoading(true));
 		else dispatch(setLoading(false));
+
+		console.log({ loading });
 	}, [properties, status, error]);
 
 	const handleUserCoordinates = async () => {
