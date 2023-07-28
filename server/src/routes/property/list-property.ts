@@ -47,6 +47,7 @@ router.post(
 			existingProperty.set({
 				owner: process.env.ETHRESTATE_ADDRESS,
 				listed: true,
+				listedAt: new Date(),
 			});
 
 			existingProperty.save();
