@@ -45,6 +45,7 @@ router.post(
 		try {
 			existingProperty.set({
 				minted: true,
+				mintedAt: new Date(),
 			});
 
 			existingProperty.save();
