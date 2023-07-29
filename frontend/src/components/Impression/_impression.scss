@@ -1,0 +1,39 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.impression-container {
+	@include display_flex(column, center, center);
+	width: 50%;
+	height: 25vh;
+	margin-top: 5%;
+	background: linear-gradient(
+		rgba(0, 0, 0, 0.05),
+		rgba(0, 0, 0, 0.3),
+		rgba(0, 0, 0, 0.05)
+	);
+	border-radius: 5px;
+	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+
+	.impression-header {
+		@include reset();
+		color: white;
+		font-size: 38px;
+	}
+
+	.impression-search-bar-container {
+		@include display_flex(row, space-between, center);
+		width: 84%;
+		height: 33%;
+		margin-top: 10px;
+	}
+
+	.catchy-sentence {
+		@include reset();
+		margin-top: 15px;
+		color: white;
+		font-size: 16px;
+		font-weight: bold;
+		text-align: center;
+		text-transform: uppercase;
+	}
+}

@@ -7,7 +7,7 @@ import Loader from "../../components/Loader/loader";
 import Header from "../../components/Header/header";
 import Drawer from "../../components/Drawer/drawer";
 import Login from "../../components/Login/login";
-import Search from "../../components/Search/search";
+import Impression from "../../components/Impression/impression";
 import Cards from "../../components/Cards/cards";
 import Popular from "../../components/Popular/popular";
 import Testimonials from "../../components/Testimonials/testimonials";
@@ -90,7 +90,7 @@ const Home = () => {
 
 			{loginFormDisplayed && <Login />}
 
-			<Search />
+			<Impression />
 
 			<div
 				className={`components-container ${displayContent ? "visible" : ""}`}

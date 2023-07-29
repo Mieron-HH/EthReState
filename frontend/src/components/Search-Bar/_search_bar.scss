@@ -1,0 +1,74 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.search-bar-container {
+	width: 100%;
+	height: 100%;
+	@include display_flex(row, space-between, center);
+
+	.input-group {
+		height: 100%;
+		position: relative;
+
+		.input-item {
+			width: 100%;
+			height: 100%;
+			padding: 0 8px;
+			font-size: 15px;
+			border-radius: 5px;
+			border: none;
+		}
+
+		.label-icon {
+			width: fit-content;
+			height: fit-content;
+			position: absolute;
+			top: calc(50% - 12.5px);
+			right: 3px;
+			z-index: 1;
+
+			.icon {
+				font-size: 25px;
+			}
+		}
+
+		&:hover {
+			border-radius: 10px;
+
+			&::placeholder {
+				font-size: 14px;
+			}
+		}
+	}
+
+	.input-group.text {
+		width: 50%;
+	}
+
+	.input-group.number {
+		width: 15%;
+
+		.input-item {
+			padding-left: 35%;
+		}
+	}
+
+	.search-button {
+		@include reset();
+		width: 19%;
+		height: 100%;
+		background: linear-gradient(to right, #214e6c, #4095ce);
+		color: white;
+		font-size: 15px;
+		font-weight: bold;
+		border-radius: 5px;
+		border: none;
+		cursor: pointer;
+
+		&:hover {
+			background: linear-gradient(270deg, #f82a7e 0%, #752a90 100%);
+			margin-bottom: 3px;
+			transition: margin 0.1s ease-in;
+		}
+	}
+}
