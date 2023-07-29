@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { BiBath, BiBed } from "react-icons/bi";
 import { MdLocationOn } from "react-icons/md";
 
-const SearchBar = () => {
+const SearchBar = ({ backgroundColor = "white" }) => {
 	const navigate = useNavigate();
 	const [city, setCity] = useState("");
 	const [bedroomNumber, setBedroomNumber] = useState("");
@@ -25,6 +25,7 @@ const SearchBar = () => {
 			<div className="input-group text">
 				<input
 					className="input-item"
+					style={{ backgroundColor }}
 					type="text"
 					ref={inputRef}
 					value={city}
@@ -42,6 +43,7 @@ const SearchBar = () => {
 			<div className="input-group number">
 				<input
 					className="input-item"
+					style={{ backgroundColor }}
 					type="text"
 					value={bedroomNumber}
 					onChange={(e) => {
@@ -63,6 +65,7 @@ const SearchBar = () => {
 			<div className="input-group number">
 				<input
 					className="input-item"
+					style={{ backgroundColor }}
 					type="text"
 					value={bathRoomNumber}
 					onChange={(e) => {
