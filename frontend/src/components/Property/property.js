@@ -3,20 +3,17 @@ import "./_property.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import {
-	BsCameraFill,
-	BsEyeFill,
-	BsFillCalendarWeekFill,
-} from "react-icons/bs";
-import {
 	BiBath,
 	BiBed,
 	BiChevronLeft,
 	BiChevronRight,
 	BiSolidHeart,
 } from "react-icons/bi";
-import { SlSizeFullscreen } from "react-icons/sl";
-import { MdLocationOn } from "react-icons/md";
+import { BsEyeFill, BsFillCalendarWeekFill } from "react-icons/bs";
 import { CgUserlane } from "react-icons/cg";
+import { IoMdPhotos } from "react-icons/io";
+import { MdLocationOn } from "react-icons/md";
+import { SlSizeFullscreen } from "react-icons/sl";
 
 // importing services
 import { updatePropertyLikes } from "../../services/api-calls";
@@ -118,7 +115,7 @@ const Card = ({ property = null, width = "", height = "" }) => {
 
 					<div className="counts-item">
 						<div className="count">{property.images.length + 1}</div>
-						<BsCameraFill />
+						<IoMdPhotos />
 					</div>
 				</div>
 

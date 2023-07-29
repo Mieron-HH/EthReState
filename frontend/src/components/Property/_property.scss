@@ -61,6 +61,7 @@
 		width: 100%;
 		height: 41%;
 		padding: 5px 8px;
+		@include display_flex(column, space-between, flex-start);
 		background: linear-gradient(
 			rgba(0, 0, 0, 0.15),
 			rgba(0, 0, 0, 0.75),
@@ -72,7 +73,7 @@
 		z-index: 1;
 
 		.counts-container {
-			width: 30px;
+			width: 28px;
 			height: 60%;
 			@include display_flex(column, space-between, center);
 			position: absolute;
@@ -93,16 +94,16 @@
 
 				.count {
 					font-size: 15px;
-					font-weight: bold;
+					font-weight: 600;
 				}
 			}
 		}
 
 		.address {
-			width: 100%;
-			height: fit-content;
-			color: white;
+			width: 90%;
+			height: 19%;
 			@include display_flex(row, flex-start, center);
+			color: white;
 			font-size: 14px;
 			font-weight: bolder;
 			text-transform: uppercase;
@@ -115,8 +116,7 @@
 
 		.price {
 			width: 100%;
-			margin-top: 12px;
-			height: fit-content;
+			height: 19%;
 			color: white;
 			font-size: 17px;
 			font-weight: bolder;
@@ -124,8 +124,7 @@
 
 		.bed-bath-size-container {
 			width: 100%;
-			height: fit-content;
-			margin-top: 12px;
+			height: 19%;
 			@include display_flex(row, flex-start, center);
 
 			.item-container {
@@ -150,8 +149,7 @@
 
 		.seller {
 			width: 100%;
-			height: fit-content;
-			margin-top: 12px;
+			height: 19%;
 			@include display_flex(row, flex-start, center);
 			color: #ccc;
 			font-size: 15px;
@@ -164,8 +162,7 @@
 
 		.other-info {
 			width: 100%;
-			height: fit-content;
-			margin-top: 8px;
+			height: 19%;
 			@include display_flex(row, space-between, center);
 			color: #aaa;
 			font-size: 12px;
