@@ -7,10 +7,29 @@ const initialState = {
 	popular: [],
 	status: "idle", // idle, loading, succeeded, failed
 	error: null,
+	street: "",
+	city: "",
+	stateEntry: "",
+	bedroomNumber: "",
+	bathroomNumber: "",
+	price: "",
+	size: "",
 };
 
-const fetchPropertiesAPI = async (city, state) => {
+const fetchPropertiesAPI = async (
+	street,
+	city,
+	state,
+	bedroomNumber,
+	bathRoomNumber,
+	price,
+	size
+) => {
 	let payload = {};
+
+	if (street && street.trim() !== "") {
+		payload.street = street.trim();
+	}
 
 	if (city && city.trim() !== "") {
 		payload.city = city.trim();
@@ -18,6 +37,22 @@ const fetchPropertiesAPI = async (city, state) => {
 
 	if (state && state.trim() !== "") {
 		payload.state = state.trim();
+	}
+
+	if (bedroomNumber && bedroomNumber.trim() !== "") {
+		payload.bedroomNumber = bedroomNumber.trim();
+	}
+
+	if (bathRoomNumber && bathRoomNumber.trim() !== "") {
+		payload.bathRoomNumber = bathRoomNumber.trim();
+	}
+
+	if (price && price.trim() !== "") {
+		payload.price = price.trim();
+	}
+
+	if (size && size.trim() !== "") {
+		payload.size = size.trim();
 	}
 
 	return await axios
@@ -41,9 +76,25 @@ const fetchPopularAPI = async () => {
 
 export const fetchProperties = createAsyncThunk(
 	"properties/fetchProperties",
-	async ({ city = "", state = "" }) => {
+	async ({
+		street = "",
+		city = "",
+		state = "",
+		bedroomNumber = "",
+		bathroomNumber = "",
+		price = "",
+		size = "",
+	}) => {
 		try {
-			return await fetchPropertiesAPI(city, state);
+			return await fetchPropertiesAPI(
+				street,
+				city,
+				state,
+				bedroomNumber,
+				bathroomNumber,
+				price,
+				size
+			);
 		} catch (error) {
 			console.log({ error });
 			if (
@@ -76,7 +127,29 @@ export const fetchPopular = createAsyncThunk(
 const propertySlice = createSlice({
 	name: "properties",
 	initialState,
-	reducers: {},
+	reducers: {
+		setStreet: (state, action) => {
+			state.street = action.payload;
+		},
+		setCity: (state, action) => {
+			state.city = action.payload;
+		},
+		setStateEntry: (state, action) => {
+			state.stateEntry = action.payload;
+		},
+		setBedroomNumber: (state, action) => {
+			state.bedroomNumber = action.payload;
+		},
+		setBathroomNumber: (state, action) => {
+			state.bathroomNumber = action.payload;
+		},
+		setPrice: (state, action) => {
+			state.price = action.payload;
+		},
+		setSize: (state, action) => {
+			state.size = action.payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchProperties.pending, (state) => {
@@ -103,5 +176,15 @@ const propertySlice = createSlice({
 			});
 	},
 });
+
+export const {
+	setStreet,
+	setCity,
+	setStateEntry,
+	setBedroomNumber,
+	setBathroomNumber,
+	setPrice,
+	setSize,
+} = propertySlice.actions;
 
 export default propertySlice.reducer;

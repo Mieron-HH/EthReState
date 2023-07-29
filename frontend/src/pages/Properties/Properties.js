@@ -1,14 +1,22 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./_properties.scss";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 
 // importing components
 import Loader from "../../components/Loader/loader";
+import SearchBar from "../../components/Search-Bar/search_bar";
+import Drawer from "../../components/Drawer/drawer";
 import Property from "../../components/Property/property";
 
 // importing actions
-import { fetchProperties } from "../../slices/property-slice";
+import {
+	fetchProperties,
+	setCity,
+	setBedroomNumber,
+	setBathroomNumber,
+} from "../../slices/property-slice";
 import { setLoading } from "../../slices/common-slice";
 
 /// importing helpers
@@ -16,11 +24,12 @@ import { getCityAndState } from "../../services/helpers";
 
 const Properties = () => {
 	const dispatch = useDispatch();
+	const location = useLocation();
 
 	const { properties, status, error } = useSelector(
 		(state) => state.properties
 	);
-	const { loading } = useSelector((state) => state.common);
+	const { drawerExtended, loading } = useSelector((state) => state.common);
 	const [coordinates, setCoordinates] = useState(null);
 
 	useEffect(() => {
@@ -34,7 +43,15 @@ const Properties = () => {
 	}, [properties, status, error]);
 
 	const handleUserCoordinates = async () => {
-		if (Cookies.get("location") === undefined) {
+		if (location.state) {
+			const { city, bedroomNumber, bathrooNumber } = location.state;
+
+			dispatch(setCity(city));
+			dispatch(setBedroomNumber(bedroomNumber));
+			dispatch(setBathroomNumber(bathrooNumber));
+
+			dispatch(fetchProperties({ city, bedroomNumber, bathrooNumber }));
+		} else if (Cookies.get("location") === undefined) {
 			if (navigator) {
 				navigator.geolocation.getCurrentPosition(
 					(position) => {
@@ -71,13 +88,24 @@ const Properties = () => {
 		<div className="Properties">
 			{loading && <Loader />}
 
+			<div className="properties-search-bar-container">
+				<SearchBar backgroundColor="#eed" />
+			</div>
+
+			<div
+				className="properties-drawer-container"
+				style={{ width: drawerExtended ? "18vw" : "5vw" }}
+			>
+				<Drawer />
+			</div>
+
 			<div className="properties-container">
 				{properties.map((property) => {
 					return (
 						<Property
 							key={property.id}
-							width={370}
-							height={390}
+							width={350}
+							height={360}
 							property={property}
 						/>
 					);

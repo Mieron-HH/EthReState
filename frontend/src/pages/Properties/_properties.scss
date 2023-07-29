@@ -4,14 +4,30 @@
 .Properties {
 	width: 100vw;
 	height: 100vh;
-	@include display_flex(column, flex-start, center);
+	@include display_flex(column, space-between, center);
 	position: relative;
 	overflow-y: scroll;
+
+	.properties-search-bar-container {
+		width: 70%;
+		height: 9%;
+		margin-top: 1%;
+	}
+
+	.properties-drawer-container {
+		width: 20vw;
+		height: 60vh;
+		margin-top: 20vh;
+		position: absolute;
+		right: 0px;
+		z-index: 10;
+		transition: width 0.25s ease-in-out;
+	}
 
 	.properties-container {
 		width: 90%;
 		height: 90%;
-		margin-top: 20px;
+		margin-top: 5%;
 		padding: 10px;
 		@include display_flex(row, flex-start, flex-start);
 		flex-wrap: wrap;

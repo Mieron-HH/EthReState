@@ -37,7 +37,6 @@ const Card = ({ property = null, width = "", height = "" }) => {
 	}, []);
 
 	useEffect(() => {
-		console.log({ user });
 		if (user && property && property.likes.includes(user.id))
 			setPropertyLiked(true);
 	}, [user]);

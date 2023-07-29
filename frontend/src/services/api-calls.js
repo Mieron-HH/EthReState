@@ -50,9 +50,7 @@ export const loginUser = async (email, password) => {
 
 export const logoutUser = async () => {
 	try {
-		await axios.get(BASE_URL + "/user/signout").then((response) => {
-			console.log(response.data);
-		});
+		await axios.get(BASE_URL + "/user/signout");
 
 		return null;
 	} catch (error) {
