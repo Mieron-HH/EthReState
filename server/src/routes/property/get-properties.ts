@@ -1,12 +1,12 @@
 import express, { Request, Response } from "express";
-import mongoose from "mongoose";
 
 // importing models
-import { User } from "../../models/user";
 import { Property } from "../../models/property";
 
-// importing types, middlewares, and errors
-import { BadRequestError } from "@kmalae.ltd/library";
+interface RangeValues {
+	$lte?: string;
+	$gte?: string;
+}
 
 interface QueryParams {
 	minted: boolean;
@@ -18,6 +18,8 @@ interface QueryParams {
 	state?: string;
 	bedroomNumber?: string;
 	bathroomNumber?: string;
+	price?: RangeValues;
+	size?: RangeValues;
 }
 
 const router = express.Router();
@@ -25,7 +27,17 @@ const router = express.Router();
 router.post(
 	"/api/property/getProperties",
 	async (req: Request, res: Response) => {
-		const { street, city, state, bedroomNumber, bathroomNumber } = req.body;
+		const {
+			street,
+			city,
+			state,
+			bedroomNumber,
+			bathroomNumber,
+			minPrice,
+			maxPrice,
+			minSize,
+			maxSize,
+		} = req.body;
 
 		const queryParams: QueryParams = {
 			minted: true,
@@ -39,6 +51,18 @@ router.post(
 		if (state) queryParams.state = state;
 		if (bedroomNumber) queryParams.bedroomNumber = bedroomNumber;
 		if (bathroomNumber) queryParams.bathroomNumber = bathroomNumber;
+		if (minPrice || maxPrice) {
+			queryParams.price = {};
+
+			if (minPrice) queryParams.price["$gte"] = minPrice;
+			if (maxPrice) queryParams.price["$lte"] = maxPrice;
+		}
+		if (minSize || maxSize) {
+			queryParams.price = {};
+
+			if (minSize) queryParams.price["$gte"] = minSize;
+			if (maxSize) queryParams.price["$lte"] = maxSize;
+		}
 
 		const properties = await Property.find(queryParams).populate("seller");
 
