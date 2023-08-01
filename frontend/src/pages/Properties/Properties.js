@@ -6,9 +6,11 @@ import Cookies from "js-cookie";
 
 // importing components
 import Loader from "../../components/Loader/loader";
-import SearchBar from "../../components/Search-Bar/search_bar";
+import Header from "../../components/Header/header";
+import SearchBarLarge from "../../components/Search-Bar-Large/search_bar_large";
 import Drawer from "../../components/Drawer/drawer";
 import Property from "../../components/Property/property";
+import Footer from "../../components/Footer/footer";
 
 // importing actions
 import {
@@ -88,8 +90,12 @@ const Properties = () => {
 		<div className="Properties">
 			{loading && <Loader />}
 
+			<div className="properties-header-container">
+				<Header inverted="inverted" />
+			</div>
+
 			<div className="properties-search-bar-container">
-				<SearchBar backgroundColor="#eed" />
+				<SearchBarLarge />
 			</div>
 
 			<div
@@ -104,13 +110,15 @@ const Properties = () => {
 					return (
 						<Property
 							key={property.id}
-							width={350}
-							height={360}
+							width="350px"
+							height="360px"
 							property={property}
 						/>
 					);
 				})}
 			</div>
+
+			<Footer />
 		</div>
 	);
 };
