@@ -79,7 +79,9 @@ const Home = () => {
 			/>
 			<div className="shade"></div>
 
-			<Header />
+			<div className="home-header-container">
+				<Header />
+			</div>
 
 			<div
 				className="home-drawer-container"
