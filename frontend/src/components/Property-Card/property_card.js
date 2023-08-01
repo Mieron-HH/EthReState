@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./_property.scss";
+import "./_property_card.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import {
@@ -22,7 +22,7 @@ import { updatePropertyLikes } from "../../services/api-calls";
 import { createAddress, loadUserCookie } from "../../services/helpers";
 import { setUser } from "../../slices/common-slice";
 
-const Card = ({ property = null, width = "", height = "" }) => {
+const PropertyCard = ({ property = null, width = "", height = "" }) => {
 	const dispatch = useDispatch();
 
 	const { user } = useSelector((state) => state.common);
@@ -169,4 +169,4 @@ const Card = ({ property = null, width = "", height = "" }) => {
 	);
 };
 
-export default Card;
+export default PropertyCard;

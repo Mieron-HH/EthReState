@@ -9,7 +9,7 @@ import Loader from "../../components/Loader/loader";
 import Header from "../../components/Header/header";
 import SearchBarLarge from "../../components/Search-Bar-Large/search_bar_large";
 import Drawer from "../../components/Drawer/drawer";
-import Property from "../../components/Property/property";
+import PropertyCard from "../../components/Property-Card/property_card";
 import Footer from "../../components/Footer/footer";
 
 // importing actions
@@ -108,7 +108,7 @@ const Properties = () => {
 			<div className="properties-container">
 				{properties.map((property) => {
 					return (
-						<Property
+						<PropertyCard
 							key={property.id}
 							width="350px"
 							height="360px"

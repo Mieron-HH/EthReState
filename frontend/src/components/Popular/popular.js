@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./_popular.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/css/bundle";
 
 // importing components
-import Property from "../Property/property";
+import PropertyCard from "../Property-Card/property_card";
 
 const Popular = () => {
 	const navigate = useNavigate();
@@ -40,7 +40,7 @@ const Popular = () => {
 					popular.map((property) => {
 						return (
 							<SwiperSlide key={property.id} className="popular-carousel-item">
-								<Property property={property} width="100%" height="100%" />
+								<PropertyCard property={property} width="100%" height="100%" />
 							</SwiperSlide>
 						);
 					})}
