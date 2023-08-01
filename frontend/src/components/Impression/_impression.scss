@@ -2,10 +2,10 @@
 @import "../../styles/variables";
 
 .impression-container {
-	@include display_flex(column, center, center);
+	@include display_flex(column, space-evenly, center);
 	width: 50%;
 	height: 25vh;
-	margin-top: 5%;
+	margin-top: 7%;
 	background: linear-gradient(
 		rgba(0, 0, 0, 0.05),
 		rgba(0, 0, 0, 0.3),
@@ -23,7 +23,7 @@
 	.impression-search-bar-container {
 		@include display_flex(row, space-between, center);
 		width: 84%;
-		height: 33%;
+		height: 30%;
 		margin-top: 10px;
 	}
 
