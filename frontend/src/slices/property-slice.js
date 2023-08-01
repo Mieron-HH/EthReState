@@ -14,6 +14,10 @@ const initialState = {
 	bathroomNumber: "",
 	price: "",
 	size: "",
+	minPrice: "",
+	maxPrice: "",
+	minSize: "",
+	maxSize: "",
 };
 
 const fetchPropertiesAPI = async (
@@ -21,39 +25,33 @@ const fetchPropertiesAPI = async (
 	city,
 	state,
 	bedroomNumber,
-	bathRoomNumber,
-	price,
-	size
+	bathroomNumber,
+	minPrice,
+	maxPrice,
+	minSize,
+	maxSize
 ) => {
 	let payload = {};
 
-	if (street && street.trim() !== "") {
-		payload.street = street.trim();
-	}
+	if (street && street.trim() !== "") payload.street = street.trim();
 
-	if (city && city.trim() !== "") {
-		payload.city = city.trim();
-	}
+	if (city && city.trim() !== "") payload.city = city.trim();
 
-	if (state && state.trim() !== "") {
-		payload.state = state.trim();
-	}
+	if (state && state.trim() !== "") payload.state = state.trim();
 
-	if (bedroomNumber && bedroomNumber.trim() !== "") {
+	if (bedroomNumber && bedroomNumber.trim() !== "")
 		payload.bedroomNumber = bedroomNumber.trim();
-	}
 
-	if (bathRoomNumber && bathRoomNumber.trim() !== "") {
-		payload.bathRoomNumber = bathRoomNumber.trim();
-	}
+	if (bathroomNumber && bathroomNumber.trim() !== "")
+		payload.bathroomNumber = bathroomNumber.trim();
 
-	if (price && price.trim() !== "") {
-		payload.price = price.trim();
-	}
+	if (minPrice && minPrice.trim() !== "") payload.minPrice = minPrice.trim();
 
-	if (size && size.trim() !== "") {
-		payload.size = size.trim();
-	}
+	if (maxPrice && maxPrice.trim() !== "") payload.maxPrice = maxPrice.trim();
+
+	if (minSize && minSize.trim() !== "") payload.minSize = minSize.trim();
+
+	if (maxSize && maxSize.trim() !== "") payload.maxSize = maxSize.trim();
 
 	return await axios
 		.post(BASE_URL + "/property/getProperties", payload, {
@@ -82,8 +80,10 @@ export const fetchProperties = createAsyncThunk(
 		state = "",
 		bedroomNumber = "",
 		bathroomNumber = "",
-		price = "",
-		size = "",
+		minPrice = "",
+		maxPrice = "",
+		minSize = "",
+		maxSize = "",
 	}) => {
 		try {
 			return await fetchPropertiesAPI(
@@ -92,8 +92,10 @@ export const fetchProperties = createAsyncThunk(
 				state,
 				bedroomNumber,
 				bathroomNumber,
-				price,
-				size
+				minPrice,
+				maxPrice,
+				minSize,
+				maxSize
 			);
 		} catch (error) {
 			console.log({ error });
@@ -149,6 +151,18 @@ const propertySlice = createSlice({
 		setSize: (state, action) => {
 			state.size = action.payload;
 		},
+		setMinPrice: (state, action) => {
+			state.minPrice = action.payload;
+		},
+		setMaxPrice: (state, action) => {
+			state.maxPrice = action.payload;
+		},
+		setMinSize: (state, action) => {
+			state.minSize = action.payload;
+		},
+		setMaxSize: (state, action) => {
+			state.maxSize = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -185,6 +199,10 @@ export const {
 	setBathroomNumber,
 	setPrice,
 	setSize,
+	setMinPrice,
+	setMaxPrice,
+	setMinSize,
+	setMaxSize,
 } = propertySlice.actions;
 
 export default propertySlice.reducer;
