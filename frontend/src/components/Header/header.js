@@ -1,15 +1,21 @@
 import React from "react";
 import "./_header.scss";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ inverted = "" }) => {
+	const navigate = useNavigate();
 	const location = useLocation();
+
+	const navigateHome = () => {
+		if (location.pathname !== "/") navigate("/");
+	};
 
 	return (
 		<div className="header-container">
-			<div className="logo-container">
+			<div className={`logo-container ${inverted}`} onClick={navigateHome}>
 				<img className="logo" src={require("../../images/Logo.png")} alt="" />
 			</div>
+
 			<div className="menu-container">
 				<Link
 					className={`menu-item ${location.pathname === "/" && "selected"}`}
@@ -20,7 +26,7 @@ const Header = () => {
 
 				<Link
 					className={`menu-item ${
-						location.pathname === "/publish" && "selected"
+						location.pathname === "/properties" && "selected"
 					}`}
 					to="/properties"
 				>

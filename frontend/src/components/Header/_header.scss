@@ -2,11 +2,9 @@
 @import "../../styles/variables";
 
 .header-container {
-	@include display_flex(row, space-between, center);
 	width: 100%;
-	height: 12vh;
-	margin-top: 1.7%;
-	padding: 0 8%;
+	height: 100%;
+	@include display_flex(row, space-between, center);
 
 	.logo-container {
 		width: 10rem;
@@ -19,12 +17,17 @@
 		);
 		border-top-left-radius: 15px;
 		border-bottom-right-radius: 15px;
+		cursor: pointer;
 
 		.logo {
 			width: 100%;
 			height: 100%;
 			object-fit: fill;
 		}
+	}
+
+	.logo-container.inverted {
+		background: none;
 	}
 
 	.menu-container {
