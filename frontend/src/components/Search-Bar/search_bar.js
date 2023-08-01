@@ -16,7 +16,7 @@ import {
 } from "../../slices/property-slice";
 import { setLoading } from "../../slices/common-slice";
 
-const SearchBar = ({ backgroundColor = "white" }) => {
+const SearchBar = ({ backgroundColor = "white", height = "100%" }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -26,9 +26,11 @@ const SearchBar = ({ backgroundColor = "white" }) => {
 		city,
 		stateEntry,
 		bedroomNumber,
-		bathRoomNumber,
-		price,
-		size,
+		bathroomNumber,
+		minPrice,
+		maxPrice,
+		minSize,
+		maxSize,
 	} = useSelector((state) => state.properties);
 	const inputRef = useRef(null);
 
@@ -44,9 +46,9 @@ const SearchBar = ({ backgroundColor = "white" }) => {
 
 	const searchProperties = () => {
 		if (location.pathname === "/") {
-			if (city !== "" || bedroomNumber !== "" || bathRoomNumber !== "")
+			if (city !== "" || bedroomNumber !== "" || bathroomNumber !== "")
 				navigate("/properties", {
-					state: { city, bedroomNumber, bathRoomNumber },
+					state: { city, bedroomNumber, bathroomNumber },
 				});
 
 			inputRef.current.focus();
@@ -58,16 +60,18 @@ const SearchBar = ({ backgroundColor = "white" }) => {
 					city,
 					stateEntry,
 					bedroomNumber,
-					bathRoomNumber,
-					price,
-					size,
+					bathroomNumber,
+					minPrice,
+					maxPrice,
+					minSize,
+					maxSize,
 				})
 			);
 		}
 	};
 
 	return (
-		<div className="search-bar-container">
+		<div className="search-bar-container" style={{ height }}>
 			<div className="input-group text">
 				<input
 					className="input-item"
@@ -100,7 +104,7 @@ const SearchBar = ({ backgroundColor = "white" }) => {
 						)
 							dispatch(setBedroomNumber(e.target.value));
 					}}
-					placeholder="3"
+					placeholder="e.g 3"
 				/>
 
 				<div className="label-icon">
@@ -113,7 +117,7 @@ const SearchBar = ({ backgroundColor = "white" }) => {
 					className="input-item"
 					style={{ backgroundColor }}
 					type="text"
-					value={bathRoomNumber}
+					value={bathroomNumber}
 					onChange={(e) => {
 						if (
 							(/^[0-9]*(\.[0-9]*)?$/.test(e.target.value) &&
@@ -122,7 +126,7 @@ const SearchBar = ({ backgroundColor = "white" }) => {
 						)
 							dispatch(setBathroomNumber(e.target.value));
 					}}
-					placeholder="2"
+					placeholder="e.g 2"
 				/>
 
 				<div className="label-icon">

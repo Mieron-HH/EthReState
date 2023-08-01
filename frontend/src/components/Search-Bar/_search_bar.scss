@@ -17,6 +17,14 @@
 			font-size: 15px;
 			border-radius: 5px;
 			border: none;
+
+			&:hover {
+				border-radius: 8px;
+
+				&::placeholder {
+					font-size: 14px;
+				}
+			}
 		}
 
 		.label-icon {
@@ -31,14 +39,6 @@
 				font-size: 23px;
 			}
 		}
-
-		&:hover {
-			border-radius: 10px;
-
-			&::placeholder {
-				font-size: 14px;
-			}
-		}
 	}
 
 	.input-group.text {
@@ -49,7 +49,7 @@
 		width: 15%;
 
 		.input-item {
-			padding-left: 35%;
+			padding-left: 20%;
 		}
 	}
 
