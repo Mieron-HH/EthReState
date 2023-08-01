@@ -58,10 +58,10 @@ router.post(
 			if (maxPrice) queryParams.price["$lte"] = maxPrice;
 		}
 		if (minSize || maxSize) {
-			queryParams.price = {};
+			queryParams.size = {};
 
-			if (minSize) queryParams.price["$gte"] = minSize;
-			if (maxSize) queryParams.price["$lte"] = maxSize;
+			if (minSize) queryParams.size["$gte"] = minSize;
+			if (maxSize) queryParams.size["$lte"] = maxSize;
 		}
 
 		const properties = await Property.find(queryParams).populate("seller");
