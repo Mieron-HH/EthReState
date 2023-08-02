@@ -10,7 +10,6 @@ import Header from "../../components/Header/header";
 import SearchBarLarge from "../../components/Search-Bar-Large/search_bar_large";
 import Drawer from "../../components/Drawer/drawer";
 import PropertyCard from "../../components/Property-Card/property_card";
-import Footer from "../../components/Footer/footer";
 
 // importing actions
 import {
@@ -111,14 +110,12 @@ const Properties = () => {
 						<PropertyCard
 							key={property.id}
 							width="350px"
-							height="360px"
+							height="320px"
 							property={property}
 						/>
 					);
 				})}
 			</div>
-
-			<Footer />
 		</div>
 	);
 };
