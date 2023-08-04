@@ -8,7 +8,12 @@ import { User } from "../../models/user";
 import { Property } from "../../models/property";
 
 // importing types, middlewares, and errors
-import { BadRequestError, validateRequest } from "@kmalae.ltd/library";
+import {
+	BadRequestError,
+	currentUser,
+	requireAuth,
+	validateRequest,
+} from "@kmalae.ltd/library";
 
 const router = express.Router();
 
@@ -20,19 +25,16 @@ router.post(
 			.withMessage("Property ID required")
 			.custom((input) => mongoose.Types.ObjectId.isValid(input))
 			.withMessage("Invalid property ID"),
-		body("buyerID")
-			.notEmpty()
-			.withMessage("Buyer ID required")
-			.custom((input) => mongoose.Types.ObjectId.isValid(input))
-			.withMessage("Invalid buyer ID"),
 	],
+	currentUser,
+	requireAuth,
 	validateRequest,
 	async (req: Request, res: Response) => {
-		const { propertyID, buyerID, newOwner } = req.body;
-
-		const existingUser = await User.findById(buyerID);
+		const { email } = req.currentUser!;
+		const existingUser = await User.findOne({ email });
 		if (!existingUser) throw new BadRequestError("User not found");
 
+		const { propertyID } = req.body;
 		const existingProperty = await Property.findById(propertyID);
 		if (!existingProperty) throw new BadRequestError("Property not found");
 
@@ -49,7 +51,7 @@ router.post(
 
 		try {
 			existingProperty.set({
-				buyer: buyerID,
+				buyer: existingUser._id,
 				locked: true,
 				lockedAt: new Date(),
 			});
