@@ -1,12 +1,18 @@
 import mongoose from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
+interface MetadataAttr {
+	ipnft: string;
+	url: string;
+}
+
 export interface ImageAttr {
 	data: Buffer;
 	contentType: string;
 }
 
 interface PropertyAttr {
+	metadata: MetadataAttr;
 	seller: string;
 	tokenID?: string;
 	street: string;
@@ -39,6 +45,7 @@ interface PropertyModel extends mongoose.Model<PropertyDoc> {
 
 const propertySchema = new mongoose.Schema(
 	{
+		metadata: { type: Object, required: true },
 		seller: {
 			type: mongoose.Types.ObjectId,
 			required: true,

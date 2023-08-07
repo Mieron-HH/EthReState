@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
-const hre = require("hardhat");
 import app from "./app";
 import * as dotnev from "dotenv";
 dotnev.config();
 
-import { NFTStorage, File } from "nft.storage";
+import { NFTStorage } from "nft.storage";
 var client: NFTStorage;
 
 app.listen(5000, async () => {

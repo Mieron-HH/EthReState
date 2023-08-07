@@ -2,9 +2,9 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 const web3 = require("web3");
 const sharp = require("sharp");
+import { File } from "nft.storage";
 import multer from "multer";
-import fs from "fs";
-import path from "path";
+import { client } from "../../index";
 
 // importing models and services
 import { User } from "../../models/user";
@@ -119,7 +119,18 @@ router.post(
 		await DeleteImages.deleteImage(req);
 
 		try {
+			const metadata = await client.store({
+				name: "Property Data",
+				description: "IPFS stored Property data",
+				image: new File([thumbnail.data], "property thumbnail image", {
+					type: thumbnail.contentType,
+				}),
+			});
+
+			await client.check(metadata.ipnft);
+
 			const property = Property.build({
+				metadata,
 				seller: existingUser.id,
 				owner,
 				street,
