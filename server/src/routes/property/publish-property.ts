@@ -37,6 +37,11 @@ router.post(
 			.withMessage("Price must be provided")
 			.isNumeric()
 			.withMessage("Price must be in digits"),
+		body("downPayment")
+			.notEmpty()
+			.withMessage("Down payment must be provided")
+			.isNumeric()
+			.withMessage("Down payment must be in digits"),
 		body("size")
 			.notEmpty()
 			.withMessage("Size must be provided")
@@ -79,6 +84,7 @@ router.post(
 		const {
 			owner,
 			price,
+			downPayment,
 			size,
 			street,
 			city,
@@ -137,6 +143,7 @@ router.post(
 				city,
 				state,
 				price,
+				downPayment,
 				size,
 				bedroomNumber,
 				bathroomNumber,

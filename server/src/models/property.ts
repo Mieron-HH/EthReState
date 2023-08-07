@@ -19,6 +19,7 @@ interface PropertyAttr {
 	city: string;
 	state: string;
 	price: string;
+	downPayment: string;
 	size: string;
 	bedroomNumber: string;
 	bathroomNumber: string;
@@ -55,6 +56,7 @@ const propertySchema = new mongoose.Schema(
 		street: { type: String, required: true, lowercase: true, trim: true },
 		city: { type: String, required: true, lowercase: true, trim: true },
 		price: { type: String, required: true },
+		downPayment: { type: String, required: true },
 		size: { type: String, required: true },
 		bedroomNumber: { type: String, required: true },
 		bathroomNumber: { type: String, required: true },
