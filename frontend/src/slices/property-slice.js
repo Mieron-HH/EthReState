@@ -18,6 +18,8 @@ const initialState = {
 	maxPrice: "",
 	minSize: "",
 	maxSize: "",
+	selectedProperty: null,
+	propertyDetailDisplayed: false,
 };
 
 const fetchPropertiesAPI = async (
@@ -130,6 +132,9 @@ const propertySlice = createSlice({
 	name: "properties",
 	initialState,
 	reducers: {
+		emptyProperties: (state) => {
+			state.properties = [];
+		},
 		setStreet: (state, action) => {
 			state.street = action.payload;
 		},
@@ -163,6 +168,12 @@ const propertySlice = createSlice({
 		setMaxSize: (state, action) => {
 			state.maxSize = action.payload;
 		},
+		setSelectedProperty: (state, action) => {
+			state.selectedProperty = action.payload;
+		},
+		setPropertyDetailDisplayed: (state, action) => {
+			state.propertyDetailDisplayed = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -192,6 +203,7 @@ const propertySlice = createSlice({
 });
 
 export const {
+	emptyProperties,
 	setStreet,
 	setCity,
 	setStateEntry,
@@ -203,6 +215,8 @@ export const {
 	setMaxPrice,
 	setMinSize,
 	setMaxSize,
+	setSelectedProperty,
+	setPropertyDetailDisplayed,
 } = propertySlice.actions;
 
 export default propertySlice.reducer;

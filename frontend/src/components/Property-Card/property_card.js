@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./_property_card.scss";
 import { useDispatch, useSelector } from "react-redux";
+
+// importing icons
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import {
 	BiBath,
@@ -11,16 +13,24 @@ import {
 } from "react-icons/bi";
 import { BsEyeFill, BsFillCalendarWeekFill } from "react-icons/bs";
 import { CgUserlane } from "react-icons/cg";
+import { FaEthereum } from "react-icons/fa";
 import { IoMdPhotos } from "react-icons/io";
 import { MdLocationOn } from "react-icons/md";
 import { SlSizeFullscreen } from "react-icons/sl";
 
 // importing services
-import { updatePropertyLikes } from "../../services/api-calls";
+import {
+	updatePropertyLikes,
+	updatePropertyViews,
+} from "../../services/api-calls";
+import {
+	setPropertyDetailDisplayed,
+	setSelectedProperty,
+} from "../../slices/property-slice";
 
 // importing helpers
-import { createAddress, loadUserCookie } from "../../services/helpers";
-import { setUser } from "../../slices/common-slice";
+import { concatAddress, loadUserCookie } from "../../services/helpers";
+import { setLoading, setUser } from "../../slices/common-slice";
 
 const PropertyCard = ({ property = null, width = "", height = "" }) => {
 	const dispatch = useDispatch();
@@ -67,9 +77,16 @@ const PropertyCard = ({ property = null, width = "", height = "" }) => {
 		updatePropertyLikes(propertyID);
 	};
 
+	const displaySelectedProperty = (propertyID) => {
+		dispatch(setLoading(true));
+		dispatch(setSelectedProperty(property));
+		dispatch(setPropertyDetailDisplayed(true));
+		updatePropertyViews(propertyID);
+	};
+
 	return property ? (
 		<div
-			className="card-container"
+			className="property-card-container"
 			style={{
 				width: width !== "" ? width : "370px",
 				height: height !== "" ? height : "440px",
@@ -83,6 +100,7 @@ const PropertyCard = ({ property = null, width = "", height = "" }) => {
 				<img
 					className={`image ${slide !== 0 && "hidden"}`}
 					src={`data:${property.thumbnail.contentType};base64,${property.thumbnail.data}`}
+					onClick={() => displaySelectedProperty(property.id)}
 				/>
 
 				{property.images.map((image, index) => {
@@ -91,6 +109,7 @@ const PropertyCard = ({ property = null, width = "", height = "" }) => {
 							key={index}
 							className={`image ${slide - 1 !== index && "hidden"}`}
 							src={`data:${image.contentType};base64,${image.data}`}
+							onClick={() => displaySelectedProperty(property.id)}
 						/>
 					);
 				})}
@@ -109,21 +128,23 @@ const PropertyCard = ({ property = null, width = "", height = "" }) => {
 
 					<div className="counts-item">
 						<div className="count">{propertyLikes}</div>
-						<BiSolidHeart />
+						<BiSolidHeart className="icon" />
 					</div>
 
 					<div className="counts-item">
 						<div className="count">{property.images.length + 1}</div>
-						<IoMdPhotos />
+						<IoMdPhotos className="icon" />
 					</div>
 				</div>
 
 				<div className="address">
 					<MdLocationOn className="icon" />{" "}
-					{createAddress(property.street, property.city, property.state)}
+					{concatAddress(property.street, property.city, property.state)}
 				</div>
 
-				<div className="price">ETH {property.price}</div>
+				<div className="price">
+					<FaEthereum /> {property.price} ETH
+				</div>
 
 				<div className="bed-bath-size-container">
 					<div className="item-container">

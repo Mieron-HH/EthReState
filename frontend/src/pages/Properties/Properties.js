@@ -10,6 +10,8 @@ import Header from "../../components/Header/header";
 import SearchBarLarge from "../../components/Search-Bar-Large/search_bar_large";
 import Drawer from "../../components/Drawer/drawer";
 import PropertyCard from "../../components/Property-Card/property_card";
+import PropertyDetail from "../../components/Property-Detail/property_detail";
+import Login from "../../components/Login/login";
 
 // importing actions
 import {
@@ -17,6 +19,7 @@ import {
 	setCity,
 	setBedroomNumber,
 	setBathroomNumber,
+	emptyProperties,
 } from "../../slices/property-slice";
 import { setLoading } from "../../slices/common-slice";
 
@@ -27,15 +30,21 @@ const Properties = () => {
 	const dispatch = useDispatch();
 	const location = useLocation();
 
-	const { properties, status, error } = useSelector(
+	const { properties, status, error, propertyDetailDisplayed } = useSelector(
 		(state) => state.properties
 	);
-	const { drawerExtended, loading } = useSelector((state) => state.common);
+	const { drawerExtended, loading, loginFormDisplayed } = useSelector(
+		(state) => state.common
+	);
 	const [coordinates, setCoordinates] = useState(null);
 
 	useEffect(() => {
 		dispatch(setLoading(true));
 		handleUserCoordinates();
+
+		return () => {
+			dispatch(emptyProperties());
+		};
 	}, []);
 
 	useEffect(() => {
@@ -88,6 +97,8 @@ const Properties = () => {
 	return (
 		<div className="Properties">
 			{loading && <Loader />}
+			{propertyDetailDisplayed && <PropertyDetail />}
+			{loginFormDisplayed && <Login />}
 
 			<div className="properties-header-container">
 				<Header inverted="inverted" />
@@ -104,7 +115,10 @@ const Properties = () => {
 				<Drawer />
 			</div>
 
-			<div className="properties-container">
+			<div
+				className="properties-container"
+				style={{ overflowY: propertyDetailDisplayed ? "hidden" : "scroll" }}
+			>
 				{properties.map((property) => {
 					return (
 						<PropertyCard

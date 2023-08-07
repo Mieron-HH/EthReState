@@ -3,10 +3,10 @@
 
 .Properties {
 	width: 100vw;
-	min-height: 100vh;
+	height: 100vh;
 	@include display_flex(column, flex-start, center);
 	position: relative;
-	overflow-y: scroll;
+	overflow: hidden;
 
 	.properties-header-container {
 		width: 100%;
@@ -33,8 +33,8 @@
 
 	.properties-container {
 		width: 90%;
-		height: 100vh;
-		margin-top: 2%;
+		height: 75vh;
+		margin-top: 1%;
 		padding: 10px;
 		@include display_flex(row, flex-start, flex-start);
 		flex-wrap: wrap;

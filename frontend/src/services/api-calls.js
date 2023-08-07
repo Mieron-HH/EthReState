@@ -115,7 +115,29 @@ export const updatePropertyViews = async (propertyID) => {
 			.then((response) => (data = response.data))
 			.catch((err) => {
 				if (err.response) error = err.response.data.errors[0].message;
-				console.log({ err });
+				console.log({ err, error });
+			});
+	} catch (error) {
+		console.log({ error });
+		throw error;
+	}
+};
+
+export const lockProperty = async (propertyID) => {
+	let data = null;
+	let error = "";
+
+	try {
+		await axios
+			.post(
+				BASE_URL + "/property/lock",
+				{ propertyID },
+				{ withCredentials: true }
+			)
+			.then((response) => (data = response.data))
+			.catch((err) => {
+				if (err.response) error = err.response.data.errors[0].message;
+				console.log({ err, error });
 			});
 	} catch (error) {
 		console.log({ error });
