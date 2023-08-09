@@ -10,9 +10,11 @@ const initialState = {
 	street: "",
 	city: "",
 	stateEntry: "",
-	bedroomNumber: "",
-	bathroomNumber: "",
+	zipCode: "",
+	bedroomNumber: "1",
+	bathroomNumber: "1",
 	price: "",
+	downPayment: "",
 	size: "",
 	minPrice: "",
 	maxPrice: "",
@@ -144,6 +146,9 @@ const propertySlice = createSlice({
 		setStateEntry: (state, action) => {
 			state.stateEntry = action.payload;
 		},
+		setZipCode: (state, action) => {
+			state.zipCode = action.payload;
+		},
 		setBedroomNumber: (state, action) => {
 			state.bedroomNumber = action.payload;
 		},
@@ -152,6 +157,9 @@ const propertySlice = createSlice({
 		},
 		setPrice: (state, action) => {
 			state.price = action.payload;
+		},
+		setDownPayment: (state, action) => {
+			state.downPayment = action.payload;
 		},
 		setSize: (state, action) => {
 			state.size = action.payload;
@@ -173,6 +181,17 @@ const propertySlice = createSlice({
 		},
 		setPropertyDetailDisplayed: (state, action) => {
 			state.propertyDetailDisplayed = action.payload;
+		},
+		resetAddProperty: (state) => {
+			state.street = "";
+			state.city = "";
+			state.stateEntry = "";
+			state.zipCode = "";
+			state.bedroomNumber = "1";
+			state.bathroomNumber = "1";
+			state.price = "";
+			state.downPayment = "";
+			state.size = "";
 		},
 	},
 	extraReducers: (builder) => {
@@ -207,10 +226,13 @@ export const {
 	setStreet,
 	setCity,
 	setStateEntry,
+	setZipCode,
 	setBedroomNumber,
 	setBathroomNumber,
 	setPrice,
+	setDownPayment,
 	setSize,
+	resetAddProperty,
 	setMinPrice,
 	setMaxPrice,
 	setMinSize,

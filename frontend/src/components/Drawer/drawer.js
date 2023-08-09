@@ -110,6 +110,7 @@ const Drawer = () => {
 	};
 
 	const navigateToListProperty = () => {
+		dispatch(setLoading(true));
 		navigate("/publish");
 	};
 

@@ -7,26 +7,61 @@
 	@include display_flex(column, center, center);
 	position: relative;
 
+	.ethereum-loader-container {
+		width: 35%;
+		height: 90%;
+		@include display_flex(column, center, center);
+		background-color: white;
+		box-shadow: 2px 2px 10px #aaa;
+
+		.loading-message {
+			width: 100%;
+			height: 10%;
+			@include display_flex(row, center, center);
+			color: #130442;
+			font-size: 35px;
+			font-weight: 600;
+		}
+
+		.loader-gif {
+			width: 20%;
+			height: 20%;
+			margin-top: 30px;
+		}
+
+		.loader-gif.larger {
+			width: 30%;
+			height: 30%;
+		}
+	}
+
 	.content-container {
 		width: 35%;
 		height: 90%;
-		@include display_flex(column, space-between, flex-start);
+		margin-top: 15px;
+		@include display_flex(column, space-between, center);
+		position: relative;
 
-		.status-indicator {
+		.progress-indicator {
 			width: 100%;
 			height: 3.5px;
 			background-color: rgb(76, 235, 76);
 			border-radius: 30px;
 			transition: width 1s ease-in-out;
+			position: absolute;
+			left: 0;
 		}
 
 		.form-container {
 			width: 100%;
 			height: 99%;
-			padding: 10px 20px;
+			margin-top: 6px;
+			padding: 15px 20px 90px 20px;
 			@include display_flex(column, flex-start, flex-start);
 			border: 0.5px ridge #aaa;
-			border-radius: 8px;
+			border-radius: 3px;
+			border-bottom-left-radius: 8px;
+			border-bottom-right-radius: 8px;
 			box-shadow: 2px 2px 10px #aaa;
 			overflow-y: scroll;
 
@@ -51,12 +86,13 @@
 				small {
 					font-size: 12px;
 					font-weight: 500;
-					text-transform: lowercase;
+					text-transform: none;
 				}
 			}
 
 			.input-group {
 				@include display_flex(column, space-between, flex-start);
+				position: relative;
 
 				.input-item {
 					width: 100%;
@@ -70,6 +106,41 @@
 
 					&::placeholder {
 						text-transform: uppercase;
+					}
+
+					&:focus {
+						border: 0.5px solid rgb(76, 235, 76);
+					}
+				}
+
+				.states-list {
+					@include reset();
+					width: 100%;
+					min-height: 100px;
+					max-height: 100px;
+					list-style: none;
+					background-color: white;
+					border: 1px ridge lightgray;
+					border-radius: 5px;
+					position: absolute;
+					bottom: -103px;
+					z-index: 1;
+					overflow-y: scroll;
+
+					.state-item {
+						width: 100%;
+						height: 20px;
+						margin-bottom: 3px;
+						padding-left: 5px;
+						@include display_flex(row, flex-start, center);
+						color: #555;
+						font-size: 13px;
+						font-weight: bold;
+						cursor: pointer;
+
+						&:hover {
+							background-color: rgba(173, 216, 230, 0.687);
+						}
 					}
 				}
 
@@ -151,8 +222,9 @@
 				.property-pictures {
 					width: 100%;
 					min-height: 80%;
-					@include display_flex(row, space-between, center);
+					@include display_flex(row, flex-start, center);
 					flex-wrap: wrap;
+					gap: 20px;
 
 					.add-picture-uploader {
 						width: 130px;
@@ -191,7 +263,10 @@
 					cursor: default;
 
 					.remove-picture-icon {
-						font-size: 20px;
+						background-color: black;
+						border-radius: 100%;
+						color: white;
+						font-size: 15px;
 						position: absolute;
 						top: 2px;
 						right: 2px;
@@ -213,26 +288,36 @@
 				font-size: 28px;
 				cursor: pointer;
 			}
+		}
 
-			.submit-button-container {
-				width: 100%;
+		.submit-button-container {
+			width: 99.5%;
+			min-height: 80px;
+			@include display_flex(row, center, center);
+			background-color: white;
+			border-top: 0.5px ridge #bbb;
+			border-bottom: 0.5px ridge #bbb;
+			border-bottom-left-radius: 8px;
+			border-bottom-right-radius: 8px;
+			position: absolute;
+			bottom: 0;
+			z-index: 1;
+
+			.submit-button {
+				width: 90%;
 				min-height: 45px;
-				margin-top: 40px;
-				margin-bottom: 20px;
-				@include display_flex(row, center, center);
+				background-color: rgb(62, 231, 62);
+				border: none;
+				outline: none;
+				border-radius: 5px;
+				color: white;
+				font-size: 18px;
+				font-weight: bold;
+				text-transform: uppercase;
+				cursor: pointer;
 
-				.submit-button {
-					width: 90%;
-					height: 100%;
-					background-color: rgb(62, 231, 62);
-					border: none;
-					outline: none;
-					border-radius: 5px;
-					color: white;
-					font-size: 18px;
-					font-weight: bold;
-					text-transform: uppercase;
-					cursor: pointer;
+				&:active {
+					opacity: 0.8;
 				}
 			}
 		}
