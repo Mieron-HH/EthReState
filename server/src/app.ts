@@ -37,7 +37,6 @@ app.use(
 	cookieSession({
 		signed: false,
 		secure: false,
-		maxAge: 60 * 60 * 1000,
 	})
 );
 app.use(
