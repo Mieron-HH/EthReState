@@ -8,6 +8,15 @@
 	position: relative;
 	overflow: hidden;
 
+	.properties-loader-container {
+		width: 100vw;
+		height: 100vh;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 15;
+	}
+
 	.properties-header-container {
 		width: 100%;
 		height: 10vh;

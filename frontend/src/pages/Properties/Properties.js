@@ -96,7 +96,12 @@ const Properties = () => {
 
 	return (
 		<div className="Properties">
-			{loading && <Loader />}
+			{loading && (
+				<div className="properties-loader-container">
+					<Loader />
+				</div>
+			)}
+
 			{propertyDetailDisplayed && <PropertyDetail />}
 			{loginFormDisplayed && <Login />}
 
