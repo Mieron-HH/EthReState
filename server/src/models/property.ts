@@ -56,7 +56,7 @@ const propertySchema = new mongoose.Schema(
 		street: { type: String, required: true, lowercase: true, trim: true },
 		city: { type: String, required: true, lowercase: true, trim: true },
 		price: { type: String, required: true },
-		downPayment: { type: String, required: true },
+		downPayment: { type: String, required: false },
 		size: { type: String, required: true },
 		bedroomNumber: { type: String, required: true },
 		bathroomNumber: { type: String, required: true },
