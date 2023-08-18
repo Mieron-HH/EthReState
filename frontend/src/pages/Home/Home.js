@@ -71,7 +71,11 @@ const Home = () => {
 
 	return (
 		<div className="Home">
-			{loading && <Loader />}
+			{loading && (
+				<div className="home-loader-container">
+					<Loader />
+				</div>
+			)}
 			<img
 				className="landing-page-image"
 				src={require("../../images/landing_page_image.jpg")}
