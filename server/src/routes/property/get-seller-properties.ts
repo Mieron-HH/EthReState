@@ -21,7 +21,7 @@ interface QueryParams {
 
 const router = express.Router();
 
-router.get(
+router.post(
 	"/api/property/getSellerProperties",
 	currentUser,
 	requireAuth,
@@ -30,13 +30,13 @@ router.get(
 		const existingUser = await User.findOne({ email });
 		if (!existingUser) throw new BadRequestError("User not found");
 
-		const { filter, city, bedroomNumber, bathroomNumber } = req.body;
+		const { propertyStatus, city, bedroomNumber, bathroomNumber } = req.body;
 		const queryParams: QueryParams = {
 			seller: existingUser._id,
 		};
 
-		if (filter) {
-			switch (filter) {
+		if (propertyStatus) {
+			switch (propertyStatus) {
 				case "minted":
 					queryParams.minted = true;
 					break;
