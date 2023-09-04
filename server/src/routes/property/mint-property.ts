@@ -24,16 +24,22 @@ router.post(
 			.withMessage("Property ID must be provided")
 			.custom((input) => mongoose.Types.ObjectId.isValid(input))
 			.withMessage("Invlaid property ID"),
+		body("tokenID")
+			.notEmpty()
+			.withMessage("Token ID must be provided")
+			.isNumeric()
+			.withMessage("Invalid token ID"),
 	],
 	currentUser,
 	requireAuth,
 	validateRequest,
 	async (req: Request, res: Response) => {
-		const { email, id } = req.currentUser!;
+		const { email } = req.currentUser!;
 		const existingUser = await User.findOne({ email });
 		if (!existingUser) throw new BadRequestError("User not found");
 
-		const { propertyID } = req.body;
+		const { propertyID, tokenID } = req.body;
+		console.log({ tokenID });
 		const existingProperty = await Property.findById(propertyID);
 		if (!existingProperty) throw new BadRequestError("Property not found");
 
@@ -44,6 +50,7 @@ router.post(
 
 		try {
 			existingProperty.set({
+				tokenID,
 				minted: true,
 				mintedAt: new Date(),
 			});

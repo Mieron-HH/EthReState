@@ -17,11 +17,11 @@ import {
 const router = express.Router();
 
 router.post(
-	"/api/property/unlock",
+	"/api/property/getPropertyImages",
 	[
 		body("propertyID")
 			.notEmpty()
-			.withMessage("Property ID required")
+			.withMessage("Property ID must be provided")
 			.custom((input) => mongoose.Types.ObjectId.isValid(input))
 			.withMessage("Invalid property ID"),
 	],
@@ -30,33 +30,17 @@ router.post(
 	validateRequest,
 	async (req: Request, res: Response) => {
 		const { email } = req.currentUser!;
-		const existingUser = await User.findOne({ email });
-		if (!existingUser) throw new BadRequestError("User not found");
+		const exisingUser = await User.findOne({ email });
+		if (!exisingUser) throw new BadRequestError("User not found");
 
 		const { propertyID } = req.body;
 		const existingProperty = await Property.findById(propertyID);
 		if (!existingProperty) throw new BadRequestError("Property not found");
 
-		if (
-			existingProperty.seller.toString() !== existingUser._id.toString() ||
-			existingProperty.buyer?.toString() !== existingUser._id.toString()
-		)
-			throw new BadRequestError("User cannot unlock property");
+		const propertyImages = existingProperty.images;
 
-		try {
-			existingProperty.set({
-				buyer: undefined,
-				locked: false,
-			});
-
-			existingProperty.save();
-
-			return res.status(201).send(existingProperty);
-		} catch (error) {
-			console.error(error);
-			throw new BadRequestError("Error unlocking property");
-		}
+		res.status(200).send({ propertyImages });
 	}
 );
 
-export { router as UnlockRouter };
+export { router as GetPropertyImagesRouter };

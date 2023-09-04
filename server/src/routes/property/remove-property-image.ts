@@ -17,13 +17,18 @@ import {
 const router = express.Router();
 
 router.post(
-	"/api/property/unlock",
+	"/api/property/removePropertyImage",
 	[
 		body("propertyID")
 			.notEmpty()
-			.withMessage("Property ID required")
+			.withMessage("Property ID must be provided")
 			.custom((input) => mongoose.Types.ObjectId.isValid(input))
 			.withMessage("Invalid property ID"),
+		body("imageIndex")
+			.notEmpty()
+			.withMessage("Image index must be provided")
+			.isInt({ min: 0 })
+			.withMessage("Invalid image index"),
 	],
 	currentUser,
 	requireAuth,
@@ -33,30 +38,26 @@ router.post(
 		const existingUser = await User.findOne({ email });
 		if (!existingUser) throw new BadRequestError("User not found");
 
-		const { propertyID } = req.body;
+		const { propertyID, imageIndex } = req.body;
 		const existingProperty = await Property.findById(propertyID);
 		if (!existingProperty) throw new BadRequestError("Property not found");
 
-		if (
-			existingProperty.seller.toString() !== existingUser._id.toString() ||
-			existingProperty.buyer?.toString() !== existingUser._id.toString()
-		)
-			throw new BadRequestError("User cannot unlock property");
+		if (existingProperty.seller.toString() !== existingUser._id.toString())
+			throw new BadRequestError("User does not own property");
+		if (imageIndex < 0 || imageIndex >= existingProperty.images.length)
+			throw new BadRequestError("Invalid image index");
 
 		try {
-			existingProperty.set({
-				buyer: undefined,
-				locked: false,
-			});
+			existingProperty.images.splice(imageIndex, 1);
 
-			existingProperty.save();
+			await existingProperty.save();
 
 			return res.status(201).send(existingProperty);
 		} catch (error) {
 			console.error(error);
-			throw new BadRequestError("Error unlocking property");
+			throw new BadRequestError("Error removing property image");
 		}
 	}
 );
 
-export { router as UnlockRouter };
+export { router as RemovePropertyImageRouter };

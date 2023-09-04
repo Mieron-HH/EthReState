@@ -24,7 +24,7 @@ const router = express.Router();
 const upload = multer({ dest: "properties/" });
 
 router.post(
-	"/api/property/publish",
+	"/api/property/create",
 	upload.any(),
 	[
 		body("owner")
@@ -54,6 +54,13 @@ router.post(
 			.withMessage("State must be provided")
 			.custom((input) => input.length === 2)
 			.withMessage("State must be in 2 letters form"),
+		body("zipCode")
+			.notEmpty()
+			.withMessage("Zipcode must be provided")
+			.isNumeric()
+			.withMessage("Zipcode must be in digits")
+			.isLength({ min: 5, max: 5 })
+			.withMessage("Zipcode must be 5 digits long"),
 		body("bathroomNumber")
 			.notEmpty()
 			.withMessage("Bathroom number must be provided")
@@ -77,7 +84,7 @@ router.post(
 		const { email } = req.currentUser!;
 		const existingUser = await User.findOne({ email });
 		if (!existingUser) {
-			await DeleteImages.deleteImage(req);
+			await DeleteImages.deleteMultipleImages(req);
 			throw new BadRequestError("User not found");
 		}
 
@@ -89,6 +96,7 @@ router.post(
 			street,
 			city,
 			state,
+			zipCode,
 			bathroomNumber,
 			bedroomNumber,
 		} = req.body;
@@ -103,7 +111,7 @@ router.post(
 			// @ts-ignore
 			const image = req.files[index];
 			const imageBuffer = await sharp(image.path)
-				.resize({ width: 800 })
+				.resize({ width: 500 })
 				.toBuffer();
 
 			if (image.fieldname === "propertyImage") {
@@ -122,7 +130,7 @@ router.post(
 			}
 		}
 
-		await DeleteImages.deleteImage(req);
+		await DeleteImages.deleteMultipleImages(req);
 
 		try {
 			const metadata = await client.store({
@@ -142,6 +150,7 @@ router.post(
 				street,
 				city,
 				state,
+				zipCode,
 				price,
 				downPayment,
 				size,
@@ -168,4 +177,4 @@ router.post(
 	}
 );
 
-export { router as PublishRouter };
+export { router as CreateRouter };

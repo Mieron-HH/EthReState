@@ -13,8 +13,9 @@ import { SigninRouter } from "./routes/user/sign-in";
 import { CurrentUserRouter } from "./routes/user/current-user";
 import { signoutRouter } from "./routes/user/sign-out";
 
-// importing MINT routes
-import { PublishRouter } from "./routes/property/publish-property";
+// importing PROPERTY routes
+import { CreateRouter } from "./routes/property/create-property";
+import { FetchPropertyRouter } from "./routes/property/fetch-property";
 import { MintRouter } from "./routes/property/mint-property";
 import { ListRouter } from "./routes/property/list-property";
 import { UnlistRouter } from "./routes/property/unlist-property";
@@ -28,6 +29,10 @@ import { GetBuyerPropertiesRouter } from "./routes/property/get-buyer-properties
 import { GetPopularPropertiesRouter } from "./routes/property/get-popular-properties";
 import { UpdateLikesRouter } from "./routes/property/update-property-likes";
 import { UpdateViewsRouter } from "./routes/property/update-property-views";
+import { GetPropertyImagesRouter } from "./routes/property/get-property-images";
+import { ChangePropertyThumbnailRouter } from "./routes/property/change-property-thumbnail";
+import { AddPropertyImageRouter } from "./routes/property/add-property-image";
+import { RemovePropertyImageRouter } from "./routes/property/remove-property-image";
 
 const app = express();
 
@@ -52,8 +57,9 @@ app.use(SigninRouter);
 app.use(CurrentUserRouter);
 app.use(signoutRouter);
 
-// hooking MINT routes
-app.use(PublishRouter);
+// hooking PROPERTY routes
+app.use(CreateRouter);
+app.use(FetchPropertyRouter);
 app.use(MintRouter);
 app.use(ListRouter);
 app.use(UnlistRouter);
@@ -67,6 +73,10 @@ app.use(GetBuyerPropertiesRouter);
 app.use(GetPopularPropertiesRouter);
 app.use(UpdateLikesRouter);
 app.use(UpdateViewsRouter);
+app.use(GetPropertyImagesRouter);
+app.use(ChangePropertyThumbnailRouter);
+app.use(AddPropertyImageRouter);
+app.use(RemovePropertyImageRouter);
 
 // Invalid routes
 app.all("*", async (req, res, next) => {

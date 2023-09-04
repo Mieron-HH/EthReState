@@ -5,7 +5,12 @@ import mongoose from "mongoose";
 // importing models
 import { User } from "../../models/user";
 import { Property } from "../../models/property";
-import { BadRequestError, currentUser, requireAuth } from "@kmalae.ltd/library";
+import {
+	BadRequestError,
+	currentUser,
+	requireAuth,
+	validateRequest,
+} from "@kmalae.ltd/library";
 
 const router = express.Router();
 
@@ -20,6 +25,7 @@ router.post(
 	],
 	currentUser,
 	requireAuth,
+	validateRequest,
 	async (req: Request, res: Response) => {
 		const { email } = req.currentUser!;
 		const existingUser = await User.findOne({ email });
@@ -29,9 +35,10 @@ router.post(
 		const existingProperty = await Property.findById(propertyID);
 		if (!existingProperty) throw new BadRequestError("Property not found");
 
+		if (existingProperty.seller.toString() !== existingUser._id.toString())
+			throw new BadRequestError("User does not own property");
 		if (existingProperty.locked || existingProperty.sold)
 			throw new BadRequestError("Cannot delete property");
-
 		if (existingProperty.cancelled)
 			throw new BadRequestError("Property already deleted");
 

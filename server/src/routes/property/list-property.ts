@@ -36,9 +36,9 @@ router.post(
 		const { propertyID } = req.body;
 		const existingProperty = await Property.findById(propertyID);
 		if (!existingProperty) throw new BadRequestError("Property not found");
-
 		if (existingProperty.seller.toString() !== existingUser._id.toString())
 			throw new BadRequestError("User does not own property");
+
 		if (!existingProperty.minted)
 			throw new BadRequestError("NFT for the property not minted");
 		if (existingProperty.listed)

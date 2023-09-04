@@ -67,7 +67,19 @@ router.post(
 		if (bedroomNumber) queryParams.bedroomNumber = bedroomNumber;
 		if (bathroomNumber) queryParams.bathroomNumber = bathroomNumber;
 
-		const properties = await Property.find(queryParams);
+		const properties = await Property.aggregate([
+			{ $match: queryParams }, // Apply your matching conditions here
+			{
+				$addFields: {
+					imagesCount: { $size: "$images" }, // Add a field containing the length of images array
+				},
+			},
+			{
+				$project: {
+					images: 0, // Exclude the images array
+				},
+			},
+		]);
 
 		return res.status(200).send(properties);
 	}
