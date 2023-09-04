@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { BsPersonFillDown } from "react-icons/bs";
 
 // importing variables
 import { stateAbbreviations } from "./variables";
@@ -37,10 +38,29 @@ export const getCityAndState = async (lat, lng) => {
 	return location;
 };
 
-export const concatAddress = (street = "", city = "", state = "") => {
-	const address = `${street.toUpperCase()} | ${city.toUpperCase()} | ${state.toUpperCase()}`;
+export const concatAddress = ({
+	street = "",
+	city = "",
+	state = "",
+	zipcode = "",
+	maxChars = 200,
+}) => {
+	const address = `${street.toUpperCase()} | ${city.toUpperCase()} | ${state.toUpperCase()} | ${zipcode}`;
 
-	if (address.length > 40) return address.slice(0, 40) + "...";
+	if (address.length > maxChars) return address.slice(0, maxChars) + "...";
 
 	return address;
+};
+
+export const concatPrice = (property) => {
+	return (
+		<>
+			ETH {property.price}
+			{property.downPayment && (
+				<small>
+					<BsPersonFillDown /> {property.downPayment}
+				</small>
+			)}
+		</>
+	);
 };

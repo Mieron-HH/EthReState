@@ -59,13 +59,13 @@ export const logoutUser = async () => {
 	}
 };
 
-export const publishProperty = async (PostData) => {
+export const createProperty = async (PostData) => {
 	let data = null;
 	let error = "";
 
 	try {
 		await axios
-			.post(BASE_URL + "/property/publish", PostData, { withCredentials: true })
+			.post(BASE_URL + "/property/create", PostData, { withCredentials: true })
 			.then((response) => (data = response.data))
 			.catch((err) => {
 				if (err.response) error = err.response.data.errors[0].message;
