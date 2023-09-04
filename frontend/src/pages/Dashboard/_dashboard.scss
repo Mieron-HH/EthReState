@@ -1,0 +1,32 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.Dashboard {
+	width: 100vw;
+	height: 100vh;
+	@include display_flex(row, flex-start, center);
+	background-color: #fafaf2;
+
+	.dashboard-drawer-container {
+		width: 18%;
+		height: 100%;
+		border-right: 0.5px ridge lightgray;
+		overflow: hidden;
+	}
+
+	.dashboard-body-container {
+		width: 82%;
+		height: 100%;
+		@include display_flex(row, center, center);
+		position: relative;
+
+		.dashboard-loader-container {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 15;
+		}
+	}
+}

@@ -27,11 +27,11 @@ import {
 	setPrice,
 	setDownPayment,
 	setSize,
-	resetAddProperty,
+	resetPropertySlice,
 } from "../../slices/property-slice";
 
 // importing services
-import { publishProperty } from "../../services/api-calls";
+import { createProperty } from "../../services/api-calls";
 import { stateAbbreviations } from "../../services/variables";
 
 const Publish = () => {
@@ -75,7 +75,7 @@ const Publish = () => {
 		}
 
 		return () => {
-			dispatch(resetAddProperty());
+			dispatch(resetPropertySlice());
 		};
 	}, []);
 
@@ -314,7 +314,7 @@ const Publish = () => {
 			downPayment === "" ? "0" : downPayment
 		);
 
-		const { data, error } = await publishProperty(PostData.current);
+		const { data, error } = await createProperty(PostData.current);
 		setError(error);
 
 		if (data) await mintPropertyNFT(data, signer);
