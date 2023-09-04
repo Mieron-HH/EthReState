@@ -18,6 +18,7 @@ interface PropertyAttr {
 	street: string;
 	city: string;
 	state: string;
+	zipCode: string;
 	price: string;
 	downPayment: string;
 	size: string;
@@ -56,6 +57,8 @@ const propertySchema = new mongoose.Schema(
 		street: { type: String, required: true, lowercase: true, trim: true },
 		city: { type: String, required: true, lowercase: true, trim: true },
 		price: { type: String, required: true },
+		state: { type: String, required: true, lowercase: true, trim: true },
+		zipCode: { type: String, required: true },
 		downPayment: { type: String, required: false },
 		size: { type: String, required: true },
 		bedroomNumber: { type: String, required: true },
@@ -63,7 +66,6 @@ const propertySchema = new mongoose.Schema(
 		owner: { type: String, required: true, lowercase: true, trim: true },
 		thumbnail: { type: Object, required: true },
 		images: { type: [Object], required: true },
-		state: { type: String, required: true, lowercase: true, trim: true },
 		minted: { type: Boolean, required: true },
 		mintedAt: { type: Date, required: false },
 		listed: { type: Boolean, required: true },
@@ -76,12 +78,11 @@ const propertySchema = new mongoose.Schema(
 		likes: { type: [String], required: true },
 		views: { type: Number, required: true },
 		buyer: { type: mongoose.Types.ObjectId, required: false, ref: "User" },
+		createdAt: { type: Date, default: Date.now },
 	},
 	{
 		toJSON: {
 			transform(doc, ret) {
-				ret.id = ret._id;
-				delete ret._id;
 				delete ret.__v;
 			},
 		},
