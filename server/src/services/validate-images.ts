@@ -15,7 +15,7 @@ export const validateImages = async (
 
 	// @ts-ignore
 	if (!req.files || Object.keys(req.files).length === 0) {
-		await DeleteImages.deleteImage(req);
+		await DeleteImages.deleteMultipleImages(req);
 		throw new BadRequestError("Property images required");
 	}
 
@@ -24,12 +24,12 @@ export const validateImages = async (
 		// @ts-ignore
 		const image = req.files[index]!;
 		if (!["propertyImage", "thumbnailImage"].includes(image.fieldname)) {
-			await DeleteImages.deleteImage(req);
+			await DeleteImages.deleteMultipleImages(req);
 			throw new BadRequestError("Property images required");
 		}
 
 		if (!accepted_format.includes(image.mimetype.toLowerCase())) {
-			await DeleteImages.deleteImage(req);
+			await DeleteImages.deleteMultipleImages(req);
 			throw new BadRequestError("Invalid image format");
 		}
 
@@ -38,7 +38,7 @@ export const validateImages = async (
 	}
 
 	if (!thumbnail_image_found || image_count < 3) {
-		await DeleteImages.deleteImage(req);
+		await DeleteImages.deleteMultipleImages(req);
 		if (!thumbnail_image_found)
 			throw new BadRequestError("Default image required");
 		else throw new BadRequestError("Mininum three property images required");
