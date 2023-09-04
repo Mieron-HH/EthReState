@@ -42,7 +42,7 @@
 	}
 
 	.input-group.text {
-		width: 50%;
+		width: 49.5%;
 	}
 
 	.input-group.number {
@@ -67,8 +67,10 @@
 
 		&:hover {
 			background: linear-gradient(270deg, #f82a7e 0%, #752a90 100%);
-			margin-bottom: 3px;
-			transition: margin 0.1s ease-in;
+		}
+
+		&:active {
+			opacity: 0.8;
 		}
 	}
 }

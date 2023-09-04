@@ -1,0 +1,12 @@
+@import "../../../styles/mixin";
+@import "../../../styles/variables";
+
+.my-properties {
+	width: 90%;
+	height: 90%;
+	@include display_flex(column, flex-start, center);
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0px 0px 5px #aaa;
+	overflow: hidden;
+}

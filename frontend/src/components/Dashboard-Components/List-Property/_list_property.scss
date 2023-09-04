@@ -1,0 +1,455 @@
+@import "../../../styles/mixin";
+@import "../../../styles/variables";
+
+.list {
+	width: 100%;
+	height: 100%;
+	@include display_flex(column, center, center);
+	position: relative;
+
+	.listing-progress-indicator {
+		width: 20%;
+		height: 20px;
+		margin-bottom: 10px;
+		@include display_flex(row, flex-start, center);
+
+		.progress {
+			width: 17px;
+			height: 17px;
+			background-color: rgb(159, 251, 159);
+			border-radius: 100%;
+		}
+
+		.progress.reached {
+			background-color: rgb(68, 210, 68);
+		}
+
+		.progress-line {
+			width: 40%;
+			height: 4px;
+			background-color: rgb(159, 251, 159);
+			transition: width 1s ease-in-out;
+		}
+
+		.progress-line.reached {
+			background-color: rgb(68, 210, 68);
+		}
+	}
+
+	.list-loader-container {
+		width: 44%;
+		height: 85%;
+		@include display_flex(column, center, center);
+		background-color: white;
+		border-radius: 10px;
+		box-shadow: 0px 0px 5px #aaa;
+
+		.loading-message {
+			width: 100%;
+			height: 10%;
+			@include display_flex(row, center, center);
+			color: #130442;
+			font-size: 35px;
+			font-weight: 600;
+		}
+
+		.loader-gif {
+			width: 20%;
+			height: 20%;
+			margin-top: 30px;
+		}
+
+		.loader-gif.larger {
+			width: 30%;
+			height: 30%;
+		}
+	}
+
+	.content-container {
+		width: 44%;
+		height: 90%;
+		margin-top: 15px;
+		@include display_flex(column, space-between, center);
+		position: relative;
+
+		.progress-indicator {
+			width: 100%;
+			height: 3.5px;
+			background-color: rgb(76, 235, 76);
+			border-radius: 30px;
+			transition: width 1s ease-in-out;
+			position: absolute;
+			left: 0;
+		}
+
+		.form-container {
+			width: 100%;
+			height: 99%;
+			margin-top: 6px;
+			padding: 15px 20px 90px 20px;
+			@include display_flex(column, flex-start, flex-start);
+			background-color: white;
+			border-radius: 10px;
+			border-bottom-left-radius: 8px;
+			border-bottom-right-radius: 8px;
+			box-shadow: 0px 0px 5px #aaa;
+			overflow-y: scroll;
+
+			.error-message {
+				width: 100%;
+				height: 30px;
+				@include display_flex(row, center, center);
+				color: red;
+				font-size: 18px;
+				font-weight: 600;
+			}
+
+			.input-label {
+				width: 100%;
+				height: fit-content;
+				margin-left: 5px;
+				color: #555;
+				font-weight: 600;
+				font-size: 13px;
+				text-transform: uppercase;
+
+				small {
+					font-size: 12px;
+					font-weight: 500;
+					text-transform: none;
+				}
+			}
+
+			.input-group {
+				@include display_flex(column, space-between, flex-start);
+				position: relative;
+
+				.input-item {
+					width: 100%;
+					height: 45px;
+					padding-left: 10px;
+					background-color: rgba(211, 211, 211, 0.446);
+					border-radius: 10px;
+					font-size: 15px;
+					outline: none;
+					border: 0.5px ridge lightgray;
+
+					&::placeholder {
+						text-transform: uppercase;
+					}
+
+					&:focus {
+						border: 0.5px solid rgb(76, 235, 76);
+					}
+				}
+
+				.states-list {
+					@include reset();
+					width: 100%;
+					min-height: 100px;
+					max-height: 100px;
+					list-style: none;
+					background-color: white;
+					border: 1px ridge lightgray;
+					border-radius: 5px;
+					position: absolute;
+					bottom: -103px;
+					z-index: 1;
+					overflow-y: scroll;
+
+					.state-item {
+						width: 100%;
+						height: 20px;
+						margin-bottom: 3px;
+						padding-left: 5px;
+						@include display_flex(row, flex-start, center);
+						color: #555;
+						font-size: 13px;
+						font-weight: bold;
+						cursor: pointer;
+
+						&:hover {
+							background-color: rgba(173, 216, 230, 0.687);
+						}
+					}
+				}
+
+				.input-icon {
+					width: 100%;
+					height: fit-content;
+					@include display_flex(row, center, center);
+					font-size: 23px;
+					color: #555;
+				}
+
+				.input-counter {
+					width: 70%;
+					height: 50%;
+					@include display_flex(row, space-between, center);
+					font-size: 18px;
+
+					.counter-button {
+						width: 30%;
+						height: 100%;
+						@include display_flex(row, center, center);
+						background-color: rgba(211, 211, 211, 0.8);
+						color: #333;
+						font-weight: bold;
+						cursor: pointer;
+						user-select: none;
+
+						&:active {
+							background-color: lightblue;
+							font-size: 20px;
+						}
+					}
+
+					.increment {
+						border-top-right-radius: 5px;
+						border-bottom-right-radius: 5px;
+					}
+
+					.decrement {
+						border-top-left-radius: 5px;
+						border-bottom-left-radius: 5px;
+					}
+
+					.counter-number {
+						width: 40%;
+						height: 100%;
+						@include display_flex(row, center, center);
+						border: 1px solid rgba(211, 211, 211, 1);
+					}
+				}
+			}
+
+			.input-group-container {
+				width: 100%;
+				min-height: 60px;
+				margin-top: 20px;
+				@include display_flex(row, space-between, center);
+			}
+
+			.thumbnail-container {
+				width: 100%;
+				min-height: 155px;
+				margin-top: 40px;
+				@include display_flex(column, space-between, flex-start);
+
+				.thumbnail-picture {
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+				}
+			}
+
+			.property-pictures-container {
+				width: 100%;
+				margin-top: 40px;
+				padding: 0 3px 3px 3px;
+				@include display_flex(column, space-between, flex-start);
+
+				.property-pictures {
+					width: 100%;
+					min-height: 80%;
+					@include display_flex(row, flex-start, center);
+					flex-wrap: wrap;
+					gap: 20px;
+
+					.add-picture-uploader {
+						width: 130px;
+						height: 130px;
+						margin-top: 10px;
+						@include display_flex(row, center, center);
+						border-radius: 10px;
+
+						.icon {
+							color: #777;
+							font-size: 35px;
+							cursor: pointer;
+
+							&:hover {
+								color: rgb(31, 166, 210);
+							}
+						}
+					}
+				}
+			}
+
+			.picture-uploader {
+				width: 130px;
+				height: 130px;
+				@include display_flex(row, center, center);
+				background-color: #eee;
+				border: 2px dotted gray;
+				border-radius: 10px;
+				box-shadow: 1px 1px 5px #555;
+
+				.picture-preview-container {
+					width: 100%;
+					height: 100%;
+					border-radius: 10px;
+					position: relative;
+					cursor: default;
+
+					.remove-picture-icon {
+						background-color: black;
+						border-radius: 100%;
+						color: white;
+						font-size: 15px;
+						position: absolute;
+						top: 2px;
+						right: 2px;
+						cursor: pointer;
+					}
+
+					.picture-preview {
+						width: 100%;
+						height: 100%;
+						object-fit: fit;
+						border-radius: 10px;
+					}
+				}
+			}
+
+			.icon {
+				@include reset();
+				color: #667;
+				font-size: 28px;
+				cursor: pointer;
+			}
+		}
+
+		.submit-button-container {
+			width: 99.5%;
+			min-height: 80px;
+			@include display_flex(row, center, center);
+			background-color: white;
+			border-top: 0.5px ridge #bbb;
+			border-bottom: 0.5px ridge #bbb;
+			border-bottom-left-radius: 8px;
+			border-bottom-right-radius: 8px;
+			position: absolute;
+			bottom: 0;
+			z-index: 1;
+
+			.submit-button {
+				width: 80%;
+				min-height: 45px;
+				background-color: rgb(62, 231, 62);
+				border: none;
+				outline: none;
+				border-radius: 5px;
+				color: white;
+				font-size: 18px;
+				font-weight: bold;
+				text-transform: uppercase;
+				cursor: pointer;
+
+				&:active {
+					opacity: 0.8;
+				}
+			}
+		}
+	}
+
+	.mint-transfer-nft-container {
+		width: 44%;
+		height: 85%;
+		padding-bottom: 50px;
+		@include display_flex(column, center, center);
+		background-color: white;
+		border-radius: 10px;
+		box-shadow: 0px 0px 5px #aaa;
+		position: relative;
+
+		.instruction-container {
+			width: 80%;
+			height: 30%;
+			@include display_flex(row, space-between, center);
+
+			.icon-container {
+				width: 30%;
+				height: 100%;
+
+				.icon {
+					width: 100%;
+					height: 100%;
+				}
+
+				.icon.mint {
+					color: rgb(101, 16, 101);
+				}
+
+				.icon.transfer {
+					color: rgb(4, 4, 114);
+				}
+			}
+
+			.arrows-container {
+				width: 25%;
+				height: 100%;
+				@include display_flex(row, flex-start, center);
+
+				.arrow {
+					width: 20%;
+					height: 40px;
+					@include display_flex(row, center, center);
+
+					.icon {
+						@include reset();
+						font-size: 30px;
+					}
+
+					.icon.mint {
+						color: rgb(101, 16, 101);
+					}
+
+					.icon.transfer {
+						color: rgb(4, 4, 114);
+					}
+				}
+			}
+
+			.logo-container {
+				width: 30%;
+				height: 75%;
+				padding: 10px;
+				@include display_flex(row, center, center);
+				background-color: rgb(4, 4, 114);
+				border-radius: 100%;
+
+				.logo {
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+				}
+			}
+		}
+
+		.button {
+			width: 80%;
+			height: 45px;
+			@include display_flex(row, center, center);
+			border-radius: 5px;
+			color: white;
+			font-size: 20px;
+			font-weight: bold;
+			position: absolute;
+			bottom: 10px;
+			cursor: pointer;
+
+			&:active {
+				opacity: 0.8;
+			}
+		}
+
+		.button.mint {
+			background-color: rgb(101, 16, 101);
+		}
+
+		.button.transfer {
+			background-color: rgb(4, 4, 114);
+		}
+	}
+}

@@ -1,0 +1,115 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.dashboard-drawer {
+	width: 100%;
+	height: 100%;
+	@include display_flex(column, flex-start, center);
+	background-color: white;
+
+	.logo-container {
+		width: 100%;
+		height: 12%;
+		padding: 12px 0;
+		@include display_flex(row, center, center);
+		background-color: #121212;
+
+		.logo {
+			width: 60%;
+			height: 100%;
+			object-fit: contain;
+			cursor: pointer;
+		}
+	}
+
+	.user-container {
+		width: 90%;
+		height: 8%;
+		margin-top: 10px;
+		@include display_flex(row, space-around, center);
+		border-bottom: 0.5px ridge lightgray;
+
+		.icon {
+			width: 15%;
+			height: 60%;
+			color: #333;
+		}
+
+		.user-detail-container {
+			width: 80%;
+			height: 100%;
+			@include display_flex(column, space-around, flex-start);
+
+			.user-name {
+				color: #333;
+				font-size: 16px;
+				font-weight: bold;
+			}
+
+			.user-email {
+				color: #444;
+				font-size: 14px;
+				font-weight: 600;
+			}
+		}
+	}
+
+	.menu-container {
+		width: 85%;
+		height: 70%;
+		margin-top: 10%;
+		@include display_flex(column, flex-start, center);
+
+		.menu-item {
+			width: 100%;
+			height: 46px;
+			margin-bottom: 8px;
+			@include display_flex(row, center, center);
+			border-radius: 17px;
+			cursor: pointer;
+
+			.icon-container {
+				width: 30px;
+				height: 30px;
+				margin-right: 10px;
+				@include display_flex(row, center, center);
+				border-radius: 10px;
+
+				.icon {
+					font-size: 25px;
+					color: #444;
+				}
+			}
+
+			.menu {
+				width: 68%;
+				height: 100%;
+				@include display_flex(row, flex-start, center);
+				color: #444;
+				font-size: 15px;
+				font-weight: 600;
+			}
+
+			&:hover {
+				background-color: #ddd;
+			}
+		}
+
+		.menu-item.selected {
+			background-color: #121212;
+			box-shadow: 0px 0px 3px #333;
+
+			.icon-container {
+				background-color: none;
+
+				.icon {
+					color: white;
+				}
+			}
+
+			.menu {
+				color: white;
+			}
+		}
+	}
+}

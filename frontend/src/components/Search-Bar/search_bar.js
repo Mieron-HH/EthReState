@@ -8,11 +8,11 @@ import { BiBath, BiBed } from "react-icons/bi";
 import { MdOutlineLocationOn } from "react-icons/md";
 import {
 	fetchProperties,
+	fetchSellerProperties,
+	resetPropertySlice,
 	setBathroomNumber,
 	setBedroomNumber,
 	setCity,
-	setStateEntry,
-	setStreet,
 } from "../../slices/property-slice";
 import { setLoading } from "../../slices/common-slice";
 
@@ -31,42 +31,50 @@ const SearchBar = ({ backgroundColor = "white", height = "100%" }) => {
 		maxPrice,
 		minSize,
 		maxSize,
+		propertyStatus,
 	} = useSelector((state) => state.properties);
 	const inputRef = useRef(null);
 
 	useEffect(() => {
-		if (location.pathname === "/") {
-			dispatch(setStreet(""));
-			dispatch(setCity(""));
-			dispatch(setStateEntry(""));
-			dispatch(setBedroomNumber(""));
-			dispatch(setBathroomNumber(""));
-		}
+		if (location.pathname === "/") dispatch(resetPropertySlice());
 	}, []);
 
 	const searchProperties = () => {
-		if (location.pathname === "/") {
-			if (city !== "" || bedroomNumber !== "" || bathroomNumber !== "")
-				navigate("/properties", {
-					state: { city, bedroomNumber, bathroomNumber },
-				});
+		switch (location.pathname) {
+			case "/":
+				if (city !== "" || bedroomNumber !== "" || bathroomNumber !== "")
+					navigate("/properties", {
+						state: { city, bedroomNumber, bathroomNumber },
+					});
 
-			inputRef.current.focus();
-		} else {
-			setLoading(true);
-			dispatch(
-				fetchProperties({
-					street,
-					city,
-					stateEntry,
-					bedroomNumber,
-					bathroomNumber,
-					minPrice,
-					maxPrice,
-					minSize,
-					maxSize,
-				})
-			);
+				inputRef.current.focus();
+				break;
+			case "/properties":
+				dispatch(setLoading(true));
+				dispatch(
+					fetchProperties({
+						street,
+						city,
+						stateEntry,
+						bedroomNumber,
+						bathroomNumber,
+						minPrice,
+						maxPrice,
+						minSize,
+						maxSize,
+					})
+				);
+				break;
+			case "/dashboard":
+				dispatch(setLoading(true));
+				dispatch(
+					fetchSellerProperties({
+						propertyStatus,
+						city,
+						bedroomNumber,
+						bathroomNumber,
+					})
+				);
 		}
 	};
 

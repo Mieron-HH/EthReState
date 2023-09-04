@@ -33,13 +33,14 @@ const Header = ({ inverted = "" }) => {
 					Properties
 				</Link>
 
-				<div
+				<Link
 					className={`menu-item ${
-						location.pathname === "/contactUs" && "selected"
+						location.pathname === "/dashboard" && "selected"
 					}`}
+					to="/dashboard"
 				>
-					Contact Us
-				</div>
+					Dashboard
+				</Link>
 			</div>
 		</div>
 	);

@@ -178,11 +178,12 @@ const PropertyDetail = () => {
 
 					<div className="detail-container">
 						<div className="address-container">
-							{concatAddress(
-								selectedProperty.street,
-								selectedProperty.city,
-								selectedProperty.state
-							)}
+							{concatAddress({
+								street: selectedProperty.street,
+								city: selectedProperty.city,
+								state: selectedProperty.state,
+								zipcode: selectedProperty.zipcode,
+							})}
 						</div>
 
 						<div className="price-container">

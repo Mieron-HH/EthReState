@@ -138,8 +138,13 @@ const PropertyCard = ({ property = null, width = "", height = "" }) => {
 				</div>
 
 				<div className="address">
-					<MdLocationOn className="icon" />{" "}
-					{concatAddress(property.street, property.city, property.state)}
+					<MdLocationOn className="icon" />
+					{concatAddress({
+						street: property.street,
+						city: property.city,
+						state: property.state,
+						zipcode: property.zipcode,
+					})}
 				</div>
 
 				<div className="price">

@@ -1,0 +1,265 @@
+@import "../../../../styles/mixin";
+@import "../../../../styles/variables";
+
+.property-list {
+	width: 100%;
+	height: 100%;
+
+	.header-container {
+		width: 100%;
+		height: 10%;
+		@include display_flex(row, center, center);
+		border-bottom: 1px solid lightgray;
+
+		.filter-buttons-container {
+			width: 15%;
+			height: 65%;
+			margin-left: 8px;
+			@include display_flex(row, center, center);
+			position: relative;
+			cursor: pointer;
+
+			.icon {
+				color: #222;
+				font-size: 14px;
+				position: absolute;
+				right: 8px;
+				z-index: 1;
+			}
+
+			.filter-button {
+				width: 100%;
+				height: 100%;
+				@include display_flex(row, space-evenly, center);
+				border-radius: 5px;
+				color: white;
+				font-size: 15px;
+				font-weight: bold;
+				position: relative;
+				transition: opacity 0.6s ease-in-out;
+			}
+
+			.filter-button.outlined {
+				border: 1px solid lightgray;
+				color: #222 !important;
+			}
+
+			.filter-button.dimmed {
+				opacity: 0.7;
+				transition: opacity 0s;
+			}
+
+			.extended-filter-container {
+				width: 100%;
+				height: 200px;
+				@include display_flex(column, flex-start, center);
+				background-color: white;
+				border: 1px solid lightgray;
+				box-shadow: 0px 0px 3px #aaa;
+				border-radius: 5px;
+				position: absolute;
+				bottom: -205px;
+				z-index: 1;
+
+				.filter-button {
+					width: 90%;
+					height: 30px;
+					margin-top: 7px;
+					color: white;
+				}
+			}
+		}
+
+		.search-input-container {
+			width: 60%;
+			height: 65%;
+			@include display_flex(row, space-between, center);
+		}
+	}
+
+	.body-container {
+		width: 100%;
+		height: 90%;
+		padding: 15px 10px;
+		@include display_flex(row, center, flex-start);
+
+		.property-cards-container {
+			width: 100%;
+			min-height: fit-content;
+			max-height: 100%;
+			@include display_flex(row, space-between, flex-start);
+			flex-wrap: wrap;
+			overflow-y: scroll;
+
+			.property-card {
+				width: 49.3%;
+				height: 150px !important;
+				margin-bottom: 25px;
+				@include display_flex(row, space-between, center);
+				border-radius: 8px;
+				box-shadow: 0px 0px 5px #888;
+				overflow: hidden;
+				cursor: pointer;
+
+				.images-container {
+					width: 30%;
+					height: 100%;
+
+					.image {
+						width: 100%;
+						height: 100%;
+						object-fit: fill;
+					}
+				}
+
+				.details-container {
+					width: 70%;
+					height: 100%;
+					padding: 5px;
+					@include display_flex(column, flex-start, flex-start);
+					position: relative;
+
+					.address-container {
+						width: 87%;
+						height: 15%;
+						color: #333;
+						font-size: 14px;
+						font-weight: bold;
+					}
+
+					.price-container {
+						width: 87%;
+						height: 18%;
+						margin-top: 7px;
+						@include display_flex(row, flex-start, center);
+						font-size: 18px;
+						font-weight: bolder;
+						color: rgb(247, 26, 26);
+
+						small {
+							width: 13%;
+							margin-left: 10px;
+							@include display_flex(row, space-between, center);
+							color: purple;
+							font-size: 15px;
+							font-weight: bold;
+						}
+					}
+
+					.bed-bath-size-container {
+						width: 87%;
+						height: 20%;
+						margin-top: 7px;
+						@include display_flex(row, flex-start, center);
+
+						.item-container {
+							width: fit-content;
+							height: 100%;
+							margin-right: 25px;
+							@include display_flex(row, flex-start, center);
+							color: #333;
+							font-size: 15px;
+							font-weight: bold;
+
+							.icon {
+								@include reset();
+								margin-right: 5px;
+								font-size: 18px;
+							}
+						}
+					}
+
+					.counts-container {
+						width: 13%;
+						height: 65%;
+						padding: 5px 2px;
+						@include display_flex(column, space-between, center);
+						background: linear-gradient(
+							to bottom,
+							rgb(210, 235, 252),
+							rgb(250, 222, 250)
+						);
+						border-bottom-left-radius: 10px;
+						position: absolute;
+						right: 0px;
+						top: 0px;
+
+						.counts-item {
+							width: 100%;
+							height: 20%;
+							@include display_flex(row, flex-end, center);
+							color: #333;
+							font-size: 14px;
+							font-weight: bold;
+
+							.icon {
+								@include reset();
+								margin-left: 3px;
+								font-size: 15px;
+							}
+						}
+					}
+
+					.property-status {
+						width: 87%;
+						height: 20%;
+						margin-top: 7px;
+						@include display_flex(row, flex-start, center);
+
+						.icon {
+							@include reset();
+							color: rgb(153, 196, 155);
+							font-size: 23px;
+						}
+
+						.icon.active {
+							color: green;
+						}
+
+						.status-bar {
+							width: 37%;
+							height: 5px;
+							background-color: rgb(153, 196, 155);
+							border-radius: 3px;
+						}
+
+						.status-bar.active {
+							background-color: green;
+						}
+					}
+
+					.date-container {
+						width: 100%;
+						height: 10%;
+						@include display_flex(row, center, center);
+						color: #665;
+						font-size: 11px;
+						font-weight: bolder;
+						position: absolute;
+						bottom: 2px;
+
+						.icon {
+							margin-right: 5px;
+						}
+					}
+				}
+
+				&:active {
+					opacity: 0.7;
+				}
+			}
+		}
+
+		.no-data-found-container {
+			width: 100%;
+			height: 100%;
+			@include display_flex(row, center, center);
+
+			.image {
+				width: 50%;
+				height: 50%;
+				object-fit: contain;
+			}
+		}
+	}
+}
