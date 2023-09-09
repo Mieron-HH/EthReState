@@ -8,9 +8,85 @@
 		}
 	],
 	"routes": [
+		{ "src": "/api/user/current-user", "dest": "routes/user/current-user.ts" },
+		{ "src": "/api/user/sign-in", "dest": "routes/user/sign-in.ts" },
+		{ "src": "/api/user/sign-out", "dest": "routes/user/sign-out.ts" },
+		{ "src": "/api/user/sign-up", "dest": "routes/user/sign-up.ts" },
 		{
-			"src": "/(.*)",
-			"dest": "dist/index.js"
+			"src": "/api/property/add-property-image",
+			"dest": "routes/property/add-property-image.ts"
+		},
+		{
+			"src": "/api/property/create-property",
+			"dest": "routes/property/create-property.ts"
+		},
+		{
+			"src": "/api/property/get-popular-properties",
+			"dest": "routes/property/get-popular-properties.ts"
+		},
+		{
+			"src": "/api/property/get-seller-properties",
+			"dest": "routes/property/get-seller-properties.ts"
+		},
+		{
+			"src": "/api/property/mint-property",
+			"dest": "routes/property/mint-property.ts"
+		},
+		{
+			"src": "/api/property/unlist-property",
+			"dest": "routes/property/unlist-property.ts"
+		},
+		{
+			"src": "/api/property/update-property-views",
+			"dest": "routes/property/update-property-views.ts"
+		},
+		{
+			"src": "/api/property/cancel-property",
+			"dest": "routes/property/cancel-property.ts"
+		},
+		{
+			"src": "/api/property/fetch-property",
+			"dest": "routes/property/fetch-property.ts"
+		},
+		{
+			"src": "/api/property/get-properties",
+			"dest": "routes/property/get-properties.ts"
+		},
+		{
+			"src": "/api/property/list-property",
+			"dest": "routes/property/list-property.ts"
+		},
+		{
+			"src": "/api/property/remove-property-image",
+			"dest": "routes/property/remove-property-image.ts"
+		},
+		{
+			"src": "/api/property/unlock-property",
+			"dest": "routes/property/unlock-property.ts"
+		},
+		{
+			"src": "/api/property/change-property-thumbnail",
+			"dest": "routes/property/change-property-thumbnail.ts"
+		},
+		{
+			"src": "/api/property/get-buyer-properties",
+			"dest": "routes/property/get-buyer-properties.ts"
+		},
+		{
+			"src": "/api/property/get-property-images",
+			"dest": "routes/property/get-property-images.ts"
+		},
+		{
+			"src": "/api/property/lock-property",
+			"dest": "routes/property/lock-property.ts"
+		},
+		{
+			"src": "/api/property/sell-property",
+			"dest": "routes/property/sell-property.ts"
+		},
+		{
+			"src": "/api/property/update-property-likes",
+			"dest": "routes/property/update-property-likes.ts"
 		}
 	]
 }

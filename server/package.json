@@ -16,6 +16,7 @@
 	"dependencies": {
 		"@kmalae.ltd/library": "^0.0.92",
 		"@types/multer": "^1.4.7",
+		"@vercel/node": "^3.0.4",
 		"axios": "^1.4.0",
 		"blockstore-core": "^4.2.0",
 		"cookie-session": "^2.0.0",
