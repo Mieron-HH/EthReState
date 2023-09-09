@@ -3,9 +3,11 @@
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.4.0",
 		"@openzeppelin/contracts": "^4.9.2",
+		"dotenv": "^16.3.1",
 		"ethers": "^6.6.1",
 		"react-icons": "^4.10.1",
-		"server": "^1.0.38"
+		"server": "^1.0.38",
+		"solc": "^0.8.21"
 	},
 	"devDependencies": {
 		"@nomicfoundation/hardhat-toolbox": "^3.0.0",

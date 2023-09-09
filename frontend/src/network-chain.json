@@ -6,5 +6,13 @@
 		"ethRow": {
 			"address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
 		}
+	},
+	"11155111": {
+		"rethState": {
+			"address": "0xe9588BbC6762c06F4785AcA56081dFA1502cc1FB"
+		},
+		"ethRow": {
+			"address": "0xB4eC04208d2f29f737933Fa40e17EfB958e31579"
+		}
 	}
 }

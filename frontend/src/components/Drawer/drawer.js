@@ -81,6 +81,10 @@ const Drawer = () => {
 
 	const getSigner = async () => {
 		try {
+			const accounts = await window.ethereum.request({
+				method: "eth_requestAccounts",
+			});
+
 			const signer = await provider.getSigner();
 			dispatch(setSigner(signer));
 			Cookies.set("signer", JSON.stringify(signer));
