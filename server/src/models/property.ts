@@ -29,7 +29,6 @@ interface PropertyAttr {
 	owner: string;
 	minted: Boolean;
 	listed: Boolean;
-	inspected: Boolean;
 	locked: Boolean;
 	sold: Boolean;
 	cancelled: Boolean;
@@ -71,8 +70,6 @@ const propertySchema = new mongoose.Schema(
 		mintedAt: { type: Date, required: false },
 		listed: { type: Boolean, required: true },
 		listedAt: { type: Date, required: false },
-		inspected: { type: Boolean, required: true },
-		inspectedAt: { type: Date, required: false },
 		locked: { type: Boolean, required: true },
 		lockedAt: { type: Date, required: false },
 		sold: { type: Boolean, required: true },

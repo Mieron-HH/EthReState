@@ -160,7 +160,6 @@ router.post(
 				images: propertyImages,
 				minted: false,
 				listed: false,
-				inspected: false,
 				locked: false,
 				sold: false,
 				cancelled: false,
