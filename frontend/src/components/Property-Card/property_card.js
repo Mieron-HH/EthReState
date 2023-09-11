@@ -47,7 +47,7 @@ const PropertyCard = ({ property = null, width = "", height = "" }) => {
 	}, []);
 
 	useEffect(() => {
-		if (user && property && property.likes.includes(user.id))
+		if (user && property && property.likes.includes(user._id))
 			setPropertyLiked(true);
 	}, [user]);
 
@@ -100,7 +100,7 @@ const PropertyCard = ({ property = null, width = "", height = "" }) => {
 				<img
 					className={`image ${slide !== 0 && "hidden"}`}
 					src={`data:${property.thumbnail.contentType};base64,${property.thumbnail.data}`}
-					onClick={() => displaySelectedProperty(property.id)}
+					onClick={() => displaySelectedProperty(property._id)}
 				/>
 
 				{property.images.map((image, index) => {
@@ -109,7 +109,7 @@ const PropertyCard = ({ property = null, width = "", height = "" }) => {
 							key={index}
 							className={`image ${slide - 1 !== index && "hidden"}`}
 							src={`data:${image.contentType};base64,${image.data}`}
-							onClick={() => displaySelectedProperty(property.id)}
+							onClick={() => displaySelectedProperty(property._id)}
 						/>
 					);
 				})}
@@ -179,12 +179,12 @@ const PropertyCard = ({ property = null, width = "", height = "" }) => {
 					{propertyLiked ? (
 						<AiFillHeart
 							className="icon"
-							onClick={() => handlePropertyLikes(property.id)}
+							onClick={() => handlePropertyLikes(property._id)}
 						/>
 					) : (
 						<AiOutlineHeart
 							className="icon"
-							onClick={() => handlePropertyLikes(property.id)}
+							onClick={() => handlePropertyLikes(property._id)}
 						/>
 					)}
 				</div>

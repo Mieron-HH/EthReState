@@ -1,4 +1,7 @@
 import Cookies from "js-cookie";
+import { ethers } from "ethers";
+
+// importing icons
 import { BsPersonFillDown } from "react-icons/bs";
 
 // importing variables
@@ -63,4 +66,8 @@ export const concatPrice = (property) => {
 			)}
 		</>
 	);
+};
+
+export const parseToEther = (n) => {
+	return ethers.parseEther(n);
 };

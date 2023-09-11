@@ -55,7 +55,6 @@ const App = () => {
 	const dispatch = useDispatch();
 
 	const { provider, chainId } = useSelector((state) => state.config);
-	const { user } = useSelector((state) => state.common);
 	const [rethState, setRethState] = useState(null);
 	const [ethRow, setEthRow] = useState(null);
 
