@@ -274,6 +274,7 @@ const PropertyList = () => {
 												street: property.street,
 												city: property.city,
 												state: property.state,
+												zipcode: property.zipCode,
 												maxChars: 30, // length of characters to be displayed
 											})}
 										</div>

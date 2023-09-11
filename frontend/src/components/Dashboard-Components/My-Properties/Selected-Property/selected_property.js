@@ -6,7 +6,7 @@ import LoadingPropertyImageGif from "../../../../images/loading-images.gif";
 
 // importing icons
 import { AiFillDelete } from "react-icons/ai";
-import { BiSolidHeart, BiX } from "react-icons/bi";
+import { BiX } from "react-icons/bi";
 import {
 	BsEyeFill,
 	BsHouseFill,
@@ -53,7 +53,6 @@ const SellerPropertyDetail = () => {
 
 	useEffect(() => {
 		if (selectedProperty !== null) {
-			console.log({ tokenId: selectedProperty.tokenId });
 			dispatch(setLoading(false));
 			dispatch(setSelectedPropertyThumbnail(selectedProperty.thumbnail));
 			setFetchingPropertyImages(true);
