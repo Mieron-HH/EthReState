@@ -86,7 +86,7 @@
 			width: 100%;
 			height: 99%;
 			margin-top: 6px;
-			padding: 15px 20px 90px 20px;
+			padding: 10px 20px 90px 20px;
 			@include display_flex(column, flex-start, flex-start);
 			background-color: white;
 			border-radius: 10px;
@@ -97,11 +97,28 @@
 
 			.error-message {
 				width: 100%;
-				height: 30px;
+				min-height: 30px;
+				margin-bottom: 10px;
 				@include display_flex(row, center, center);
-				color: red;
-				font-size: 18px;
+				background-color: red;
+				color: white;
+				font-size: 15px;
 				font-weight: 600;
+				position: relative;
+
+				.remove-error-message-button {
+					@include display_flex(row, center, center);
+					color: white;
+					font-size: 22px;
+					position: absolute;
+					right: 5px;
+					cursor: pointer;
+
+					&:active {
+						font-size: 24px;
+						opacity: 0.8;
+					}
+				}
 			}
 
 			.input-label {
@@ -353,7 +370,7 @@
 		}
 	}
 
-	.mint-transfer-nft-container {
+	.mint-list-nft-container {
 		width: 44%;
 		height: 85%;
 		padding-bottom: 50px;
@@ -381,7 +398,7 @@
 					color: rgb(101, 16, 101);
 				}
 
-				.icon.transfer {
+				.icon.list {
 					color: rgb(4, 4, 114);
 				}
 			}
@@ -405,7 +422,7 @@
 						color: rgb(101, 16, 101);
 					}
 
-					.icon.transfer {
+					.icon.list {
 						color: rgb(4, 4, 114);
 					}
 				}
@@ -448,7 +465,7 @@
 			background-color: rgb(101, 16, 101);
 		}
 
-		.button.transfer {
+		.button.list {
 			background-color: rgb(4, 4, 114);
 		}
 	}

@@ -41,13 +41,15 @@ import {
 // importing services
 import { createProperty } from "../../../services/api-calls";
 import { stateAbbreviations } from "../../../services/variables";
+import { setSelectedMenu } from "../../../slices/dashboard-slice";
+import { parseToEther } from "../../../services/helpers";
 
 const web3 = require("web3");
 
 const ListProperty = () => {
 	const dispatch = useDispatch();
 
-	const { rethState } = useContext(ContextValues);
+	const { rethState, ethRow } = useContext(ContextValues);
 	const { provider, signer } = useSelector((state) => state.config);
 	const PostData = useRef(new FormData());
 	const {
@@ -71,7 +73,7 @@ const ListProperty = () => {
 	const [submitEnabled, setSubmitEnabled] = useState(false);
 	const [stateSuggestions, setStateSuggestions] = useState([]);
 	const [displayStateSuggestions, setDisplayStateSuggestions] = useState(false);
-	const [successfullyMinted, setSuccessfullyMinted] = useState(false);
+	const [transactionSuccessful, setTransactionSuccessful] = useState(false);
 	const [loadingMessage, setLoadingMessage] = useState("");
 	const [arrowsArray, setArrowsArray] = useState([]);
 
@@ -337,7 +339,7 @@ const ListProperty = () => {
 
 	const handlePropertyCreation = async () => {
 		setLoadingMessage("Creating Property...");
-		dispatch(setListingContentDisplayed("loader"));
+		dispatch(setListingContentDisplayed("loading"));
 
 		if (signer === null) {
 			setError("Connect wallet first");
@@ -372,7 +374,7 @@ const ListProperty = () => {
 
 	const mintPropertyNFT = async () => {
 		setLoadingMessage("Minting Property NFT...");
-		dispatch(setListingContentDisplayed("loader"));
+		dispatch(setListingContentDisplayed("loading"));
 		const signer = await provider.getSigner();
 
 		try {
@@ -398,7 +400,7 @@ const ListProperty = () => {
 				)
 				.then(() => {
 					setLoadingMessage("Successfully Minted");
-					setSuccessfullyMinted(true);
+					setTransactionSuccessful(true);
 					setTimeout(() => {
 						dispatch(setListingProgress(2));
 						dispatch(setListingContentDisplayed("list"));
@@ -416,13 +418,63 @@ const ListProperty = () => {
 		}
 	};
 
-	const listProperty = async () => {
+	const approveNFTTransfer = async () => {
 		setLoadingMessage("Listing Property...");
-		dispatch(setListingContentDisplayed("loader"));
+		dispatch(setListingContentDisplayed("loading"));
 		const signer = await provider.getSigner();
 
 		try {
-			let transaction = await rethState.connect();
+			let transaction = await rethState
+				.connect(signer)
+				.approve(ethRow.target, selectedProperty.tokenID);
+			const receipt = await transaction.wait();
+
+			if (receipt.status === 1) listProperty();
+			else {
+				// Transaction failed
+				setError("Error listing property");
+				dispatch(setListingContentDisplayed("create"));
+			}
+		} catch (error) {
+			setError("Error listing property");
+			dispatch(setListingContentDisplayed("create"));
+			console.log({ error });
+		}
+	};
+
+	const listProperty = async () => {
+		const signer = await provider.getSigner();
+
+		try {
+			let transaction = await ethRow
+				.connect(signer)
+				.list(
+					selectedProperty.tokenID,
+					parseToEther(selectedProperty.price),
+					parseToEther(selectedProperty.downPayment)
+				);
+			const receipt = await transaction.wait();
+
+			if (receipt.status === 1) {
+				// Transaction successful
+				await axios.post(
+					process.env.REACT_APP_BASE_URL + "/property/list",
+					{
+						propertyID: selectedProperty._id,
+					},
+					{ withCredentials: true }
+				);
+
+				setLoadingMessage("Successfully Listed");
+				setTransactionSuccessful(true);
+				setTimeout(() => {
+					dispatch(setSelectedMenu("my_properties"));
+				}, 2000);
+			} else {
+				// Transaction failed
+				setError("Error listing property");
+				dispatch(setListingContentDisplayed("create"));
+			}
 		} catch (error) {
 			setError("Error listing property");
 			dispatch(setListingContentDisplayed("create"));
@@ -458,11 +510,11 @@ const ListProperty = () => {
 				</div>
 			)}
 
-			{listingContentDisplayed === "loader" && (
+			{listingContentDisplayed === "loading" && (
 				<div className="list-loader-container">
 					<div className="loading-message">{loadingMessage}</div>
 
-					{successfullyMinted ? (
+					{transactionSuccessful ? (
 						<img
 							className="loader-gif larger"
 							src={GreenCheckMark}
@@ -479,7 +531,7 @@ const ListProperty = () => {
 			)}
 
 			{listingContentDisplayed === "mint" && (
-				<div className="mint-transfer-nft-container">
+				<div className="mint-list-nft-container">
 					<div className="instruction-container">
 						<div className="icon-container">
 							<BsHouseFill className="icon mint" />
@@ -499,10 +551,10 @@ const ListProperty = () => {
 			)}
 
 			{listingContentDisplayed === "list" && (
-				<div className="mint-transfer-nft-container">
+				<div className="mint-list-nft-container">
 					<div className="instruction-container">
 						<div className="icon-container">
-							<RiNftFill className="icon transfer" />
+							<RiNftFill className="icon list" />
 						</div>
 
 						<div className="arrows-container">{renderArrow()}</div>
@@ -512,7 +564,9 @@ const ListProperty = () => {
 						</div>
 					</div>
 
-					<div className="button transfer">List Property</div>
+					<div className="button list" onClick={approveNFTTransfer}>
+						List Property
+					</div>
 				</div>
 			)}
 
@@ -524,7 +578,15 @@ const ListProperty = () => {
 					></div>
 
 					<div className="form-container">
-						<div className="error-message">{error}</div>
+						{error !== "" && (
+							<div className="error-message">
+								{error}
+								<BiX
+									className="remove-error-message-button"
+									onClick={() => setError("")}
+								/>
+							</div>
+						)}
 
 						{inputGroupDiv({
 							label: "street",
