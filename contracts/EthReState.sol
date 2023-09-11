@@ -8,14 +8,15 @@ contract EthReState is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    constructor() ERC721("EthReState", "ERS") {}
+    constructor() ERC721("EthReState", "ETH") {}
 
     function mint(string memory tokenURI) public returns (uint256) {
+        _tokenIds.increment();
+        
         uint256 tokenId = _tokenIds.current();
         _mint(msg.sender, tokenId);
         _setTokenURI(tokenId, tokenURI);
 
-        _tokenIds.increment();
         return tokenId;
     }
 
