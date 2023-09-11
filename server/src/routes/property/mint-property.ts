@@ -39,7 +39,6 @@ router.post(
 		if (!existingUser) throw new BadRequestError("User not found");
 
 		const { propertyID, tokenID } = req.body;
-		console.log({ tokenID });
 		const existingProperty = await Property.findById(propertyID);
 		if (!existingProperty) throw new BadRequestError("Property not found");
 
