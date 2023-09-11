@@ -2,8 +2,8 @@
 @import "../../../styles/variables";
 
 .my-properties {
-	width: 90%;
-	height: 90%;
+	width: 98%;
+	height: 98%;
 	@include display_flex(column, flex-start, center);
 	background-color: white;
 	border-radius: 10px;
