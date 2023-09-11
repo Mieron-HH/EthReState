@@ -92,8 +92,8 @@
 			overflow-y: scroll;
 
 			.property-card {
-				width: 49.3%;
-				height: 150px !important;
+				width: 47%;
+				height: 120px !important;
 				margin-bottom: 25px;
 				@include display_flex(row, space-between, center);
 				border-radius: 8px;
@@ -109,6 +109,10 @@
 						width: 100%;
 						height: 100%;
 						object-fit: fill;
+
+						&:hover {
+							object-fit: cover;
+						}
 					}
 				}
 
@@ -123,14 +127,14 @@
 						width: 87%;
 						height: 15%;
 						color: #333;
-						font-size: 14px;
+						font-size: 15px;
 						font-weight: bold;
 					}
 
 					.price-container {
 						width: 87%;
 						height: 18%;
-						margin-top: 7px;
+						margin-top: 5px;
 						@include display_flex(row, flex-start, center);
 						font-size: 18px;
 						font-weight: bolder;
@@ -149,7 +153,7 @@
 					.bed-bath-size-container {
 						width: 87%;
 						height: 20%;
-						margin-top: 7px;
+						margin-top: 3px;
 						@include display_flex(row, flex-start, center);
 
 						.item-container {
@@ -170,7 +174,8 @@
 					}
 
 					.counts-container {
-						width: 13%;
+						min-width: 10%;
+						max-width: fit-content;
 						height: 65%;
 						padding: 5px 2px;
 						@include display_flex(column, space-between, center);
@@ -189,7 +194,7 @@
 							height: 20%;
 							@include display_flex(row, flex-end, center);
 							color: #333;
-							font-size: 14px;
+							font-size: 13px;
 							font-weight: bold;
 
 							.icon {
@@ -209,7 +214,7 @@
 						.icon {
 							@include reset();
 							color: rgb(153, 196, 155);
-							font-size: 23px;
+							font-size: 20px;
 						}
 
 						.icon.active {
@@ -218,7 +223,7 @@
 
 						.status-bar {
 							width: 37%;
-							height: 5px;
+							height: 4px;
 							background-color: rgb(153, 196, 155);
 							border-radius: 3px;
 						}
@@ -229,7 +234,7 @@
 					}
 
 					.date-container {
-						width: 100%;
+						width: 87%;
 						height: 10%;
 						@include display_flex(row, center, center);
 						color: #665;
