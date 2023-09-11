@@ -127,7 +127,7 @@ const Properties = () => {
 				{properties.map((property) => {
 					return (
 						<PropertyCard
-							key={property.id}
+							key={property._id}
 							width="350px"
 							height="320px"
 							property={property}
