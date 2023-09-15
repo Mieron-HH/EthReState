@@ -9,4 +9,4 @@ router.get("/api/user/signout", (req: Request, res: Response) => {
 	res.send({});
 });
 
-export { router as signoutRouter };
+export { router as SignoutRouter };

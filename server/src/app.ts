@@ -11,7 +11,8 @@ import { errorHandler, NotFoundError } from "@kmalae.ltd/library";
 import { SignupRouter } from "./routes/user/sign-up";
 import { SigninRouter } from "./routes/user/sign-in";
 import { CurrentUserRouter } from "./routes/user/current-user";
-import { signoutRouter } from "./routes/user/sign-out";
+import { SignoutRouter } from "./routes/user/sign-out";
+import { GetUserRouter } from "./routes/user/get-user";
 
 // importing PROPERTY routes
 import { CreateRouter } from "./routes/property/create-property";
@@ -55,7 +56,8 @@ app.use(
 app.use(SignupRouter);
 app.use(SigninRouter);
 app.use(CurrentUserRouter);
-app.use(signoutRouter);
+app.use(SignoutRouter);
+app.use(GetUserRouter);
 
 // hooking PROPERTY routes
 app.use(CreateRouter);
