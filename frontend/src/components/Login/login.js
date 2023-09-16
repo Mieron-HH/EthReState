@@ -42,10 +42,9 @@ const Login = () => {
 		setLoginError(error);
 
 		if (data) {
-			const data = await getCurrentUser();
+			dispatch(setUser(data));
 			Cookies.set("user", JSON.stringify(data));
 
-			dispatch(setUser(data));
 			dispatch(setLoginFormDisplayed(false));
 		}
 

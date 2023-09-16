@@ -2,6 +2,9 @@ import React from "react";
 import "./_header.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+// importing components
+import AuthenticaionHeader from "../Authentication-Header/authentication_header";
+
 const Header = ({ inverted = "" }) => {
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -13,34 +16,38 @@ const Header = ({ inverted = "" }) => {
 	return (
 		<div className="header-container">
 			<div className={`logo-container ${inverted}`} onClick={navigateHome}>
-				<img className="logo" src={require("../../images/Logo.png")} alt="" />
+				<img className="logo" src="images/Logo.png" alt="" />
 			</div>
 
 			<div className="menu-container">
-				<Link
-					className={`menu-item ${location.pathname === "/" && "selected"}`}
-					to="/"
-				>
-					Home
-				</Link>
+				<div className="links-container">
+					<Link
+						className={`link-item ${location.pathname === "/" && "selected"}`}
+						to="/"
+					>
+						Home
+					</Link>
 
-				<Link
-					className={`menu-item ${
-						location.pathname === "/properties" && "selected"
-					}`}
-					to="/properties"
-				>
-					Properties
-				</Link>
+					<Link
+						className={`link-item ${
+							location.pathname === "/properties" && "selected"
+						}`}
+						to="/properties"
+					>
+						Properties
+					</Link>
 
-				<Link
-					className={`menu-item ${
-						location.pathname === "/dashboard" && "selected"
-					}`}
-					to="/dashboard"
-				>
-					Dashboard
-				</Link>
+					<Link
+						className={`link-item ${
+							location.pathname === "/dashboard" && "selected"
+						}`}
+						to="/dashboard"
+					>
+						Dashboard
+					</Link>
+				</div>
+
+				<AuthenticaionHeader />
 			</div>
 		</div>
 	);

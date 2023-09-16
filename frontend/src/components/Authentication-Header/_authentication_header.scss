@@ -1,0 +1,150 @@
+@import "../../styles/mixin";
+@import "../../styles/variables";
+
+.authentication-header-container {
+	height: 100%;
+	width: 70%;
+	position: absolute;
+	right: -256px;
+
+	.auth-container {
+		width: 100%;
+		height: 100%;
+		@include display_flex(row, center, center);
+
+		.not-logged-in {
+			width: 100%;
+			height: 100%;
+			@include display_flex(row, center, center);
+
+			.auth-button {
+				height: 60%;
+				margin: 0 3px;
+				padding: 0 13px;
+				@include display_flex(row, center, center);
+				border-radius: 30px;
+				color: #eee;
+				font-size: 14px;
+				cursor: pointer;
+
+				.icon {
+					font-size: 18px;
+					margin-left: 5px;
+				}
+			}
+
+			.auth-button.login {
+				background: none;
+
+				&:hover {
+					background-color: #eee;
+					color: #121212;
+				}
+
+				&:active {
+					opacity: 0.8;
+				}
+			}
+
+			.auth-button.register {
+				background-color: #12121296;
+
+				&:hover {
+					background-color: #121212;
+				}
+
+				&:active {
+					opacity: 0.8;
+				}
+			}
+		}
+
+		.logged-in {
+			width: 40%;
+			height: 90%;
+			@include display_flex(row, center, center);
+			position: relative;
+
+			.user-icon-container {
+				width: 40px;
+				height: 40px;
+				@include display_flex(row, center, center);
+				background-color: #121212;
+				border-radius: 100%;
+				cursor: pointer;
+
+				&:active {
+					opacity: 0.8;
+				}
+
+				.icon {
+					width: 60%;
+					height: 60%;
+					color: #eee;
+				}
+			}
+
+			.menu-dropdown-container {
+				width: 150px;
+				height: 150px;
+				@include display_flex(column, space-between, center);
+				background-color: white;
+				border-radius: 5px;
+				position: absolute;
+				bottom: -155px;
+
+				.user-info-container {
+					width: 100%;
+					height: 45%;
+					@include display_flex(column, center, center);
+
+					h3 {
+						@include reset();
+						color: #333;
+						font-size: 15px;
+						font-weight: bold;
+					}
+
+					h4 {
+						@include reset();
+						color: #444;
+						font-size: 13px;
+						font-weight: 600;
+					}
+				}
+
+				.menu-items {
+					width: 100%;
+					margin-bottom: 5px;
+					@include display_flex(column, center, flex-start);
+
+					.menu-item {
+						width: 100%;
+						height: fit-content;
+						padding: 3px 8px;
+						@include display_flex(row, flex-start, center);
+						border-top: 1px solid #eee;
+						color: #555;
+						font-size: 13px;
+						font-weight: 600;
+						cursor: pointer;
+
+						&:hover {
+							background-color: whitesmoke;
+						}
+
+						&:active {
+							opacity: 0.8;
+						}
+
+						.icon {
+							margin-right: 8px;
+							color: #444;
+							font-size: 16px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

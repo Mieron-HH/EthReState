@@ -10,7 +10,6 @@ import MyProperties from "../../components/Dashboard-Components/My-Properties/my
 import Favourites from "../../components/Dashboard-Components/Favourites/favourites";
 
 // importing actions
-import { setSelectedMenu } from "../../slices/dashboard-slice";
 import { setLoading } from "../../slices/common-slice";
 
 const Dashboard = () => {
@@ -21,7 +20,6 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		dispatch(setLoading(true));
-		dispatch(setSelectedMenu("dashboard"));
 
 		setTimeout(() => dispatch(setLoading(false)), 400);
 	}, []);

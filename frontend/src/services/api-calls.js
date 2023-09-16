@@ -3,48 +3,61 @@ import axios from "axios";
 const BASE_URL = "http://localhost:5000/api";
 
 export const getCurrentUser = async () => {
-	let data = null;
-
 	try {
-		await axios
-			.get(BASE_URL + "/user/currentUser", { withCredentials: true })
-			.then((result) => {
-				data = result.data.currentUser;
-			});
+		const response = await axios.get(BASE_URL + "/user/currentUser", {
+			withCredentials: true,
+		});
+		const data = response.data;
 
-		return data;
-	} catch (error) {
-		console.error("Error fetching current user:", error);
-		throw error;
+		return { data, error: "" };
+	} catch (err) {
+		console.error(err);
+		const error = err.response
+			? err.response.data.errors[0].message
+			: "Something went wrong. Please try again.";
+
+		return { data: null, error };
+	}
+};
+
+export const getUserData = async () => {
+	try {
+		const response = await axios.get(`${BASE_URL}/user/getUser`, {
+			withCredentials: true,
+		});
+		const data = response.data;
+
+		return { data, error: "" };
+	} catch (err) {
+		console.error(err);
+		const error = err.response
+			? err.response.data.errors[0].message
+			: "Something went wrong. Please try again.";
+
+		return { data: null, error };
 	}
 };
 
 export const loginUser = async (email, password) => {
-	let data = null;
-	let error = "";
-
 	try {
-		await axios
-			.post(
-				BASE_URL + "/user/signin",
-				{
-					email,
-					password,
-				},
-				{ withCredentials: true }
-			)
-			.then((response) => {
-				data = response.data;
-			})
-			.catch((err) => {
-				if (err.response) error = err.response.data.errors[0].message;
-				console.error({ error });
-			});
+		const response = await axios.post(
+			BASE_URL + "/user/signin",
+			{
+				email,
+				password,
+			},
+			{ withCredentials: true }
+		);
+		const data = response.data;
 
-		return { data, error };
-	} catch (error) {
-		console.error({ error });
-		throw error;
+		return { data, error: "" };
+	} catch (err) {
+		console.error(err);
+		const error = err.response
+			? err.response.data.errors[0].message
+			: "Something went wrong. Please try again.";
+
+		return { data: null, error };
 	}
 };
 
@@ -60,87 +73,79 @@ export const logoutUser = async () => {
 };
 
 export const createProperty = async (PostData) => {
-	let data = null;
-	let error = "";
-
 	try {
-		await axios
-			.post(BASE_URL + "/property/create", PostData, { withCredentials: true })
-			.then((response) => (data = response.data))
-			.catch((err) => {
-				if (err.response) error = err.response.data.errors[0].message;
-				console.log({ err });
-			});
+		const response = await axios.post(BASE_URL + "/property/create", PostData, {
+			withCredentials: true,
+		});
+		const data = response.data;
 
-		return { data, error };
-	} catch (error) {
-		console.error({ error });
-		throw error;
+		return { data, error: "" };
+	} catch (err) {
+		console.error(err);
+		const error = err.response
+			? err.response.data.errors[0].message
+			: "Something went wrong. Please try again.";
+
+		return { data: null, error };
 	}
 };
 
 export const updatePropertyLikes = async (propertyID) => {
-	let data = null;
-	let error = "";
-
 	try {
-		await axios
-			.post(
-				BASE_URL + "/property/updateLikes",
-				{ propertyID },
-				{ withCredentials: true }
-			)
-			.then((response) => (data = response.data))
-			.catch((err) => {
-				if (err.response) error = err.response.data.errors[0].message;
-				console.log({ err, error });
-			});
-	} catch (error) {
-		console.log({ error });
-		throw error;
+		const response = await axios.post(
+			BASE_URL + "/property/updateLikes",
+			{ propertyID },
+			{ withCredentials: true }
+		);
+		const data = response.data;
+
+		return { data, error: "" };
+	} catch (err) {
+		console.error(err);
+		const error = err.response
+			? err.response.data.errors[0].message
+			: "Something went wrong. Please try again.";
+
+		return { data: null, error };
 	}
 };
 
 export const updatePropertyViews = async (propertyID) => {
-	let data = null;
-	let error = "";
-
 	try {
-		await axios
-			.post(
-				BASE_URL + "/property/updateViews",
-				{ propertyID },
-				{ withCredentials: true }
-			)
-			.then((response) => (data = response.data))
-			.catch((err) => {
-				if (err.response) error = err.response.data.errors[0].message;
-				console.log({ err, error });
-			});
-	} catch (error) {
-		console.log({ error });
-		throw error;
+		const response = await axios.post(
+			BASE_URL + "/property/updateViews",
+			{ propertyID },
+			{ withCredentials: true }
+		);
+		const data = response.data;
+
+		return { data, error: "" };
+	} catch (err) {
+		console.error(err);
+		const error = err.response
+			? err.response.data.errors[0].message
+			: "Something went wrong. Please try again.";
+
+		return { data: null, error };
 	}
 };
 
 export const lockProperty = async (propertyID) => {
-	let data = null;
-	let error = "";
-
 	try {
-		await axios
-			.post(
-				BASE_URL + "/property/lock",
-				{ propertyID },
-				{ withCredentials: true }
-			)
-			.then((response) => (data = response.data))
-			.catch((err) => {
-				if (err.response) error = err.response.data.errors[0].message;
-				console.log({ err, error });
-			});
-	} catch (error) {
-		console.log({ error });
-		throw error;
+		const response = await axios.post(
+			BASE_URL + "/property/lock",
+			{ propertyID },
+			{ withCredentials: true }
+		);
+		const data = response.data;
+
+		return { data, error: "" };
+	} catch (err) {
+		console.error(err);
+		const error = err.response
+			? err.response.data.errors[0].message
+			: "Something went wrong. Please try again.";
+
+		return { data: null, error };
 	}
 };

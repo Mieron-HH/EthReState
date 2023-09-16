@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 // importing components
 import Loader from "../../components/Loader/loader";
 import Header from "../../components/Header/header";
-import Drawer from "../../components/Drawer/drawer";
 import Login from "../../components/Login/login";
 import Impression from "../../components/Impression/impression";
 import Cards from "../../components/Cards/cards";
@@ -21,21 +20,15 @@ import {
 } from "../../slices/common-slice";
 import { fetchPopular } from "../../slices/property-slice";
 
-// importing services
-import { getCurrentUser } from "../../services/api-calls";
-
 const Home = () => {
 	const dispatch = useDispatch();
 
-	const { loading, loginFormDisplayed, drawerExtended } = useSelector(
-		(state) => state.common
-	);
+	const { loading, loginFormDisplayed } = useSelector((state) => state.common);
 	const { popular } = useSelector((state) => state.properties);
 	const [displayContent, setDisplayContent] = useState(false);
 
 	useEffect(() => {
 		dispatch(setLoading(true));
-		currentUserHandler();
 		dispatch(fetchPopular());
 
 		const handleScroll = () => {
@@ -48,26 +41,15 @@ const Home = () => {
 
 		window.addEventListener("scroll", handleScroll);
 
+		setTimeout(() => {
+			dispatch(setLoading(false), 800);
+		});
+
 		return () => {
 			dispatch(setLoginFormDisplayed(false));
 			window.removeEventListener("scroll", handleScroll);
 		};
 	}, []);
-
-	const currentUserHandler = async () => {
-		try {
-			const data = await getCurrentUser();
-
-			if (data !== null) dispatch(setUser(data));
-
-			setTimeout(() => {
-				dispatch(setLoading(false));
-			}, 500);
-		} catch (error) {
-			console.log({ error });
-			dispatch(setLoading(false));
-		}
-	};
 
 	return (
 		<div className="Home">
@@ -85,13 +67,6 @@ const Home = () => {
 
 			<div className="home-header-container">
 				<Header />
-			</div>
-
-			<div
-				className="home-drawer-container"
-				style={{ width: drawerExtended ? "18vw" : "5vw" }}
-			>
-				<Drawer />
 			</div>
 
 			{loginFormDisplayed && <Login />}
