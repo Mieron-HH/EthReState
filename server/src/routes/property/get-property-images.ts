@@ -39,7 +39,7 @@ router.post(
 
 		const propertyImages = existingProperty.images;
 
-		res.status(200).send({ propertyImages });
+		res.status(200).send(propertyImages);
 	}
 );
 
