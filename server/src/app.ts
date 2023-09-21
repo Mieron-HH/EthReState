@@ -34,6 +34,7 @@ import { GetPropertyImagesRouter } from "./routes/property/get-property-images";
 import { ChangePropertyThumbnailRouter } from "./routes/property/change-property-thumbnail";
 import { AddPropertyImageRouter } from "./routes/property/add-property-image";
 import { RemovePropertyImageRouter } from "./routes/property/remove-property-image";
+import { ChangePropertyPriceRouter } from "./routes/property/change-property-price";
 
 const app = express();
 
@@ -79,6 +80,7 @@ app.use(GetPropertyImagesRouter);
 app.use(ChangePropertyThumbnailRouter);
 app.use(AddPropertyImageRouter);
 app.use(RemovePropertyImageRouter);
+app.use(ChangePropertyPriceRouter);
 
 // Invalid routes
 app.all("*", async (req, res, next) => {
